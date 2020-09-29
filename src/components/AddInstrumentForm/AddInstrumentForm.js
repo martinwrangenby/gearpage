@@ -1,7 +1,25 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
+
+// TODO: read up on makeStyles
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 // TODO: Add security on input form
 const AddInstrumentForm = props => {
+  const classes = useStyles();
   const [newInstrument, setNewInstrument] = React.useState({
     name: '',
     type: '',
@@ -44,12 +62,15 @@ const AddInstrumentForm = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <select native name='type' value={newInstrument.type} onChange={handleChange}>
+      <FormControl className={classes.formControl}>
+        <InputLabel>Gear type</InputLabel>
+        <Select native name='type' value={newInstrument.type} onChange={handleChange}>
         <option aria-label="None" value="" />
           {selectSection}
-        </select>
-        <input name='name' type="text" value={newInstrument.name} onChange={handleChange} />
-        <button type="submit">Add New Instrument</button>
+        </Select>
+        <TextField name='name' type="text" value={newInstrument.name} onChange={handleChange} />
+        <Button type="submit">Add New Instrument</Button>
+      </FormControl>
     </form>
   )
 }
