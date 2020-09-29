@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import db from './assets/db';
+import useSortedData from './hooks/useSortedData';
+import AddInstrumentForm from './components/AddInstrumentForm/AddInstrumentForm';
+import InstrumentList from './components/InstrumentList/InstrumentList';
 
-function App() {
+const App = () => {
+  const [instruments, setInstruments] = React.useState(db.instruments);
+
+  const { sortedItems, requestSort, sortConfig } = useSortedData(instruments);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddInstrumentForm 
+        instruments={instruments}
+        setInstruments={setInstruments}/>
+
+      <InstrumentList
+        instruments={sortedItems}
+        sort={requestSort}
+        sortOrder={sortConfig}/>
     </div>
   );
 }
