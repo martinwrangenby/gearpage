@@ -41,12 +41,14 @@ const AddInstrumentForm = props => {
       alert('You need to select an instrument type')
     }
     else if (newInstrument) {
+      newInstrument.name = newInstrument.name.charAt(0).toUpperCase() + newInstrument.name.slice(1)
       props.setInstruments(props.instruments.concat(newInstrument));
       console.log(newInstrument);
       setNewInstrument({
         name: '',
         type: ''
       });
+      props.toggleOpen(false);
     }
  
     event.preventDefault();
@@ -68,7 +70,7 @@ const AddInstrumentForm = props => {
         <option aria-label="None" value="" />
           {selectSection}
         </Select>
-        <TextField name='name' type="text" value={newInstrument.name} onChange={handleChange} />
+        <TextField name='name' type="text" label="Name" value={newInstrument.name} onChange={handleChange} />
         <Button type="submit">Add New Instrument</Button>
       </FormControl>
     </form>
