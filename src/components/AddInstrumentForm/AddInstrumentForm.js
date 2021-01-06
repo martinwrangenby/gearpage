@@ -1,57 +1,45 @@
 import React from 'react';
+import Button from '../UI/Button/Button'
+
+import './AddInstrumentForm.css'
 
 // TODO: Add security on input form
-const AddInstrumentForm = props => {
-  const [newInstrument, setNewInstrument] = React.useState({
-    name: '',
-    type: '',
-    id: null
-  });
-
-  const handleChange = event => {
-    const value = event.target.value;
-
-    setNewInstrument({
-      ...newInstrument,
-      [event.target.name]: value,
-      id: Math.floor(Math.random() * 1000) // ugly hack just to get a id for the instrumentlist
-    });
-  };
+const addInstrumentForm = props => {
  
   const handleSubmit = event => {
-    if (newInstrument.type === '') {
-      alert('You need to select an instrument type')
-    }
-    else if (newInstrument) {
-      props.setInstruments(props.instruments.concat(newInstrument));
-      console.log(newInstrument);
-      setNewInstrument({
-        name: '',
-        type: ''
+    if (event.target.type.value && event.target.name.value) {
+      props.addInstrument({
+        name: event.target.name.value,
+        type: event.target.type.value,
+        id: Math.floor(Math.random() * 1000), // ugly hack just to get a id for the instrumentlist
       });
     }
- 
+    else {
+      alert('you must specify both instrument type and name');
+    }
     event.preventDefault();
   };
-
-  const instrumentTypes = ['amp', 'guitar', 'bass', 'effect'];
-
-  const selectSection = instrumentTypes.map((type) => {
+  
+  const selectSection = props.instrumentTypes.map((type) => {
     return (
     <option key={type} value={type}>{type}</option>
     )
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-        <select native name='type' value={newInstrument.type} onChange={handleChange}>
-        <option aria-label="None" value="" />
+    <React.Fragment>
+      <form onSubmit={handleSubmit}>
+        <select name='type' id='type' defaultValue=''>
+        <option value='' disabled>Instrument type</option>
           {selectSection}
         </select>
-        <input name='name' type="text" value={newInstrument.name} onChange={handleChange} />
-        <button type="submit">Add New Instrument</button>
-    </form>
+        <input name='name' id='name' type="text" placeholder='Instrument name'/>
+        <textarea rows='4' name='description' id='description' type="text" placeholder='Description (optional)'/>
+        <Button buttonType='Success' type='submit'>Add</Button>
+        <Button buttonType='Danger' type='reset' clicked={props.closeModal}>Cancel</Button>
+      </form>
+    </React.Fragment>
   )
 }
 
-export default AddInstrumentForm;
+export default addInstrumentForm;

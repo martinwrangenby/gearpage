@@ -1,0 +1,25 @@
+.InstrumentList {
+  width: 100%;
+  margin: auto;
+  overflow: scroll;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 500px) {
+  .InstrumentList {
+    width: 350px;
+  }
+}
+
+@media (min-width: 500px) {
+  .InstrumentList {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .InstrumentList {
+    width: 700px;
+  }
+}
