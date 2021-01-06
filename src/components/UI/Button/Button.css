@@ -1,0 +1,45 @@
+.Button {
+  display: inline-block;
+  /* padding:0.35em 1.2em; */
+  border:0.2em solid #9b9b9b;
+  margin:0.3em;
+  border-radius:0.3em;
+  box-sizing: border-box;
+  /* text-decoration:none; */
+  font-weight:300;
+  color:#FFFFFF;
+  text-align:center;
+  transition: all 0.2s;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  font-size: 1em;
+}
+.Button:hover,
+.Button:active {
+  color:#ffffff;
+  background-color:#9b9b9b;
+}
+.Button:active {
+  transform: translateY(4px);
+}
+
+.Success {
+  border:0.2em solid #274301;
+  color: #5C9210;
+}
+.Success:hover,
+.Success:active {
+  color:#ffffff;
+  background-color:#274301;
+}
+
+.Danger {
+  border:0.2em solid#5e2a0e;
+  color: #944317;
+}
+.Danger:hover,
+.Danger:active {
+  color:#ffffff;
+  background-color:#5e2a0e;
+}
