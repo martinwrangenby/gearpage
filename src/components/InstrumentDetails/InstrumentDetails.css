@@ -1,0 +1,20 @@
+.InstrumentDetails {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .InstrumentDetails {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .InstrumentDetails {
+    width: 700px;
+  }
+}
+/* TODO: As of now, this css is just a copy of the InstrumentList css
+IF there won't be a need for any specific media alignments between these 
+main components, the CSS should be moved up an level to the App.css */
