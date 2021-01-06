@@ -1,8 +1,14 @@
 import React from 'react';
-
-const instrument = props => {
+import { useHistory } from 'react-router-dom';
+const InstrumentTableItem = props => {
+  const history = useHistory();
+  const mos = () => {
+    history.push({
+      pathname: '/gearitem',
+    search: `?id=${props.id}`})
+  }
   return (
-    <tr>
+    <tr onClick={mos}>
       <td>
         {props.name}
       </td>
@@ -13,4 +19,4 @@ const instrument = props => {
   )
 }
 
-export default instrument;
+export default InstrumentTableItem;
