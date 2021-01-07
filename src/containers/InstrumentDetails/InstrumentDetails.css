@@ -2,6 +2,11 @@
   width: 100%;
   margin: auto;
   text-align: center;
+  background-color: #201d26;
+  box-shadow: 0 2px 3px #212121;
+  border: 1px solid #6c6c6c;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 500px) {
@@ -18,3 +23,4 @@
 /* TODO: As of now, this css is just a copy of the InstrumentList css
 IF there won't be a need for any specific media alignments between these 
 main components, the CSS should be moved up an level to the App.css */
+

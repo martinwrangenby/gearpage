@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from '../UI/Button/Button'
+import axios from '../../axios';
+import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import './AddInstrumentForm.css'
 
@@ -7,12 +9,23 @@ import './AddInstrumentForm.css'
 const addInstrumentForm = props => {
  
   const handleSubmit = event => {
+    console.log('yo!')
     if (event.target.type.value && event.target.name.value) {
-      props.addInstrument({
-        name: event.target.name.value,
-        type: event.target.type.value,
-        id: Math.floor(Math.random() * 1000), // ugly hack just to get a id for the instrumentlist
-      });
+      const data = {
+          name: event.target.name.value,
+          type: event.target.type.value,
+          description: event.target.description.value,
+        }
+      axios.post('/gear.json', data)
+        .then(res => {
+          console.log(res);
+          //TODO: not entierly sure if it's better to add the instrument like this or do another db fetch in InstrumentList instead...
+          props.addInstrument(Object.assign({id: res.data.name}, data));
+          props.closeModal();
+        })
+        .catch(err => {
+          props.closeModal();
+        })
     }
     else {
       alert('you must specify both instrument type and name');
@@ -42,4 +55,4 @@ const addInstrumentForm = props => {
   )
 }
 
-export default addInstrumentForm;
+export default WithErrorHandler(addInstrumentForm, axios);
