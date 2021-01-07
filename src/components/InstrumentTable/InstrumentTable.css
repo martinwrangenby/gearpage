@@ -16,6 +16,7 @@ th {
 
 tr {
   text-align: left;
+  cursor: pointer;
 }
 
 tr:nth-child(odd){
