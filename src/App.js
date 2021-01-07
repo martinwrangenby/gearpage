@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import InstrumentList from './containers/InstrumentList/InstrumentList';
-import InstrumentDetails from './components/InstrumentDetails/InstrumentDetails';
+import InstrumentDetails from './containers/InstrumentDetails/InstrumentDetails';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 const App = () => {
