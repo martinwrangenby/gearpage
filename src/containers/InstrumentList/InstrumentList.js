@@ -1,6 +1,6 @@
 import React from 'react';
 import useSortedData from '../../hooks/useSortedData';
-import AddInstrumentForm from '../../components/AddInstrumentForm/AddInstrumentForm';
+import HandleInstrumentForm from '../../components/HandleInstrumentForm/HandleInstrumentForm';
 import InstrumentTable from '../../components/InstrumentTable/InstrumentTable';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
@@ -35,18 +35,19 @@ const InstrumentList = () => {
         setError(err);
       })
   },[]);
-
-  const { sortedItems, requestSort, sortConfig } = useSortedData(instruments);
-  // TODO: more slick solution to supported gear types?
-  const instrumentTypes = ['amp', 'guitar', 'bass', 'effect'];
   
   const addInstrument = (instrument) => {
-    setInstruments(instruments.concat(instrument));
-    closeAddInstrumentModal();
+    axios.post('/gear.json', instrument)
+    .then(res => {
+      setInstruments(instruments.concat(Object.assign({id: res.data.name}, instrument)));
+    })
+    .catch(err => {
+      setError(err);
+    })
+    setAddingInstrument(false);
   }
   
-  const closeAddInstrumentModal = () => setAddingInstrument(false);
-  
+  const { sortedItems, requestSort, sortConfig } = useSortedData(instruments);
   let instrumentTable = <Spinner />;
   //TODO: not very pretty... perhaps find a more elegant solution...
   if (instruments.length > 0) {
@@ -63,10 +64,9 @@ const InstrumentList = () => {
 
   return (
     <div className='InstrumentList'>
-      <Modal show={addingInstrument} modalClosed={closeAddInstrumentModal}>
-        <AddInstrumentForm
-          instrumentTypes={instrumentTypes}
-          addInstrument={addInstrument}
+      <Modal show={addingInstrument} modalClosed={() => setAddingInstrument(false)}>
+        <HandleInstrumentForm
+          submitInstrument={addInstrument}
           closeModal={() => setAddingInstrument(false)}/>
       </Modal>
       <Button clicked={setAddingInstrument}>

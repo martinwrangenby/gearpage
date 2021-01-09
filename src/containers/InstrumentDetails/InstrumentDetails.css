@@ -1,6 +1,7 @@
 .InstrumentDetails {
   width: 100%;
   margin: auto;
+  margin-bottom: 1em;
   text-align: center;
   background-color: #201d26;
   box-shadow: 0 2px 3px #212121;
