@@ -1,4 +1,6 @@
 input, select, textarea {
+  font-family: inherit;
+  font-size: 1em;
   background-color: #2d2d3a;
   color: #d2d2d2;
   width: 90%;
