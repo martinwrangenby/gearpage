@@ -1,18 +1,21 @@
 import React from 'react';
-import './App.css';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import InstrumentList from './containers/InstrumentList/InstrumentList';
 import InstrumentDetails from './containers/InstrumentDetails/InstrumentDetails';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import Layout from './hoc/Layout/Layout';
+import './App.css';
 
 const App = () => {
   
   return (
     <BrowserRouter>
       <div className="App">
-        <Switch>
-          <Route path='/gearitem' component={InstrumentDetails}/>
-          <Route path='/' component={InstrumentList}/>
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route path='/gearitem' component={InstrumentDetails}/>
+            <Route path='/' component={InstrumentList}/>
+          </Switch>
+        </Layout>
       </div>
     </BrowserRouter>
   );
