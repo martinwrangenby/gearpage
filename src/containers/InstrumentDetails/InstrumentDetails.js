@@ -58,10 +58,11 @@ const InstrumentDetails = (props) => {
     content = <h4>{error.message}</h4>
   }
   if (instrument) {
+    // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
-      <div className='InstrumentDetails'>
-        <h1>{instrument.name}</h1>
-        <p>{instrument.description}</p>
+      <div className={`InstrumentDetails ${instrument.type}`}>
+        <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
+        <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
       </div>
     )
   }
@@ -77,10 +78,10 @@ const InstrumentDetails = (props) => {
       <Button clicked={props.history.goBack}>
         Back
       </Button>
-      <Button clicked={setEditingInstrument}>
+      <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
         Edit
       </Button>
-      <Button buttonType='Danger' clicked={deleteInstrument}>
+      <Button buttonType='Danger' clicked={deleteInstrument} dataTestId='deleteInstrument'>
         Delete
       </Button>
     </React.Fragment>
