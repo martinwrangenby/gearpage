@@ -72,10 +72,14 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "e2e": "jest -c jest.e2e.config.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:jest-playwright/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -145,5 +149,11 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-jest-playwright": "^0.2.1",
+    "expect-playwright": "^0.3.0",
+    "jest-playwright-preset": "^1.4.3",
+    "playwright": "^1.7.1"
   }
 }
