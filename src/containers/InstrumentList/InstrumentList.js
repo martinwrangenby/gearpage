@@ -69,7 +69,7 @@ const InstrumentList = () => {
           submitInstrument={addInstrument}
           closeModal={() => setAddingInstrument(false)}/>
       </Modal>
-      <Button clicked={setAddingInstrument}>
+      <Button clicked={setAddingInstrument} dataTestId='addNewInstrumentButton'>
         Add New Instrument
       </Button>
       {instrumentTable}

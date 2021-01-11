@@ -8,7 +8,7 @@ const InstrumentTableItem = props => {
     search: `?id=${props.id}`})
   }
   return (
-    <tr onClick={mos}>
+    <tr onClick={mos} id={props.id} name={props.name}>
       <td>
         {props.name}
       </td>

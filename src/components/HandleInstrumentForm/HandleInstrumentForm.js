@@ -23,12 +23,12 @@ const HandleInstrumentForm = props => {
   };
   
   const selectSection = props.instrument 
-    ? <select name='type' id='type' defaultValue={props.instrument.type}>
+    ? <select name='type' id='type' data-test-id='formGearType' defaultValue={props.instrument.type}>
         {instrumentTypes.map((type) => {
           return <option key={type} value={type}>{type}</option>
         })}
       </select>
-    : <select name='type' id='type' defaultValue=''>
+    : <select name='type' id='type' data-test-id='formGearType' defaultValue=''>
       <option value='' disabled>Instrument type</option>
         {instrumentTypes.map((type) => {
           return <option key={type} value={type}>{type}</option>
@@ -43,6 +43,7 @@ const HandleInstrumentForm = props => {
           name='name'
           id='name'
           type="text"
+          data-test-id='formGearName'
           defaultValue={props.instrument ? props.instrument.name : ''}
           placeholder='Instrument name'/>
         <textarea
@@ -50,9 +51,10 @@ const HandleInstrumentForm = props => {
           name='description'
           id='description'
           type="text"
+          data-test-id='formGearDescription'
           defaultValue={props.instrument ? props.instrument.description : ''}
           placeholder='Description (optional)'/>
-        <Button buttonType='Success' type='submit'>
+        <Button buttonType='Success' type='submit' dataTestId='submitGearFormButton'>
           {props.instrument ? 'Update' : 'Add'}
         </Button>
         <Button buttonType='Danger' type='reset' clicked={props.closeModal}>Cancel</Button>
