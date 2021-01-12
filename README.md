@@ -4,7 +4,32 @@ Simple react web app to keep track of your instruments.
 
 :construction: Constantly under construction. More of a playground for working on my react skills and other javascript-related tools/aspects that interests me.
 
-Bootstrapped with with [Create React App](https://github.com/facebook/create-react-app).  
+## Setup env and get started
+1. Install dependencies
+```
+npm install
+```
+2. Specify/setup backend service :construction:
+
+3. Run the app in dev mode
+```
+npm run
+```
+## E2e tests
+
+The e2e test framework is based on [playwright](https://playwright.dev/) and run with [jest](https://jestjs.io/). Tests are run in the Chromium browser.  
+To execute the e2e tests, run:
+```
+npm run e2e
+```
+To run the tests headful, run:
+```
+npm run test:headful
+```
+This will also increase the timeout to 10 seconds (5 default) and run the tests serially.  
+On test failure, a screenshot will be saved to `e2e/results/`
+## Boilerplate
+The project is bootstrapped with with [Create React App](https://github.com/facebook/create-react-app).  
 Create-react-app default readme content below (slightly modified since I've moved from `yarn` to `npm`) :arrow_down:
 
 ---
