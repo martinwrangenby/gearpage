@@ -5,7 +5,7 @@ require('dotenv').config(({ path: '.env.local' }));
 
 module.exports = {
   preset: 'jest-playwright-preset',
-  testTimeout: 15000,
+  testTimeout: 5000,
   verbose: true,
   testMatch: [`${__dirname}/e2e/specs/**/*.test.js`],
   globalSetup: './e2e/utils/testRunner/bootstrap.js',
