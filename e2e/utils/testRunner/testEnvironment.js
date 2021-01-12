@@ -3,7 +3,9 @@ const PlaywrightEnvironment = require('jest-playwright-preset/lib/PlaywrightEnvi
 class CustomEnvironment extends PlaywrightEnvironment {
   async setup() {
     await super.setup()
-    // Setup
+    if (process.env.HEADFUL) {
+      this.global.page.setViewportSize({width: 1920, height: 1080});
+    }
   }
 
   async teardown() {
