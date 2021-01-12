@@ -8,6 +8,7 @@ module.exports = {
   testTimeout: 15000,
   verbose: true,
   testMatch: [`${__dirname}/e2e/specs/**/*.test.js`],
+  globalSetup: './e2e/utils/testRunner/bootstrap.js',
   setupFilesAfterEnv: ["expect-playwright"],
   testEnvironmentOptions: {
     'jest-playwright': {
