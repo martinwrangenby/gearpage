@@ -1,7 +1,7 @@
 const PlaywrightRunner = require('jest-playwright-preset/lib/PlaywrightRunner')
   .default
 
-class CustomRunner extends PlaywrightRunner {
+class TestRunner extends PlaywrightRunner {
   constructor(...args) {
     super(...args)
     if (process.env.HEADFUL) {
@@ -10,4 +10,4 @@ class CustomRunner extends PlaywrightRunner {
   }
 }
 
-module.exports = CustomRunner
+module.exports = TestRunner

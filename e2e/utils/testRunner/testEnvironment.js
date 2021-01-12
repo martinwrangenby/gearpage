@@ -1,6 +1,6 @@
 const PlaywrightEnvironment = require('jest-playwright-preset/lib/PlaywrightEnvironment').default
 
-class CustomEnvironment extends PlaywrightEnvironment {
+class TestEnvironment extends PlaywrightEnvironment {
   async setup() {
     await super.setup()
     if (process.env.HEADFUL) {
@@ -27,4 +27,4 @@ class CustomEnvironment extends PlaywrightEnvironment {
   }
 }
 
-module.exports = CustomEnvironment
+module.exports = TestEnvironment

@@ -9,7 +9,7 @@ const config = {
   verbose: true,
   testMatch: [`${__dirname}/e2e/specs/**/*.test.js`],
   globalSetup: './e2e/utils/testRunner/bootstrap.js',
-  runner: './e2e/utils/testRunner/CustomRunner.js',
+  runner: './e2e/utils/testRunner/testRunner.js',
   testEnvironment: './e2e/utils/testRunner/testEnvironment.js',
   setupFilesAfterEnv: ["expect-playwright"],
   testEnvironmentOptions: {
