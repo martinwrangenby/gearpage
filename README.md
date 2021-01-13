@@ -13,7 +13,7 @@ npm install
 
 3. Run the app in dev mode
 ```
-npm run
+npm start
 ```
 ## E2e tests
 
