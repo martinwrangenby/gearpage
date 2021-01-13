@@ -10,6 +10,11 @@
   box-sizing: border-box;
 }
 
+.InstrumentDetails h1, p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (min-width: 500px) {
   .InstrumentDetails {
     width: 450px;
