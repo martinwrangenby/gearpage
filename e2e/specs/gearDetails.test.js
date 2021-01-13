@@ -9,6 +9,7 @@ beforeEach(async () => {
 
 test('Delete instrument', async () => {
   await page.click('[data-test-id="deleteInstrument"]');
+  await page.click('[data-test-id="confirm"]')
   await page.waitForLoadState('networkidle');
   await expect(page).not.toHaveSelector(`#${id}`, {timeout: 1000})
 });
