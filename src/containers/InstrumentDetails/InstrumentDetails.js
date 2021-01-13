@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 import HandleInstrumentForm from '../../components/HandleInstrumentForm/HandleInstrumentForm';
+import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios';
@@ -11,6 +12,7 @@ import './InstrumentDetails.css';
 const InstrumentDetails = (props) => {
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
+  const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
   const [ error, setError ] = React.useState(false);
   
   React.useEffect(() => { 
@@ -60,10 +62,15 @@ const InstrumentDetails = (props) => {
   if (instrument) {
     // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
-      <div className={`InstrumentDetails ${instrument.type}`}>
-        <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
-        <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
-      </div>
+      <React.Fragment>
+        <div className={`InstrumentDetails ${instrument.type}`}>
+          <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
+          <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
+        </div>
+        <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>
+          <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
+        </Modal>
+      </React.Fragment>
     )
   }
   return (
@@ -81,7 +88,7 @@ const InstrumentDetails = (props) => {
       <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
         Edit
       </Button>
-      <Button buttonType='Danger' clicked={deleteInstrument} dataTestId='deleteInstrument'>
+      <Button buttonType='Danger' clicked={setDeletingInstrument} dataTestId='deleteInstrument'>
         Delete
       </Button>
     </React.Fragment>
