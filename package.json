@@ -74,7 +74,8 @@
     "build": "node scripts/build.js",
     "e2e": "jest -c jest.e2e.config.js",
     "e2e:headful": "HEADFUL=true npm run e2e",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "cleanup": "rimraf e2e/results"
   },
   "eslintConfig": {
     "extends": [
@@ -155,6 +156,7 @@
     "eslint-plugin-jest-playwright": "^0.2.1",
     "expect-playwright": "^0.3.0",
     "jest-playwright-preset": "^1.4.3",
-    "playwright": "^1.7.1"
+    "playwright": "^1.7.1",
+    "rimraf": "^3.0.2"
   }
 }
