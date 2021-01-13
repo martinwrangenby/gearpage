@@ -1,9 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Toolbar.css';
 
 const Toolbar = () => (
   <header className='Toolbar'>
-    GEAR PAGE
+    <NavLink to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+      GEAR PAGE
+    </NavLink>
   </header>
 )
 
