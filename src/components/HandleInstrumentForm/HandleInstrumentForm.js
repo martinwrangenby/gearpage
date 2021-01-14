@@ -1,45 +1,44 @@
 import React from 'react';
-import Button from '../UI/Button/Button'
+import Button from '../UI/Button/Button';
 import instrumentTypes from '../../assets/gearTypes';
 
-import './HandleInstrumentForm.css'
+import './HandleInstrumentForm.css';
 
 // TODO: Add security on input form
 const HandleInstrumentForm = props => {
- 
+
   const handleSubmit = event => {
     if (event.target.type.value && event.target.name.value) {
       const data = {
         name: event.target.name.value,
         type: event.target.type.value,
         description: event.target.description.value,
-      }
+      };
       props.submitInstrument(data);
-    }
-    else {
+    } else {
       alert('you must specify both instrument type and name');
     }
     event.preventDefault();
   };
-  
-  const selectSection = props.instrument 
+
+  const selectSection = props.instrument
     ? <select name='type' id='type' data-test-id='formGearType' defaultValue={props.instrument.type}>
-        {instrumentTypes.map((type) => {
-          return <option key={type} value={type}>{type}</option>
-        })}
-      </select>
+      {instrumentTypes.map((type) => {
+        return <option key={type} value={type}>{type}</option>;
+      })}
+    </select>
     : <select name='type' id='type' data-test-id='formGearType' defaultValue=''>
       <option value='' disabled>Instrument type</option>
-        {instrumentTypes.map((type) => {
-          return <option key={type} value={type}>{type}</option>
-        })}
-      </select>
-      
+      {instrumentTypes.map((type) => {
+        return <option key={type} value={type}>{type}</option>;
+      })}
+    </select>;
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
         {selectSection}
-        <input 
+        <input
           name='name'
           id='name'
           type="text"
@@ -60,7 +59,7 @@ const HandleInstrumentForm = props => {
         <Button buttonType='Danger' type='reset' clicked={props.closeModal}>Cancel</Button>
       </form>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default HandleInstrumentForm;

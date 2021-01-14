@@ -8,6 +8,6 @@ const Toolbar = () => (
       GEAR PAGE
     </NavLink>
   </header>
-)
+);
 
 export default Toolbar;

@@ -70,6 +70,8 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
+    "lint": "eslint .",
+    "lint:repair": "eslint . --fix",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "e2e": "jest -c jest.e2e.config.js",
@@ -80,7 +82,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "plugin:jest-playwright/recommended"
+      "plugin:jest-playwright/recommended",
+      "./eslintrules.js"
     ]
   },
   "browserslist": {

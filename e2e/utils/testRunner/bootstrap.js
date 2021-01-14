@@ -8,7 +8,7 @@ const checkServerStatus = async () => {
         Run \x1b[32m"npm start"\x1b[0m before executing the e2e tests`);
     process.exit(0);
   }
-}
+};
 
 module.exports = async () => {
   await checkServerStatus();

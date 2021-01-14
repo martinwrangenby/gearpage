@@ -4,14 +4,14 @@ let id;
 
 beforeEach(async () => {
   id = await addGearItem(bass);
-  await page.goto(`${process.env.REACT_APP_FRONTEND}gearitem?id=${id}`, {waitUntil: 'networkidle'});
+  await page.goto(`${process.env.REACT_APP_FRONTEND}gearitem?id=${id}`, { waitUntil: 'networkidle' });
 });
 
 test('Delete instrument', async () => {
   await page.click('[data-test-id="deleteInstrument"]');
-  await page.click('[data-test-id="confirm"]')
+  await page.click('[data-test-id="confirm"]');
   await page.waitForLoadState('networkidle');
-  await expect(page).not.toHaveSelector(`#${id}`, {timeout: 1000})
+  await expect(page).not.toHaveSelector(`#${id}`, { timeout: 1000 });
 });
 
 describe('', () => {
@@ -21,12 +21,12 @@ describe('', () => {
     await page.fill('[data-test-id="formGearName"]', guitar.name);
     await page.fill('[data-test-id="formGearDescription"]', guitar.description);
     await page.click('[data-test-id="submitGearFormButton"]');
-    await page.waitForSelector(`.${guitar.type}`)
-    await expect(page).toEqualText('[data-test-id="gearDetailsName"]', guitar.name)
-    await expect(page).toEqualText('[data-test-id="gearDetailsDescription"]', guitar.description)
+    await page.waitForSelector(`.${guitar.type}`);
+    await expect(page).toEqualText('[data-test-id="gearDetailsName"]', guitar.name);
+    await expect(page).toEqualText('[data-test-id="gearDetailsDescription"]', guitar.description);
   });
 
   afterEach(async () => {
     await deleteGearItem(id);
   });
-})
+});

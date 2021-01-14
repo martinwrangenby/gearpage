@@ -6,7 +6,7 @@ import Layout from './hoc/Layout/Layout';
 import './App.css';
 
 const App = () => {
-  
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -19,6 +19,6 @@ const App = () => {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
