@@ -724,7 +724,7 @@ module.exports = function (webpackEnv) {
         cwd: paths.appPath,
         resolvePluginsRelativeTo: __dirname,
         baseConfig: {
-          extends: [require.resolve('eslint-config-react-app/base'), "plugin:jest-playwright/recommended"],
+          extends: [require.resolve('eslint-config-react-app/base'), "plugin:jest-playwright/recommended", './eslintrules.js'],
           rules: {
             ...(!hasJsxRuntime && {
               'react/react-in-jsx-scope': 'error',
