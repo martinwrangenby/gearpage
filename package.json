@@ -86,6 +86,11 @@
       "./eslintrules.js"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -158,6 +163,7 @@
   "devDependencies": {
     "eslint-plugin-jest-playwright": "^0.2.1",
     "expect-playwright": "^0.3.0",
+    "husky": "^4.3.7",
     "jest-playwright-preset": "^1.4.3",
     "playwright": "^1.7.1",
     "rimraf": "^3.0.2"
