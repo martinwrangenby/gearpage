@@ -76,6 +76,7 @@
     "build": "node scripts/build.js",
     "e2e": "jest -c jest.e2e.config.js",
     "e2e:headful": "HEADFUL=true npm run e2e",
+    "e2e:ci": "REACT_APP_FRONTEND=http://localhost:3000/ start-server-and-test 3000 e2e",
     "test": "node scripts/test.js",
     "cleanup": "rimraf e2e/results"
   },
@@ -166,6 +167,7 @@
     "husky": "^4.3.7",
     "jest-playwright-preset": "^1.4.3",
     "playwright": "^1.7.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "start-server-and-test": "^1.11.7"
   }
 }
