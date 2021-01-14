@@ -1,0 +1,23 @@
+module.exports = {
+  rules: {
+    quotes: ['error', 'single'],
+    indent: ['error', 2],
+    semi: ['error', 'always'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'no-trailing-spaces': 'error',
+    'object-shorthand': 'error',
+    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
+    'quote-props': ['error', 'as-needed'],
+    'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    'arrow-spacing': 'error',
+    'prefer-const': 'error',
+    'no-var': 'error',
+    'prefer-destructuring': ['error', { object: true, array: false }],
+    'rest-spread-spacing': ['error', 'never'],
+    'no-unreachable': 'error',
+    'prefer-template': 'error',
+    'no-multi-assign': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    'eol-last': 'error',
+  },
+};
