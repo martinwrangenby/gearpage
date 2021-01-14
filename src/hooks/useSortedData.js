@@ -4,7 +4,7 @@ import React from 'react';
 const useSortedData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
   const sortedItems = React.useMemo(() => {
-    let sortableItems = [...items];
+    const sortableItems = [...items];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key].toLowerCase() < b[sortConfig.key].toLowerCase()) {
@@ -25,8 +25,8 @@ const useSortedData = (items, config = null) => {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
-  }
-  return { sortedItems: sortedItems, requestSort , sortConfig};
-}
+  };
+  return { sortedItems, requestSort , sortConfig };
+};
 
 export default useSortedData;

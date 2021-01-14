@@ -13,6 +13,6 @@ const ConfirmChoice = props => (
       No
     </Button>
   </React.Fragment>
-)
+);
 
 export default ConfirmChoice;

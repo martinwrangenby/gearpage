@@ -10,11 +10,11 @@ const InstrumentTable = props => {
       return;
     }
     return props.sortOrder.key === name ? props.sortOrder.direction : undefined;
-  }
+  };
 
   const content = props.instruments.map((instrument) => {
     return (
-    <InstrumentTableItem key={instrument.id} {...instrument}/>
+      <InstrumentTableItem key={instrument.id} {...instrument}/>
     );
   });
 
@@ -22,10 +22,10 @@ const InstrumentTable = props => {
     <table>
       <thead>
         <tr>
-          <th className={getClassNamesFor('name')} style={{width: '70%'}} onClick={() =>props.sort('name')}>
+          <th className={getClassNamesFor('name')} style={{ width: '70%' }} onClick={() => props.sort('name')}>
             Name
           </th>
-          <th className={getClassNamesFor('type')} style={{width: '30%'}} onClick={() =>props.sort('type')}>
+          <th className={getClassNamesFor('type')} style={{ width: '30%' }} onClick={() => props.sort('type')}>
             Type
           </th>
         </tr>
@@ -34,7 +34,7 @@ const InstrumentTable = props => {
         {content}
       </tbody>
     </table>
-  )
-}
+  );
+};
 
 export default InstrumentTable;

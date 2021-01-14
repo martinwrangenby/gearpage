@@ -15,51 +15,50 @@ const InstrumentList = () => {
   const [addingInstrument, setAddingInstrument] = React.useState(false);
   const [loading, setLoading ] = React.useState(true);
   const [ error, setError ] = React.useState(false);
-  
+
   React.useEffect(() => {
     axios.get('/gear.json')
       .then(res => {
         setLoading(false);
         if (res.data) {
           const fetchedGear = [];
-          for (let key in res.data) {
+          for (const key in res.data) {
             fetchedGear.push({
               ...res.data[key],
-              id: key
-            })
+              id: key,
+            });
           }
           setInstruments(fetchedGear);
         }
       })
       .catch(err => {
         setError(err);
-      })
+      });
   },[]);
-  
+
   const addInstrument = (instrument) => {
     axios.post('/gear.json', instrument)
-    .then(res => {
-      setInstruments(instruments.concat(Object.assign({id: res.data.name}, instrument)));
-    })
-    .catch(err => {
-      setError(err);
-    })
+      .then(res => {
+        setInstruments(instruments.concat(Object.assign({ id: res.data.name }, instrument)));
+      })
+      .catch(err => {
+        setError(err);
+      });
     setAddingInstrument(false);
-  }
-  
+  };
+
   const { sortedItems, requestSort, sortConfig } = useSortedData(instruments);
   let instrumentTable = <Spinner />;
   //TODO: not very pretty... perhaps find a more elegant solution...
   if (instruments.length > 0) {
     instrumentTable = <InstrumentTable
-    instruments={sortedItems}
-    sort={requestSort}
-    sortOrder={sortConfig}/>
+      instruments={sortedItems}
+      sort={requestSort}
+      sortOrder={sortConfig}/>;
   } else if (error) {
-    instrumentTable = <h4>{error.message}</h4>
-  }
-  else if (!loading) {
-    instrumentTable = <h3>No Gear? get started adding already!</h3>
+    instrumentTable = <h4>{error.message}</h4>;
+  } else if (!loading) {
+    instrumentTable = <h3>No Gear? get started adding already!</h3>;
   }
 
   return (
@@ -75,6 +74,6 @@ const InstrumentList = () => {
       {instrumentTable}
     </div>
   );
-}
+};
 
 export default WithErrorHandler(InstrumentList, axios);

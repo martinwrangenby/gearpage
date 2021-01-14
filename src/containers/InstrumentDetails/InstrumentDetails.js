@@ -14,24 +14,24 @@ const InstrumentDetails = (props) => {
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
   const [ error, setError ] = React.useState(false);
-  
-  React.useEffect(() => { 
+
+  React.useEffect(() => {
     const query = new URLSearchParams(props.location.search);
-    for (let param of query.entries()) {
+    for (const param of query.entries()) {
       if (param[0] === 'id') {
         axios.get(`/gear/${param[1]}.json`)
           .then(res => {
             if (res.data) {
-              setInstrument({id: param[1], ...res.data});
-            } else {throw new Error('Gear item couldn\'t be found in database')}
+              setInstrument({ id: param[1], ...res.data });
+            } else {throw new Error('Gear item couldn\'t be found in database');}
           })
           .catch(err => {
-            setError(err)
+            setError(err);
           });
       }
     }
 
-  },[props.location.search])
+  },[props.location.search]);
 
   const deleteInstrument = () => {
     axios.delete(`/gear/${instrument.id}.json`)
@@ -41,23 +41,23 @@ const InstrumentDetails = (props) => {
       })
       .catch(err => {
         setError(err);
-      })
-  }
+      });
+  };
 
   const updateInstrument = (data) => {
     axios.put(`/gear/${instrument.id}.json`, data)
       .then(res => {
-        setInstrument({id: instrument.id, ...res.data});
+        setInstrument({ id: instrument.id, ...res.data });
       })
       .catch(err => {
         setError(err);
-      })
+      });
     setEditingInstrument(false);
-  }
+  };
 
-  let content = <Spinner />
+  let content = <Spinner />;
   if (error) {
-    content = <h4>{error.message}</h4>
+    content = <h4>{error.message}</h4>;
   }
   if (instrument) {
     // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
@@ -71,7 +71,7 @@ const InstrumentDetails = (props) => {
           <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
         </Modal>
       </React.Fragment>
-    )
+    );
   }
   return (
     <React.Fragment>
@@ -92,7 +92,7 @@ const InstrumentDetails = (props) => {
         Delete
       </Button>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default WithErrorHandler(InstrumentDetails, axios);

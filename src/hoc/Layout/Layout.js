@@ -9,6 +9,6 @@ const Layout = (props) => (
       {props.children}
     </main>
   </React.Fragment>
-)
+);
 
 export default Layout;

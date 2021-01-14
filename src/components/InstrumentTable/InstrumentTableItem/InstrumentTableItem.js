@@ -5,8 +5,8 @@ const InstrumentTableItem = props => {
   const mos = () => {
     history.push({
       pathname: '/gearitem',
-    search: `?id=${props.id}`})
-  }
+      search: `?id=${props.id}` });
+  };
   return (
     <tr onClick={mos} id={props.id} name={props.name}>
       <td>
@@ -16,7 +16,7 @@ const InstrumentTableItem = props => {
         {props.type}
       </td>
     </tr>
-  )
-}
+  );
+};
 
 export default InstrumentTableItem;
