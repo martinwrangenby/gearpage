@@ -3,7 +3,7 @@ const { bass } = require('../assets/testdata');
 const name = new Date().toLocaleString();
 
 beforeEach(async () => {
-  await page.goto(process.env.REACT_APP_FRONTEND, {waitUntil: 'networkidle'});
+  await page.goto(process.env.REACT_APP_FRONTEND, { waitUntil: 'networkidle' });
 });
 
 test('Add new instrument', async () => {
