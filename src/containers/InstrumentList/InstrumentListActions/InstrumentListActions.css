@@ -1,0 +1,32 @@
+.TableActions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.DropdownContent {
+  margin-bottom: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  background: #201d26;
+  display: flex;
+  flex-flow: row;
+  margin-top: auto;
+  justify-content:space-evenly;
+  max-height: 80px;
+  transition: max-height 0.1s ease-out;
+}
+
+.DropdownContent.hidden {
+  max-height: 0;
+  margin-bottom: 0;
+  transition: max-height 0.1s ease-out;
+}
+
+.DropdownContentWrapper {
+  display: flex;
+  flex-flow: column;
+  padding: 10px; 
+}
