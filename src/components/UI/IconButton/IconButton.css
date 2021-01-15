@@ -1,0 +1,19 @@
+.IconButton {
+  padding: 5px;
+  font-size: 1.5em;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.IconButton:hover {
+  background: #201d26;
+}
+
+.IconButton.Active {
+  background: #201d26;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.IconButton:active {
+  transform: translateY(4px);
+}
