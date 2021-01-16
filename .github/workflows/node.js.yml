@@ -6,15 +6,19 @@ name: Node.js CI
 on: pull_request
 
 jobs:
-  ci:
-    name: 'ci'
+  e2e_tests:
+    name: E2e tests
     env: 
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Configure node environment
+        uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: npm ci
-      - run: npm run e2e:ci
+      - name: Clean install dependencies
+        run: npm ci
+      - name: Start the app in dev mode and run the e2e tests
+        run: npm run e2e:ci
