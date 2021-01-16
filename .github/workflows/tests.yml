@@ -22,3 +22,9 @@ jobs:
         run: npm ci
       - name: Start the app in dev mode and run the e2e tests
         run: npm run e2e:ci
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: e2e-test-artifacts
+          path: e2e/results/
