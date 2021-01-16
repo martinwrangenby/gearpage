@@ -14,12 +14,14 @@ const InstrumentTable = props => {
 
   const content = props.instruments.map((instrument) => {
     return (
-      <InstrumentTableItem key={instrument.id} {...instrument}/>
+      props.filter.includes(instrument.type)
+        ? <InstrumentTableItem key={instrument.id} {...instrument}/>
+        : null
     );
   });
 
   return (
-    <table>
+    <table id='InstrumentTable'>
       <thead>
         <tr>
           <th className={getClassNamesFor('name')} style={{ width: '70%' }} onClick={() => props.sort('name')}>
