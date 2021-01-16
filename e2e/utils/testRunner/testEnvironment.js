@@ -18,7 +18,7 @@ class TestEnvironment extends PlaywrightEnvironment {
     if (event.name === 'test_done' && event.test.errors.length > 0) {
       const specName = event.test.name.replace(/\W/g, '-');
       const timestamp = new Date();
-      const screenshotName = `${specName}__${timestamp.toLocaleString('se-SV').replace(' ', '_')}.png`;
+      const screenshotName = `${specName}__${timestamp.toLocaleString('se-SV').replace(/\s/g, '_').replace(/:/g, '-')}.png`;
       await this.global.page.screenshot({
         path: `${__dirname}/../../results/${screenshotName}`,
       });
