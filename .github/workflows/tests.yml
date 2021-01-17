@@ -28,3 +28,4 @@ jobs:
         with:
           name: e2e-test-artifacts
           path: e2e/results/
+          retention-days: 10
