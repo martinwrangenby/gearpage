@@ -42,3 +42,10 @@
   color:#ffffff;
   background-color:#5e2a0e;
 }
+
+.Button:disabled {
+  background-color: #666666;
+  color: #111111;
+  border: 0.2em solid #444444;
+  cursor: not-allowed
+}
