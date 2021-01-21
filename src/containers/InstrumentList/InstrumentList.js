@@ -1,6 +1,6 @@
 import React from 'react';
 import useSortedData from '../../hooks/useSortedData';
-import HandleInstrumentForm from '../../components/HandleInstrumentForm/HandleInstrumentForm';
+import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import InstrumentTable from '../../components/InstrumentTable/InstrumentTable';
 import InstrumentListActions from './InstrumentListActions/InstrumentListActions';
 import Modal from '../../components/UI/Modal/Modal';
@@ -79,7 +79,7 @@ const InstrumentList = () => {
   return (
     <div className='InstrumentList'>
       <Modal show={addingInstrument} modalClosed={() => setAddingInstrument(false)}>
-        <HandleInstrumentForm
+        <InstrumentForm
           submitInstrument={addInstrument}
           closeModal={() => setAddingInstrument(false)}/>
       </Modal>

@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from '../UI/Button/Button';
-import Input from '../UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 import gearFormRules from '../../assets/gearFormRules';
 
 
 // TODO: Add security on input form
-const HandleInstrumentForm = props => {
+const InstrumentForm = props => {
 
   const [formContent, setFormContent] = React.useState(gearFormRules);
   const [formValid, setFormValid] = React.useState(false);
@@ -107,4 +107,4 @@ const HandleInstrumentForm = props => {
   );
 };
 
-export default HandleInstrumentForm;
+export default InstrumentForm;
