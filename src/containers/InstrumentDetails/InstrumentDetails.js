@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
-import HandleInstrumentForm from '../../components/HandleInstrumentForm/HandleInstrumentForm';
+import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -76,7 +76,7 @@ const InstrumentDetails = (props) => {
   return (
     <React.Fragment>
       <Modal show={editingInstrument} modalClosed={() => setEditingInstrument(false)}>
-        <HandleInstrumentForm
+        <InstrumentForm
           instrument={instrument}
           submitInstrument={updateInstrument}
           closeModal={() => setEditingInstrument(false)}/>

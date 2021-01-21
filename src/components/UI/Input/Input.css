@@ -1,4 +1,4 @@
-input, select, textarea {
+.InputElement {
   font-family: inherit;
   font-size: 1em;
   background-color: #2d2d3a;
@@ -12,4 +12,9 @@ input, select, textarea {
   box-sizing: border-box;
   -webkit-appearance: none;
   resize: none;
+}
+
+.InputElement.Invalid {
+  background-color: #300c0caa;
+  border: 1px solid #781515;
 }
