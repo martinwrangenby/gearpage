@@ -2,8 +2,14 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   font-family: 'Spartan', sans-serif;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 
 code {

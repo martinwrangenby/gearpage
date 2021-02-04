@@ -1,6 +1,6 @@
 .IconButton {
   padding: 5px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   transition: all 0.2s;
   cursor: pointer;
 }
