@@ -15,3 +15,5 @@
     width: 700px;
   }
 }
+/* TODO: these media limits should be general for all content within the app, not just this class
+and the one defined in App.css, could it be defined in one place? */
