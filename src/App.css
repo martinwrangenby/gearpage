@@ -4,3 +4,32 @@
   background-color: #2d2d3a;
   height: 100%;
 }
+
+.PageContentBox {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 1em;
+  text-align: center;
+  background-color: #201d26;
+  box-shadow: 0 2px 3px #212121;
+  border: 1px solid #6c6c6c;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.PageContentBox h1, p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 500px) {
+  .PageContentBox {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .PageContentBox {
+    width: 700px;
+  }
+}

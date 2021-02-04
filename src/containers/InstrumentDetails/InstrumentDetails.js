@@ -7,8 +7,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios';
 
-import './InstrumentDetails.css';
-
 const InstrumentDetails = (props) => {
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
@@ -63,7 +61,7 @@ const InstrumentDetails = (props) => {
     // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
       <React.Fragment>
-        <div className={`InstrumentDetails ${instrument.type}`}>
+        <div className={`PageContentBox ${instrument.type}`}>
           <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
           <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
         </div>
