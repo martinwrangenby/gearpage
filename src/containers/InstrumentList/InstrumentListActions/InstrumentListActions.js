@@ -25,7 +25,7 @@ const InstrumentListActions = props => {
   const dropdownContent = gearTypes.map(gearType => {
     return (
       <div key={gearType} className='DropdownContentWrapper'>
-        <Switch activated clicked={() => props.filterGear(gearType)} />
+        <Switch centered activated clicked={() => props.filterGear(gearType)} />
         {gearType}
       </div>
     );
