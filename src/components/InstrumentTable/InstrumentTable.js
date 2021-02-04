@@ -24,10 +24,10 @@ const InstrumentTable = props => {
     <table id='InstrumentTable'>
       <thead>
         <tr>
-          <th className={getClassNamesFor('name')} style={{ width: '70%' }} onClick={() => props.sort('name')}>
+          <th className={getClassNamesFor('name')} style={{ width: '75%' }} onClick={() => props.sort('name')}>
             Name
           </th>
-          <th className={getClassNamesFor('type')} style={{ width: '30%' }} onClick={() => props.sort('type')}>
+          <th className={getClassNamesFor('type')} style={{ width: '25%' }} onClick={() => props.sort('type')}>
             Type
           </th>
         </tr>
