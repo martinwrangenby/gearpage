@@ -1,0 +1,12 @@
+.SettingsItem {
+  margin: 1em auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 500px) {
+  .SettingsItem {
+    width: 70%;
+  }
+}
