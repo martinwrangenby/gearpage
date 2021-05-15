@@ -42,6 +42,19 @@ const gearFormRules = {
     valid: true,
     dataTestId: 'formGearDescription',
   },
+  price: {
+    elementType: 'input',
+    elementConfig: {
+      placeholder: 'Price',
+      type: 'number',
+    },
+    value: '',
+    rules: {
+      mandatory: false,
+    },
+    valid: true,
+    dataTestId: 'formGearPrice',
+  },
 };
 
 export default gearFormRules;
