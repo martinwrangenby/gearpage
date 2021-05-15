@@ -3,15 +3,25 @@
   font-size: 1em;
   background-color: #2d2d3a;
   color: #d2d2d2;
-  width: 90%;
+  width: 43%;
   padding: 8px;
-  margin: 10px;
+  margin: 10px 2%;
   display: inline-block;
   border: 1px solid #5c5c5c;
   border-radius: 4px;
   box-sizing: border-box;
   -webkit-appearance: none;
   resize: none;
+}
+textarea.InputElement {
+  width: 90%;
+  height: 100px;
+}
+
+@media (max-width: 600px) {
+  .InputElement {
+    width: 90%;
+  }
 }
 
 .InputElement.Invalid {
