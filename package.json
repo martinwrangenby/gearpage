@@ -80,13 +80,6 @@
     "test": "node scripts/test.js",
     "cleanup": "rimraf e2e/results"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "plugin:jest-playwright/recommended",
-      "./eslintrules.js"
-    ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
