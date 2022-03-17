@@ -19,7 +19,7 @@
     "lint:repair": "eslint . --fix",
     "start": "node scripts/devServerBootstrap.js && react-scripts start",
     "build": "react-scripts build",
-    "e2e": "jest -c jest.e2e.config.js",
+    "e2e": "npx playwright test",
     "e2e:headful": "HEADFUL=true npm run e2e",
     "e2e:ci": "REACT_APP_FRONTEND=http://localhost:3000/ start-server-and-test 3000 e2e",
     "test": "react-scripts test",
