@@ -12,6 +12,7 @@ const config = {
   },
   outputDir: 'e2e/results',
   reporter: [ [cliReporter], ['html', { open: 'never', outputFolder: 'e2e/results/html' }] ],
+  globalSetup: require.resolve(`${__dirname}/e2e/utils/globalSetup.js`),
 };
 
 module.exports = config;
