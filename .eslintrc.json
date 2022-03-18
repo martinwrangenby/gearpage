@@ -1,7 +1,7 @@
 {
   "extends": [
     "react-app",
-    "plugin:jest-playwright/recommended",
+    "plugin:playwright/playwright-test",
     "./eslintrules.js"
   ]
 }

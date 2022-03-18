@@ -19,7 +19,7 @@
     "lint:repair": "eslint . --fix",
     "start": "node scripts/devServerBootstrap.js && react-scripts start",
     "build": "react-scripts build",
-    "e2e": "jest -c jest.e2e.config.js",
+    "e2e": "npx playwright test",
     "e2e:headful": "HEADFUL=true npm run e2e",
     "e2e:ci": "REACT_APP_FRONTEND=http://localhost:3000/ start-server-and-test 3000 e2e",
     "test": "react-scripts test",
@@ -43,13 +43,12 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.20.0",
     "eslint": "^8.11.0",
     "eslint-config-react-app": "^7.0.0",
-    "eslint-plugin-jest-playwright": "^0.2.1",
-    "expect-playwright": "^0.3.0",
+    "eslint-plugin-playwright": "^0.8.0",
     "husky": "^4.3.7",
-    "jest-playwright-preset": "^1.4.3",
-    "playwright": "^1.10.0",
+    "playwright": "^1.20.0",
     "rimraf": "^3.0.2",
     "start-server-and-test": "^1.11.7"
   }
