@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
@@ -12,24 +13,20 @@ const InstrumentDetails = (props) => {
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
   const [ error, setError ] = React.useState(false);
+  const location = useLocation();
+  const history = useHistory();
 
   React.useEffect(() => {
-    const query = new URLSearchParams(props.location.search);
-    for (const param of query.entries()) {
-      if (param[0] === 'id') {
-        axios.get(`/gear/${param[1]}.json`)
-          .then(res => {
-            if (res.data) {
-              setInstrument({ id: param[1], ...res.data });
-            } else {throw new Error('Gear item couldn\'t be found in database');}
-          })
-          .catch(err => {
-            setError(err);
-          });
-      }
-    }
-
-  },[props.location.search]);
+    const id = new URLSearchParams(location.search).get('id');
+    axios.get(`/gear/${id}.json`)
+      .then(res => {
+        if (res.data) setInstrument({ id, ...res.data });
+        else throw new Error('Gear item couldn\'t be found in database');
+      })
+      .catch(err => {
+        setError(err);
+      });
+  },[location.search]);
 
   const deleteInstrument = () => {
     axios.delete(`/gear/${instrument.id}.json`)
@@ -80,7 +77,7 @@ const InstrumentDetails = (props) => {
           closeModal={() => setEditingInstrument(false)}/>
       </Modal>
       {content}
-      <Button clicked={props.history.goBack}>
+      <Button clicked={history.goBack}>
         Back
       </Button>
       <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
