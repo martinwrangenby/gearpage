@@ -8,7 +8,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios';
 
-const InstrumentDetails = (props) => {
+const InstrumentDetails = () => {
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
@@ -31,8 +31,7 @@ const InstrumentDetails = (props) => {
   const deleteInstrument = () => {
     axios.delete(`/gear/${instrument.id}.json`)
       .then(res => {
-        console.log(res);
-        props.history.replace('/');
+        history.replace('/');
       })
       .catch(err => {
         setError(err);
@@ -52,12 +51,27 @@ const InstrumentDetails = (props) => {
 
   let content = <Spinner />;
   if (error) {
-    content = <h4>{error.message}</h4>;
+    content = (
+      <>
+        <h4>
+          {error.message}
+        </h4>
+        <Button clicked={history.goBack}>
+            Back
+        </Button>
+      </>
+    );
   }
   if (instrument) {
     // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
-      <React.Fragment>
+      <>
+        <Modal show={editingInstrument} modalClosed={() => setEditingInstrument(false)}>
+          <InstrumentForm
+            instrument={instrument}
+            submitInstrument={updateInstrument}
+            closeModal={() => setEditingInstrument(false)}/>
+        </Modal>
         <div className={`PageContentBox ${instrument.type}`}>
           <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
           <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
@@ -65,29 +79,19 @@ const InstrumentDetails = (props) => {
         <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>
           <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
         </Modal>
-      </React.Fragment>
+        <Button clicked={history.goBack}>
+        Back
+        </Button>
+        <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
+        Edit
+        </Button>
+        <Button buttonType='Danger' clicked={setDeletingInstrument} dataTestId='deleteInstrument'>
+        Delete
+        </Button>
+      </>
     );
   }
-  return (
-    <React.Fragment>
-      <Modal show={editingInstrument} modalClosed={() => setEditingInstrument(false)}>
-        <InstrumentForm
-          instrument={instrument}
-          submitInstrument={updateInstrument}
-          closeModal={() => setEditingInstrument(false)}/>
-      </Modal>
-      {content}
-      <Button clicked={history.goBack}>
-        Back
-      </Button>
-      <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
-        Edit
-      </Button>
-      <Button buttonType='Danger' clicked={setDeletingInstrument} dataTestId='deleteInstrument'>
-        Delete
-      </Button>
-    </React.Fragment>
-  );
+  return content;
 };
 
 export default WithErrorHandler(InstrumentDetails, axios);
