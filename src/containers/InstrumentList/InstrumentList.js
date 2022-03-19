@@ -20,7 +20,6 @@ const InstrumentList = () => {
   React.useEffect(() => {
     axios.get('/gear.json')
       .then(res => {
-        setLoading(false);
         if (res.data) {
           const fetchedGear = [];
           for (const key in res.data) {
@@ -30,6 +29,7 @@ const InstrumentList = () => {
             });
           }
           setInstruments(fetchedGear);
+          setLoading(false);
         }
       })
       .catch(err => {
@@ -59,7 +59,7 @@ const InstrumentList = () => {
   //TODO: not very pretty... perhaps find a more elegant solution...
   if (instruments.length > 0) {
     instrumentTable = (
-      <React.Fragment>
+      <>
         <InstrumentListActions
           addInstrument={setAddingInstrument}
           filterGear={updateGearFilter}/>
@@ -68,7 +68,7 @@ const InstrumentList = () => {
           instruments={sortedItems}
           sort={requestSort}
           sortOrder={sortConfig}/>
-      </React.Fragment>
+      </>
     );
   } else if (error) {
     instrumentTable = <h4>{error.message}</h4>;
@@ -76,13 +76,17 @@ const InstrumentList = () => {
     instrumentTable = <h3>No Gear? get started adding already!</h3>;
   }
 
+  const addInstrumentModal = (
+    <Modal show={addingInstrument} modalClosed={() => setAddingInstrument(false)}>
+      <InstrumentForm
+        submitInstrument={addInstrument}
+        closeModal={() => setAddingInstrument(false)}/>
+    </Modal>
+  );
+
   return (
     <div className='InstrumentList'>
-      <Modal show={addingInstrument} modalClosed={() => setAddingInstrument(false)}>
-        <InstrumentForm
-          submitInstrument={addInstrument}
-          closeModal={() => setAddingInstrument(false)}/>
-      </Modal>
+      {!loading ? addInstrumentModal : ''}
       {instrumentTable}
     </div>
   );
