@@ -1,5 +1,8 @@
 name: Code & Metadata Scan
-on: pull_request
+on:
+  pull_request:
+  schedule:
+    - cron: '0 10 * * *'
 
 jobs:
   dangerJS:
