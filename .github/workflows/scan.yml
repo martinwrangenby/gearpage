@@ -1,49 +1,25 @@
-name: PR Validation
-
+name: Code & Metadata Scan
 on: pull_request
 
 jobs:
-  component_tests:
-    name: Component tests
+  dangerJS:
+    if: ${{ github.base_ref }}
+    name: DangerJS Analysis
+    env:
+      DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Configure node environment
         uses: actions/setup-node@v2
         with:
           node-version: 14
       - name: Clean install dependencies
         run: npm ci
-      - name: Run the component tests
-        run: npm test
-
-  e2e_tests:
-    name: E2e tests
-    env: 
-      REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Configure node environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - name: Clean install dependencies
-        run: npm ci
-      - name: Start the app in dev mode and run the e2e tests
-        run: npm run e2e:ci
-      - name: Upload test artifacts
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: e2e-test-artifacts
-          path: e2e/results/
-          retention-days: 10
+      - name: Danger
+        run: npm run danger:ci
 
   sonarcloud:
-    if: ${{ github.base_ref }}
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
     steps:
@@ -67,23 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  dangerCI:
-    if: ${{ github.base_ref }}
-    name: DangerCI Analysis
-    env:
-      DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Configure node environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - name: Clean install dependencies
-        run: npm ci
-      - name: Danger
-        run: npm run danger:ci
 
   codeQL:
     name: CodeQL Analysis 
