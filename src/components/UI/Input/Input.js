@@ -6,71 +6,31 @@ const Input = props => {
   let inputContent = null;
   const classes = ['InputElement'];
 
-  if(props.inValid && props.touched) {
-    classes.push('Invalid');
-  }
+  if(props.inValid && props.touched) classes.push('Invalid');
 
-  switch(props.elementType) {
-  case('input'):
-    inputContent = <input
+  if(['input', 'textarea'].includes(props.elementType)) {
+    inputContent = <props.elementType
       className={classes.join(' ')}
       value={props.value}
       onChange={props.changed}
       data-test-id={props.dataTestId}
       { ...props.elementConfig }/>;
-    break;
-  case('textarea'):
-    inputContent = <textarea
+  } else if(props.elementType === 'select') {
+    const placeholderOption = props.value ? null : <option value='' disabled>{props.elementConfig.placeholder}</option>;
+    inputContent = <select
       className={classes.join(' ')}
       value={props.value}
       onChange={props.changed}
-      data-test-id={props.dataTestId}
-      { ...props.elementConfig }/>;
-    break;
-  case('select'):
-    inputContent = props.value
-      ? (
-        <select
-          className={classes.join(' ')}
-          value={props.value}
-          onChange={props.changed}
-          data-test-id={props.dataTestId}>
-          {props.elementConfig.options.map(option => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      )
-      : (
-        <select
-          className={classes.join(' ')}
-          value={props.value}
-          onChange={props.changed}
-          data-test-id={props.dataTestId}>
-          <option value='' disabled>Instrument type</option>
-          {props.elementConfig.options.map(option => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      );
-    break;
-  default:
-    inputContent = <input
-      className={classes.join(' ')}
-      value={props.value}
-      onChange={props.changed}
-      data-test-id={props.dataTestId}
-      { ...props.elementConfig }/>;
-    break;
+      data-test-id={props.dataTestId}>
+      {placeholderOption}
+      {props.elementConfig.options.map(option => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>;
   }
-  return (
-    <React.Fragment>
-      { inputContent }
-    </React.Fragment>
-  );
+  return inputContent;
 };
 
 export default Input;

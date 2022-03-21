@@ -1,2 +1,2 @@
-const instrumentTypes = ['amp', 'guitar', 'bass', 'effect'];
-export default instrumentTypes;
+const gearTypes = ['amp', 'guitar', 'bass', 'effect'];
+export default gearTypes;

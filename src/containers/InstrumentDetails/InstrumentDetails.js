@@ -6,7 +6,7 @@ import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios';
+import axios from '../../axiosInstance';
 
 const InstrumentDetails = () => {
   const [ instrument, setInstrument ] = React.useState(null);

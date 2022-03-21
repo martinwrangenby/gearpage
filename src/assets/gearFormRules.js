@@ -20,6 +20,7 @@ const gearFormRules = {
     elementType: 'select',
     elementConfig: {
       options: gearTypes,
+      placeholder: 'Gear type',
     },
     value: '',
     rules: {
