@@ -2,7 +2,7 @@ name: Code & Metadata Scan
 on:
   pull_request:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '0 5 * * *'
 
 jobs:
   dangerJS:
