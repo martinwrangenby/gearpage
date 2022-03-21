@@ -5,7 +5,7 @@ import InstrumentTable from '../../components/InstrumentTable/InstrumentTable';
 import InstrumentListActions from './InstrumentListActions/InstrumentListActions';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import axios from '../../axios';
+import axios from '../../axiosInstance';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import gearTypes from '../../assets/gearTypes';
 
