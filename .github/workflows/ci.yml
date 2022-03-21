@@ -58,7 +58,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.coverage.exclusions=e2e/**/*
+            -Dsonar.sources=src,e2e
+            -Dsonar.coverage.exclusions=e2e/**,**/*.test.js,src/assets/**
             -Dsonar.qualitygate.wait=true
             -Dsonar.projectKey=martinwrangenby_gearpage
             -Dsonar.organization=martinwrangenby
