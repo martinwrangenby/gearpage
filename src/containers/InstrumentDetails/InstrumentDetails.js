@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
@@ -14,7 +14,7 @@ const InstrumentDetails = () => {
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
   const [ error, setError ] = React.useState(false);
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
@@ -31,7 +31,7 @@ const InstrumentDetails = () => {
   const deleteInstrument = () => {
     axios.delete(`/gear/${instrument.id}.json`)
       .then(res => {
-        history.replace('/');
+        navigate('/', { replace: true });
       })
       .catch(err => {
         setError(err);
@@ -56,7 +56,7 @@ const InstrumentDetails = () => {
         <h4>
           {error.message}
         </h4>
-        <Button clicked={history.goBack}>
+        <Button clicked={() => navigate(-1)}>
             Back
         </Button>
       </>
@@ -79,7 +79,7 @@ const InstrumentDetails = () => {
         <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>
           <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
         </Modal>
-        <Button clicked={history.goBack}>
+        <Button clicked={() => navigate(-1)}>
         Back
         </Button>
         <Button clicked={setEditingInstrument} dataTestId='editInstrument'>

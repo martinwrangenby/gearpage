@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import InstrumentList from './containers/InstrumentList/InstrumentList';
 import InstrumentDetails from './containers/InstrumentDetails/InstrumentDetails';
 import Settings from './containers/Settings/Settings';
@@ -12,11 +12,11 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <Layout>
-          <Switch>
-            <Route path='/gearitem' component={InstrumentDetails}/>
-            <Route path='/settings' component={Settings} />
-            <Route path='/' component={InstrumentList}/>
-          </Switch>
+          <Routes>
+            <Route path='/gearitem' element={<InstrumentDetails/>}/>
+            <Route path='/settings' element={<Settings/>} />
+            <Route path='/' element={<InstrumentList/>}/>
+          </Routes>
         </Layout>
       </div>
     </BrowserRouter>

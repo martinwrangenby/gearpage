@@ -1,10 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const InstrumentTableItem = props => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const isSelected = () => {
-    history.push({
+    navigate({
       pathname: '/gearitem',
       search: `?id=${props.id}` });
   };
