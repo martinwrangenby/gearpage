@@ -1,13 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import InstrumentTableItem from './InstrumentTableItem';
 
-const mockHistoryPush = jest.fn();
-
+const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...(jest.requireActual('react-router-dom')),
-  useHistory: () => ({
-    push: mockHistoryPush,
-  }),
+  useNavigate: () => mockedUsedNavigate,
 }));
 
 describe('InstrumentableItem', () => {
@@ -39,7 +36,7 @@ describe('InstrumentableItem', () => {
   test('clicking the row will push path and query for instrument to history', () => {
     const tableRow = screen.getByRole('row');
     fireEvent.click(tableRow);
-    expect(mockHistoryPush).toBeCalledWith(
+    expect(mockedUsedNavigate).toBeCalledWith(
       {
         pathname: '/gearitem',
         search: '?id=123456',
