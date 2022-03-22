@@ -3,5 +3,12 @@
     "react-app",
     "plugin:playwright/playwright-test",
     "./eslintrules.js"
+  ],
+  "overrides": [{
+    "files": ["src/**/*.test.js"],
+    "rules": {
+      "playwright/missing-playwright-await": 0
+    }
+  }
   ]
 }
