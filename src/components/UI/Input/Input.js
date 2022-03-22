@@ -2,33 +2,46 @@ import React from 'react';
 
 import './Input.css';
 
-const Input = props => {
+const Input = ({
+  inValid = false,
+  touched = false,
+  elementType = 'input',
+  value = '',
+  changed = () => {console.error(`no onChange handler function provided to ${elementType} component`);},
+  dataTestId = '',
+  elementConfig = {},
+}) => {
   let inputContent = null;
   const classes = ['InputElement'];
 
-  if(props.inValid && props.touched) classes.push('Invalid');
+  if(inValid && touched) classes.push('Invalid');
 
-  if(['input', 'textarea'].includes(props.elementType)) {
-    inputContent = <props.elementType
-      className={classes.join(' ')}
-      value={props.value}
-      onChange={props.changed}
-      data-test-id={props.dataTestId}
-      { ...props.elementConfig }/>;
-  } else if(props.elementType === 'select') {
-    const placeholderOption = props.value ? null : <option value='' disabled>{props.elementConfig.placeholder}</option>;
+  if(elementType === 'select') {
+    if (!elementConfig.options) {
+      console.error('Can not generate <select> element without passing options (elementConfig.options)');
+      return null;
+    }
+    const placeholderOption = value ? null : <option value='' disabled>{elementConfig.placeholder}</option>;
     inputContent = <select
       className={classes.join(' ')}
-      value={props.value}
-      onChange={props.changed}
-      data-test-id={props.dataTestId}>
+      value={value}
+      onChange={changed}
+      data-test-id={dataTestId}>
       {placeholderOption}
-      {props.elementConfig.options.map(option => (
+      {elementConfig.options.map(option => (
         <option key={option} value={option}>
           {option}
         </option>
       ))}
     </select>;
+  } else {
+    const CustomTag = elementType;
+    inputContent = <CustomTag
+      className={classes.join(' ')}
+      value={value}
+      onChange={changed}
+      data-test-id={dataTestId}
+      { ...elementConfig }/>;
   }
   return inputContent;
 };
