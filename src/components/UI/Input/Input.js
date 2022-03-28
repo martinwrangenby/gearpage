@@ -6,9 +6,9 @@ const Input = ({
   inValid = false,
   touched = false,
   elementType = 'input',
-  value = '',
+  value = undefined,
   changed = () => {console.error(`no onChange handler function provided to ${elementType} component`);},
-  dataTestId = '',
+  dataTestId = undefined,
   elementConfig = {},
 }) => {
   let inputContent = null;
