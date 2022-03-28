@@ -25,6 +25,14 @@ jobs:
   sonarcloud:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_FIREBASE_APIKEY: ${{ secrets.REACT_APP_FIREBASE_APIKEY }}
+      REACT_APP_FIREBASE_AUTHDOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTHDOMAIN }}
+      REACT_APP_FIREBASE_DBURL: ${{ secrets.REACT_APP_FIREBASE_DBURL }}
+      REACT_APP_FIREBASE_PROJECTID: ${{ secrets.REACT_APP_FIREBASE_PROJECTID }}
+      REACT_APP_FIREBASE_STORAGEBUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGEBUCKET }}
+      REACT_APP_FIREBASE_MSGSENDERID: ${{ secrets.REACT_APP_FIREBASE_MSGSENDERID }}
+      REACT_APP_FIREBASE_APPID: ${{ secrets.REACT_APP_FIREBASE_APPID }}
     steps:
       - uses: actions/checkout@v2
         with:

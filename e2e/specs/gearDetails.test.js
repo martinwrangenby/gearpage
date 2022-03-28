@@ -1,12 +1,13 @@
 const { test, expect } = require('@playwright/test');
 const { addGearItem, deleteGearItem } = require('../utils/firebaseAPI');
 const { bass, guitar } = require('../assets/testdata');
+test.use({ storageState: 'loggedIn.json' });
 let id;
 
 test.describe('Gear details page', () => {
   test.beforeEach(async ({ page }) => {
     id = await addGearItem(bass);
-    await page.goto(`${process.env.REACT_APP_FRONTEND}gearitem?id=${id}`, { waitUntil: 'networkidle' });
+    await page.goto(`/gearitem?id=${id}`);
   });
 
   test.afterEach(async () => {

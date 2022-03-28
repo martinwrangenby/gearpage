@@ -1,24 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import IconButton from '../../UI/IconButton/IconButton';
 import ToolbarMenu from './ToolbarMenu/ToolbarMenu';
 import './Toolbar.css';
 
 const Toolbar = (props) => {
+  const navigate = useNavigate();
   React.useEffect(() => {
-    if (props.showMenu) {
-      document.addEventListener('mousedown', handleClick);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
+    if (props.showMenu) document.addEventListener('mousedown', handleCloseMenuClick);
+    return () => document.removeEventListener('mousedown', handleCloseMenuClick);
   });
 
-  const handleClick = event => {
+  const handleMenuChoice = (choice) => {
+    if (choice === 'settings') navigate('/settings');
+    if (choice === 'logout') props.logout();
+    props.toggleMenu(false);
+  };
+
+  const handleCloseMenuClick = event => {
     if (!document.getElementById('menuButton').contains(event.target) &&
-      !document.getElementById('menuContent').contains(event.target)) {
-      props.toggleMenu(false);
-    }
+      !document.getElementById('menuContent').contains(event.target)) props.toggleMenu(false);
   };
 
   return (
@@ -32,7 +33,7 @@ const Toolbar = (props) => {
         <NavLink to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
           GEAR PAGE
         </NavLink>
-        {props.showMenu ? <ToolbarMenu /> : ''}
+        {props.showMenu ? <ToolbarMenu handleMenuChoice={handleMenuChoice}/> : ''}
       </div>
     </header>
   );

@@ -6,7 +6,10 @@ const Layout = (props) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   return (
     <React.Fragment>
-      <Toolbar showMenu={menuOpen} toggleMenu={setMenuOpen}/>
+      <Toolbar
+        showMenu={menuOpen}
+        toggleMenu={setMenuOpen}
+        logout={props.logout}/>
       <main className='Content'>
         {props.children}
       </main>

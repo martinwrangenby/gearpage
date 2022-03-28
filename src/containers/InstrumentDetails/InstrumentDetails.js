@@ -1,12 +1,11 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getDatabase, ref, onValue, off, set, remove } from 'firebase/database';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axiosInstance';
 
 const InstrumentDetails = () => {
   const [ instrument, setInstrument ] = React.useState(null);
@@ -15,37 +14,28 @@ const InstrumentDetails = () => {
   const [ error, setError ] = React.useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const db = getDatabase();
 
   React.useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
-    axios.get(`/gear/${id}.json`)
-      .then(res => {
-        if (res.data) setInstrument({ id, ...res.data });
-        else throw new Error('Gear item couldn\'t be found in database');
-      })
-      .catch(err => {
-        setError(err);
-      });
-  },[location.search]);
+    const databaseRef = ref(db, `/gear/${id}`);
+    onValue(databaseRef, snapshot => {
+      const data = snapshot.val();
+      if (data) setInstrument({ id, ...data });
+      else setError(new Error('Gear item couldn\'t be found in database'));
+    },
+    (err) => navigate('/login') // TODO: when adding id specific db path, investigate if this should be tweaked if loggedin user tries to get other user's stuff...
+    );
+    return () => off(databaseRef);
+  },[location.search, db, navigate]);
 
   const deleteInstrument = () => {
-    axios.delete(`/gear/${instrument.id}.json`)
-      .then(res => {
-        navigate('/', { replace: true });
-      })
-      .catch(err => {
-        setError(err);
-      });
+    remove(ref(db, `/gear/${instrument.id}`),);
+    navigate('/', { replace: true });
   };
 
   const updateInstrument = (data) => {
-    axios.put(`/gear/${instrument.id}.json`, data)
-      .then(res => {
-        setInstrument({ id: instrument.id, ...res.data });
-      })
-      .catch(err => {
-        setError(err);
-      });
+    set(ref(db, `/gear/${instrument.id}`), data);
     setEditingInstrument(false);
   };
 
@@ -53,12 +43,14 @@ const InstrumentDetails = () => {
   if (error) {
     content = (
       <>
-        <h4>
-          {error.message}
-        </h4>
-        <Button clicked={() => navigate(-1)}>
-            Back
-        </Button>
+        <Modal>
+          <h3>
+            {error.message}
+          </h3>
+          <Button clicked={() => navigate('/')}>
+              Back
+          </Button>
+        </Modal>
       </>
     );
   }
@@ -94,4 +86,4 @@ const InstrumentDetails = () => {
   return content;
 };
 
-export default WithErrorHandler(InstrumentDetails, axios);
+export default InstrumentDetails;

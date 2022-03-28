@@ -4,31 +4,35 @@ import React from 'react';
 import Backdrop from '../Backdrop/Backdrop';
 import './Modal.css';
 
-const Modal = (props) => {
+const Modal = ({
+  show = true,
+  modalClosed = () => null,
+  children,
+}) => {
   const escFunction = React.useCallback((event) => {
     if(event.keyCode === 27) {
-      props.modalClosed();
+      modalClosed();
     }
-  }, [props]);
+  }, [modalClosed]);
 
   React.useEffect(() => {
-    if (props.show) {
+    if (show) {
       document.addEventListener('keydown', escFunction, false);
       return () => {
         document.removeEventListener('keydown', escFunction, false);
       };
     }
-  }, [escFunction, props.show]);
+  }, [escFunction, show]);
 
   return (
     <React.Fragment>
-      <Backdrop show={props.show} clicked={props.modalClosed} />
+      <Backdrop show={show} clicked={modalClosed} />
       <div
         className="Modal"
         style={{
-          transform: props.show ? 'scale(1)' : 'scale(0)',
-          opacity: props.show ? '1' : '0' }}>
-        {props.show ? props.children : null}
+          transform: show ? 'scale(1)' : 'scale(0)',
+          opacity: show ? '1' : '0' }}>
+        {show ? children : null}
       </div>
     </React.Fragment>
   );
