@@ -5,6 +5,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { server } from './mocks/server.js';
 import { configure } from '@testing-library/dom';
+require('dotenv').config(({ path: '.env.local' }));
 
 configure({ testIdAttribute: 'data-test-id' });
 // Establish API mocking before all tests.
