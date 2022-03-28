@@ -1,11 +1,12 @@
 const { test, expect } = require('@playwright/test');
 const { deleteGearItem } = require('../utils/firebaseAPI');
 const { bass } = require('../assets/testdata');
+test.use({ storageState: 'loggedIn.json' });
 const name = new Date().toLocaleString();
 
 test.describe('Gear list', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(process.env.REACT_APP_FRONTEND, { waitUntil: 'networkidle' });
+    await page.goto('/');
   });
 
   test.afterEach(async ({ page }) => {
