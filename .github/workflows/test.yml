@@ -1,5 +1,13 @@
 name: Test
 on: push
+env:
+  REACT_APP_FIREBASE_APIKEY: ${{ secrets.REACT_APP_FIREBASE_APIKEY }}
+  REACT_APP_FIREBASE_AUTHDOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTHDOMAIN }}
+  REACT_APP_FIREBASE_DBURL: ${{ secrets.REACT_APP_FIREBASE_DBURL }}
+  REACT_APP_FIREBASE_PROJECTID: ${{ secrets.REACT_APP_FIREBASE_PROJECTID }}
+  REACT_APP_FIREBASE_STORAGEBUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGEBUCKET }}
+  REACT_APP_FIREBASE_MSGSENDERID: ${{ secrets.REACT_APP_FIREBASE_MSGSENDERID }}
+  REACT_APP_FIREBASE_APPID: ${{ secrets.REACT_APP_FIREBASE_APPID }}
 
 jobs:
   component_tests:
@@ -21,6 +29,9 @@ jobs:
     name: E2e tests
     env: 
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
+      E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
+      FIREBASE_SC_PRIVATE_KEY: ${{ secrets.FIREBASE_SC_PRIVATE_KEY }}
+      FIREBASE_SC_CLIENT_EMAIL: ${{ secrets.FIREBASE_SC_CLIENT_EMAIL }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
