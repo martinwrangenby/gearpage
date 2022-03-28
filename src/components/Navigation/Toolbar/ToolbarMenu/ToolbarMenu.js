@@ -1,13 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import './ToolbarMenu.css';
 
-const ToolbarMenu = () => (
+const ToolbarMenu = ({ handleMenuChoice }) => (
   <div className='ToolbarMenu' id='menuContent'>
-    <NavLink to='/settings' style={{ textDecoration: 'none', color: 'inherit' }}>
-      <p style={{ margin: 'auto' }}>Settings</p>
-    </NavLink>
-    <p style={{ margin: 'auto' }}>Sign out</p>
+    <p
+      style={{ margin: 'auto', cursor: 'pointer' }}
+      data-test-id='toolbarMenuSettings'
+      onClick={() => handleMenuChoice('settings')}>
+      Settings
+    </p>
+    <p
+      style={{ margin: 'auto', cursor: 'pointer' }}
+      data-test-id='toolbarMenuLogout'
+      onClick={() => handleMenuChoice('logout')}>
+      Sign out
+    </p>
   </div>
 );
 

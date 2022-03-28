@@ -1,12 +1,12 @@
 import React from 'react';
+import { getDatabase, ref, onValue, push, off } from 'firebase/database';
 import useSortedData from '../../hooks/useSortedData';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import InstrumentTable from '../../components/InstrumentTable/InstrumentTable';
 import InstrumentListActions from './InstrumentListActions/InstrumentListActions';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import axios from '../../axiosInstance';
-import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import Button from '../../components/UI/Button/Button';
 import gearTypes from '../../assets/gearTypes';
 
 import './InstrumentList.css';
@@ -17,25 +17,28 @@ const InstrumentList = () => {
   const [addingInstrument, setAddingInstrument] = React.useState(false);
   const [loading, setLoading ] = React.useState(true);
   const [ error, setError ] = React.useState(false);
+  const db = getDatabase();
+
   React.useEffect(() => {
-    axios.get('/gear.json')
-      .then(res => {
-        if (res.data) {
-          const fetchedGear = [];
-          for (const key in res.data) {
-            fetchedGear.push({
-              ...res.data[key],
-              id: key,
-            });
-          }
-          setInstruments(fetchedGear);
-          setLoading(false);
-        }
-      })
-      .catch(err => {
-        setError(err);
-      });
-  },[]);
+    const databaseRef = ref(db, '/gear');
+    onValue(databaseRef, (snapshot) => {
+      const data = snapshot.val();
+      const fetchedGear = [];
+      for (const key in data) {
+        fetchedGear.push({
+          ...data[key],
+          id: key,
+        });
+      }
+      setInstruments(fetchedGear);
+      setLoading(false);
+    },
+    (err) => {
+      setError(err);
+    }
+    );
+    return () => off(databaseRef);
+  },[db]);
 
   const updateGearFilter = (instrumentType) => {
     gearFilter.includes(instrumentType)
@@ -44,13 +47,7 @@ const InstrumentList = () => {
   };
 
   const addInstrument = (instrument) => {
-    axios.post('/gear.json', instrument)
-      .then(res => {
-        setInstruments(instruments.concat(Object.assign({ id: res.data.name }, instrument)));
-      })
-      .catch(err => {
-        setError(err);
-      });
+    push(ref(db, '/gear'), instrument);
     setAddingInstrument(false);
   };
 
@@ -73,7 +70,14 @@ const InstrumentList = () => {
   } else if (error) {
     instrumentTable = <h4>{error.message}</h4>;
   } else if (!loading) {
-    instrumentTable = <h3>No Gear? get started adding already!</h3>;
+    instrumentTable = (
+      <>
+        <h3>No Gear? get started adding already!</h3>
+        <Button clicked={() => setAddingInstrument(true)} dataTestId='addNewInstrumentButton'>
+          Add an instrument
+        </Button>
+      </>
+    );
   }
 
   const addInstrumentModal = (
@@ -92,4 +96,4 @@ const InstrumentList = () => {
   );
 };
 
-export default WithErrorHandler(InstrumentList, axios);
+export default InstrumentList;
