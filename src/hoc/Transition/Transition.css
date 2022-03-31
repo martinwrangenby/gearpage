@@ -1,0 +1,58 @@
+
+.TransitionContainer {
+  overflow: hidden;
+  align-self: center;
+}
+.TransitionContainer.Open {
+  animation: fadeInAnimationContainer 0.2s ease-out
+}
+.TransitionContainer.Close {
+  animation: fadeOutAnimationContainer 0.2s ease-out
+}
+
+.Transition {
+  overflow: hidden;
+  margin: 0;
+}
+.Transition.Open {
+  animation: fadeInAnimation 0.2s ease-out
+}
+.Transition.Close {
+  animation: fadeOutAnimation 0.2s ease-out
+}
+
+@keyframes fadeInAnimation {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes fadeInAnimationContainer {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 100px;
+  }
+}
+
+@keyframes fadeOutAnimationContainer {
+  0% {
+    max-height: 100px;
+  }
+  100% {
+    max-height: 0;
+  }
+}
