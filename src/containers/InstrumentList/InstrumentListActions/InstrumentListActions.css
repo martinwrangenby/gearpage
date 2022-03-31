@@ -16,13 +16,6 @@
   margin-top: auto;
   justify-content:space-evenly;
   max-height: 80px;
-  transition: max-height 0.1s ease-out;
-}
-
-.DropdownContent.hidden {
-  max-height: 0;
-  margin-bottom: 0;
-  transition: max-height 0.1s ease-out;
 }
 
 .DropdownContentWrapper {

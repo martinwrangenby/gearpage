@@ -13,13 +13,14 @@ import './InstrumentList.css';
 
 const InstrumentList = () => {
   const [instruments, setInstruments] = React.useState([]);
-  const [gearFilter, setGearFilter] = React.useState(gearTypes);
+  const [gearFilter, setGearFilter] = React.useState(JSON.parse(localStorage.getItem('gearTypesFilter')) || gearTypes);
   const [addingInstrument, setAddingInstrument] = React.useState(false);
   const [loading, setLoading ] = React.useState(true);
   const [ error, setError ] = React.useState(false);
   const db = getDatabase();
 
   React.useEffect(() => {
+    localStorage.setItem('gearTypesFilter', JSON.stringify(gearFilter));
     const databaseRef = ref(db, '/gear');
     onValue(databaseRef, (snapshot) => {
       const data = snapshot.val();
@@ -38,13 +39,14 @@ const InstrumentList = () => {
     }
     );
     return () => off(databaseRef);
-  },[db]);
-
+  },[db, gearFilter]);
   const updateGearFilter = (instrumentType) => {
     gearFilter.includes(instrumentType)
       ? setGearFilter(gearFilter.filter(item => item !== instrumentType))
       : setGearFilter([instrumentType, ...gearFilter]);
   };
+
+  const resetGearFilter = () => setGearFilter(gearTypes);
 
   const addInstrument = (instrument) => {
     push(ref(db, '/gear'), instrument);
@@ -58,8 +60,10 @@ const InstrumentList = () => {
     instrumentTable = (
       <>
         <InstrumentListActions
+          activeFilter={gearFilter}
+          resetFilter={resetGearFilter}
           addInstrument={setAddingInstrument}
-          filterGear={updateGearFilter}/>
+          updateFilter={updateGearFilter}/>
         <InstrumentTable
           filter={gearFilter}
           instruments={sortedItems}
