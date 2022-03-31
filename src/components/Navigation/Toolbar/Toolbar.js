@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import IconButton from '../../UI/IconButton/IconButton';
 import ToolbarMenu from './ToolbarMenu/ToolbarMenu';
+import Transition from '../../../hoc/Transition/Transition';
 import './Toolbar.css';
 
 const Toolbar = (props) => {
@@ -30,10 +31,14 @@ const Toolbar = (props) => {
           id='menuButton'
           active={props.showMenu}
           clicked={() => props.toggleMenu(!props.showMenu)}/>
+        <div className='ToolbarMenuContainer'>
+          <Transition show={props.showMenu}>
+            <ToolbarMenu handleMenuChoice={handleMenuChoice}/>
+          </Transition>
+        </div>
         <NavLink to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
           GEAR PAGE
         </NavLink>
-        {props.showMenu ? <ToolbarMenu handleMenuChoice={handleMenuChoice}/> : ''}
       </div>
     </header>
   );

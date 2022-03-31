@@ -1,12 +1,5 @@
 
 .ToolbarMenu {
-  position: absolute;
-  overflow: hidden;
   background: #201d26;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 1px 1px 5px #000000;
-  opacity: 1;
   padding: 10px 20px;
-  top: 100%;
 }
