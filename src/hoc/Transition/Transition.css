@@ -10,10 +10,6 @@
   animation: fadeOutAnimationContainer 0.2s ease-out
 }
 
-.Transition {
-  overflow: hidden;
-  margin: 0;
-}
 .Transition.Open {
   animation: fadeInAnimation 0.2s ease-out
 }

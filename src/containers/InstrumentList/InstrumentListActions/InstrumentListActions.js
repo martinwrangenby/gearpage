@@ -5,7 +5,13 @@ import Transition from '../../../hoc/Transition/Transition';
 import './InstrumentListActions.css';
 import gearTypes from '../../../assets/gearTypes';
 
-const InstrumentListActions = props => {
+const InstrumentListActions = ({
+  activeFilter,
+  resetFilter,
+  addInstrument,
+  updateFilter,
+
+}) => {
   const [showFilter, setShowFilter] = React.useState(false);
   React.useEffect(() => {
     if (showFilter) {
@@ -26,7 +32,7 @@ const InstrumentListActions = props => {
 
   const resetFilters = () => {
     setShowFilter(false);
-    props.resetFilter();
+    resetFilter();
   };
 
   return (
@@ -38,7 +44,7 @@ const InstrumentListActions = props => {
             active={showFilter}
             clicked={() => {setShowFilter(!showFilter);}}
             id='FilterButton'/>
-          <Transition show={props.activeFilter.length !== gearTypes.length}>
+          <Transition show={activeFilter.length !== gearTypes.length}>
             <div
               style={{ alignSelf: 'center', marginLeft: '5px', cursor: 'pointer' }}
               onClick={() => resetFilters()}>
@@ -48,7 +54,7 @@ const InstrumentListActions = props => {
         </div>
         <IconButton
           type='fa fa-plus'
-          clicked={props.addInstrument}
+          clicked={addInstrument}
           dataTestId='addNewInstrumentButton'/>
       </div>
       <Transition show={showFilter}>
@@ -60,8 +66,8 @@ const InstrumentListActions = props => {
               <div key={gearType} className='DropdownContentWrapper'>
                 <Switch
                   centered
-                  activated={props.activeFilter.includes(gearType)}
-                  clicked={() => props.updateFilter(gearType)} />
+                  activated={activeFilter.includes(gearType)}
+                  clicked={() => updateFilter(gearType)} />
                 {gearType}
               </div>
             );
