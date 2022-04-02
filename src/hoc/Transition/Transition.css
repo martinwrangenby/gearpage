@@ -18,37 +18,19 @@
 }
 
 @keyframes fadeInAnimation {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
-
 @keyframes fadeOutAnimation {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
 }
 
 @keyframes fadeInAnimationContainer {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 100px;
-  }
+  0% { max-height: 0; }
+  100% { max-height: 100px; }
 }
-
 @keyframes fadeOutAnimationContainer {
-  0% {
-    max-height: 100px;
-  }
-  100% {
-    max-height: 0;
-  }
+  0% { max-height: 100px; }
+  100% { max-height: 0; }
 }
