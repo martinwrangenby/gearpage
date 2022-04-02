@@ -65,9 +65,9 @@ const App = () => {
         handleSwitchClick={handleRememberMeSwitchClick}
         errorMsg={loginError}
         filledFields={email !== '' && password !== ''}/>}/>
-      <Route path='/gearitem' element={<InstrumentDetails/>}/>
+      <Route path='/gearitem' element={<InstrumentDetails userId={user?.uid}/>}/>
       <Route path='/settings' element={<Settings/>} />
-      <Route path='/' element={<InstrumentList/>}/>
+      <Route path='/' element={<InstrumentList userId={user?.uid}/>}/>
     </Routes>;
 
   return (
