@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Login from './containers/Authentication/Login/Login';
+import Login from './components/Authentication/Login/Login';
 import InstrumentList from './containers/InstrumentList/InstrumentList';
 import InstrumentDetails from './containers/InstrumentDetails/InstrumentDetails';
 import Settings from './containers/Settings/Settings';
