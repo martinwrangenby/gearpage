@@ -10,6 +10,8 @@ const scopes = [
   'https://www.googleapis.com/auth/firebase.database',
 ];
 
+const userId = process.env.E2E_TEST_UID;
+
 const promisify = f => (...args) =>
   new Promise ((pass, fail) =>
     f (...args, (err, result) => err ? fail(err) : pass(result))
@@ -22,14 +24,14 @@ async function getGoogleApiToken() {
 
 const deleteGearItem = async (id) => {
   const { access_token } = await getGoogleApiToken();
-  return instance.delete(`/gear/${id}.json`, {  headers: { Authorization: `Bearer ${access_token}` } })
+  return instance.delete(`/users/${userId}/gear/${id}.json`, {  headers: { Authorization: `Bearer ${access_token}` } })
     .then(res => null)
     .catch(err => { throw new Error(`Could not delete id ${id} from DB`); });
 };
 
 const addGearItem = async (gearItem) => {
   const { access_token } = await getGoogleApiToken();
-  return instance.post('/gear.json', gearItem, {  headers: { Authorization: `Bearer ${access_token}` } })
+  return instance.post(`/users/${userId}/gear.json`, gearItem, {  headers: { Authorization: `Bearer ${access_token}` } })
     .then(res => res.data.name)
     .catch(err => {
       console.log(err);
