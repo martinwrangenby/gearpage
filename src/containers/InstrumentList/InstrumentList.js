@@ -11,7 +11,7 @@ import gearTypes from '../../assets/gearTypes';
 
 import './InstrumentList.css';
 
-const InstrumentList = () => {
+const InstrumentList = ({ userId }) => {
   const [instruments, setInstruments] = React.useState([]);
   const [gearFilter, setGearFilter] = React.useState(JSON.parse(localStorage.getItem('gearTypesFilter')) || gearTypes);
   const [addingInstrument, setAddingInstrument] = React.useState(false);
@@ -21,7 +21,7 @@ const InstrumentList = () => {
 
   React.useEffect(() => {
     localStorage.setItem('gearTypesFilter', JSON.stringify(gearFilter));
-    const databaseRef = ref(db, '/gear');
+    const databaseRef = ref(db, `/users/${userId}/gear`);
     onValue(databaseRef, (snapshot) => {
       const data = snapshot.val();
       const fetchedGear = [];
@@ -39,7 +39,7 @@ const InstrumentList = () => {
     }
     );
     return () => off(databaseRef);
-  },[db, gearFilter]);
+  },[db, gearFilter, userId]);
   const updateGearFilter = (instrumentType) => {
     gearFilter.includes(instrumentType)
       ? setGearFilter(gearFilter.filter(item => item !== instrumentType))
@@ -49,7 +49,7 @@ const InstrumentList = () => {
   const resetGearFilter = () => setGearFilter(gearTypes);
 
   const addInstrument = (instrument) => {
-    push(ref(db, '/gear'), instrument);
+    push(ref(db, `/users/${userId}/gear`), instrument);
     setAddingInstrument(false);
   };
 

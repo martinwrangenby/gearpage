@@ -30,6 +30,7 @@ jobs:
     env: 
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
       E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
+      E2E_TEST_UID: ${{ secrets.E2E_TEST_UID }}
       FIREBASE_SC_PRIVATE_KEY: ${{ secrets.FIREBASE_SC_PRIVATE_KEY }}
       FIREBASE_SC_CLIENT_EMAIL: ${{ secrets.FIREBASE_SC_CLIENT_EMAIL }}
     runs-on: ubuntu-latest

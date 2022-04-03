@@ -7,7 +7,7 @@ import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-const InstrumentDetails = () => {
+const InstrumentDetails = ({ userId }) => {
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
@@ -18,7 +18,7 @@ const InstrumentDetails = () => {
 
   React.useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
-    const databaseRef = ref(db, `/gear/${id}`);
+    const databaseRef = ref(db, `/users/${userId}/gear/${id}`);
     onValue(databaseRef, snapshot => {
       const data = snapshot.val();
       if (data) setInstrument({ id, ...data });
@@ -27,15 +27,15 @@ const InstrumentDetails = () => {
     (err) => navigate('/login') // TODO: when adding id specific db path, investigate if this should be tweaked if loggedin user tries to get other user's stuff...
     );
     return () => off(databaseRef);
-  },[location.search, db, navigate]);
+  },[location.search, db, navigate, userId]);
 
   const deleteInstrument = () => {
-    remove(ref(db, `/gear/${instrument.id}`),);
+    remove(ref(db, `/users/${userId}/gear/${instrument.id}`),);
     navigate('/', { replace: true });
   };
 
   const updateInstrument = (data) => {
-    set(ref(db, `/gear/${instrument.id}`), data);
+    set(ref(db, `/users/${userId}/gear/${instrument.id}`), data);
     setEditingInstrument(false);
   };
 
