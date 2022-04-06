@@ -5,6 +5,7 @@
 }
 
 .PageContentBox {
+  white-space: pre-line;
   width: 100%;
   margin: auto;
   margin-bottom: 1em;
