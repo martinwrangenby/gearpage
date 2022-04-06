@@ -6,7 +6,7 @@ import './Settings.css';
 const Settings = () => {
   return (
     <div className='PageContentBox'>
-      <h1>
+      <h1 className='PageContentHeader'>
         Settings
       </h1>
       <p className='SettingsItem'>
