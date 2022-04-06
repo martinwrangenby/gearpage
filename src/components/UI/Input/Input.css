@@ -18,3 +18,15 @@
   background-color: #300c0caa;
   border: 1px solid #781515;
 }
+
+textarea.InputElement {
+  width: 90%;
+  height: 100px;
+  transition: height 0.2s ease-in 250ms;
+}
+
+textarea.InputElement:focus {
+  width: 90%;
+  height: 200px;
+  transition: height 0.2s ease-out;
+}
