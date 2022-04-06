@@ -65,8 +65,10 @@ const InstrumentDetails = ({ userId }) => {
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
         <div className={`PageContentBox ${instrument.type}`}>
-          <h1 data-test-id='gearDetailsName'>{instrument.name}</h1>
-          <p data-test-id='gearDetailsDescription'>{instrument.description}</p>
+          <h1 className='PageContentHeader' data-test-id='gearDetailsName'>{instrument.name}</h1>
+          <div data-test-id='gearDetailsDescription'>
+            {instrument.description}
+          </div>
         </div>
         <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>
           <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
