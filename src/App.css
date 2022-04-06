@@ -31,5 +31,7 @@
 @media (min-width: 1000px) {
   .PageContentBox {
     width: 700px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
