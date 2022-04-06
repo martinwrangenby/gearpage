@@ -5,15 +5,19 @@
 }
 
 .PageContentBox {
+  white-space: pre-line;
   width: 100%;
   margin: auto;
   margin-bottom: 1em;
-  text-align: center;
+  text-align: left;
   background-color: #201d26;
   box-shadow: 0 2px 3px #212121;
   border: 1px solid #6c6c6c;
   padding: 10px;
   box-sizing: border-box;
+}
+.PageContentHeader {
+  text-align: center;
 }
 
 .PageContentBox h1, p {
@@ -30,5 +34,7 @@
 @media (min-width: 1000px) {
   .PageContentBox {
     width: 700px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

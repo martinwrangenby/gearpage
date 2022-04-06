@@ -3,9 +3,9 @@
   font-size: 1em;
   background-color: #2d2d3a;
   color: #d2d2d2;
-  width: 90%;
+  width: 43%;
   padding: 8px;
-  margin: 10px;
+  margin: 10px 2%;
   display: inline-block;
   border: 1px solid #5c5c5c;
   border-radius: 4px;
@@ -17,4 +17,22 @@
 .InputElement.Invalid {
   background-color: #300c0caa;
   border: 1px solid #781515;
+}
+
+textarea.InputElement {
+  width: 90%;
+  height: 100px;
+  transition: height 0.2s ease-in 250ms;
+}
+
+textarea.InputElement:focus {
+  width: 90%;
+  height: 200px;
+  transition: height 0.2s ease-out;
+}
+
+@media (max-width: 600px) {
+  .InputElement {
+    width: 90%;
+  }
 }
