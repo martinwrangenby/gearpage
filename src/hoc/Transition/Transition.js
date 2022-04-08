@@ -15,10 +15,12 @@ const Transition = props => {
     }
   }, [show, props.show]);
 
+  const { orientation = 'North' } = props;
+
   return show
     ? (
       <div className={`TransitionContainer ${classNameExt}`}>
-        <div className ={`Transition ${classNameExt}`}>
+        <div className ={`Transition${orientation} ${classNameExt}`}>
           {props.children}
         </div>
       </div>
