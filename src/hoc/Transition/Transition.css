@@ -10,20 +10,36 @@
   animation: fadeOutAnimationContainer 0.2s ease-out
 }
 
-.Transition.Open {
-  animation: fadeInAnimation 0.2s ease-out
+.TransitionNorth.Open {
+  animation: fadeInAnimationNorth 0.2s ease-out
 }
-.Transition.Close {
-  animation: fadeOutAnimation 0.2s ease-out
+.TransitionNorth.Close {
+  animation: fadeOutAnimationNorth 0.2s ease-out
 }
 
-@keyframes fadeInAnimation {
+.TransitionSouth.Open {
+  animation: fadeInAnimationSouth 0.2s ease-out
+}
+.TransitionSouth.Close {
+  animation: fadeOutAnimationSouth 0.2s ease-out
+}
+
+@keyframes fadeInAnimationNorth {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
 }
-@keyframes fadeOutAnimation {
+@keyframes fadeOutAnimationNorth {
   from { transform: translateY(0); }
   to { transform: translateY(-100%); }
+}
+
+@keyframes fadeInAnimationSouth {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fadeOutAnimationSouth {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
 }
 
 @keyframes fadeInAnimationContainer {

@@ -44,7 +44,7 @@ const InstrumentListActions = ({
             active={showFilter}
             clicked={() => {setShowFilter(!showFilter);}}
             id='FilterButton'/>
-          <Transition show={activeFilter.length !== gearTypes.length}>
+          <Transition orientation='South' show={activeFilter.length !== gearTypes.length}>
             <div
               style={{ alignSelf: 'center', marginLeft: '5px', cursor: 'pointer' }}
               onClick={() => resetFilters()}>
