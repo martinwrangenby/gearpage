@@ -11,6 +11,27 @@ test.describe('Login', () => {
     await page.click('#menuButton');
     await expect(page.locator('#menuContent')).toBeVisible();
   });
+
+  test('Login with incorrect password (with valid, existing email)', async ({ page }) => {
+    await page.goto('/');
+    await page.fill('[data-test-id="loginUsername"]', 'tester@testmail.com');
+    await page.fill('[data-test-id="loginPassword"]', 'lol dummy pw');
+    await page.click('[data-test-id="loginSubmit"]');
+    const loginFailure = page.locator('[data-test-id="loginError"]');
+
+    await expect(loginFailure).toContainText('Wrong email or password');
+  });
+
+  test('Login with non-existing email', async ({ page }) => {
+    await page.goto('/');
+    await page.fill('[data-test-id="loginUsername"]', 'thisemail@isnotaregistereduser.com');
+    await page.fill('[data-test-id="loginPassword"]', 'lol dummy pw');
+    await page.click('[data-test-id="loginSubmit"]');
+    const loginFailure = page.locator('[data-test-id="loginError"]');
+
+    await expect(loginFailure).toContainText('Wrong email or password');
+  });
+
 });
 
 
