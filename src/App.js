@@ -66,7 +66,7 @@ const App = () => {
           handleSubmitButtonClick={login}
           handleSwitchClick={handleRememberMeSwitchClick}
           errorMsg={loginError}
-          filledFields={email !== '' && password !== ''}/>}/>
+          formValid={email.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/) && password !== ''}/>}/>
       <Route path='/gearitem' element={<InstrumentDetails userId={user?.uid}/>}/>
       <Route path='/settings' element={<Settings/>} />
       <Route path='/' element={<InstrumentList userId={user?.uid}/>}/>

@@ -6,7 +6,7 @@ import Switch from '../../UI/Switch/Switch';
 
 import './Login.css';
 
-const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonClick, errorMsg, filledFields }) => {
+const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonClick, errorMsg, formValid }) => {
 
   return(
     <Modal show={true}>
@@ -30,7 +30,7 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
             activated={true}/>
         </div>
         <Button
-          disabled={!filledFields}
+          disabled={!formValid}
           clicked={handleSubmitButtonClick}
           dataTestId='loginSubmit'>
           Sign in
