@@ -41,7 +41,8 @@ const App = () => {
       navigate('/');
       setLoginError('');
     } catch (err) {
-      if (err.code === 'auth/invalid-email' || err.code === 'auth/wrong-password') setLoginError('Wrong email or password');
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') setLoginError('Wrong email or password');
+      else if (err.code === 'auth/invalid-email') setLoginError('You need to enter a valid email address');
       else setLoginError(err.code);
     }
   };
@@ -58,13 +59,14 @@ const App = () => {
   const appContent = loading
     ? <Spinner />
     : <Routes>
-      <Route path='/login' element={<Login
-        setEmail={setEmail}
-        setPassword={setPassword}
-        handleSubmitButtonClick={login}
-        handleSwitchClick={handleRememberMeSwitchClick}
-        errorMsg={loginError}
-        filledFields={email !== '' && password !== ''}/>}/>
+      <Route path='/login' element={
+        <Login
+          setEmail={setEmail}
+          setPassword={setPassword}
+          handleSubmitButtonClick={login}
+          handleSwitchClick={handleRememberMeSwitchClick}
+          errorMsg={loginError}
+          filledFields={email !== '' && password !== ''}/>}/>
       <Route path='/gearitem' element={<InstrumentDetails userId={user?.uid}/>}/>
       <Route path='/settings' element={<Settings/>} />
       <Route path='/' element={<InstrumentList userId={user?.uid}/>}/>
