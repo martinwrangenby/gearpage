@@ -10,7 +10,7 @@ const config = {
     headless: process.env.HEADFUL ? false : true,
     browserName: 'chromium',
     screenshot: 'only-on-failure',
-    baseURL: process.env.REACT_APP_FRONTEND,
+    baseURL: process.env.REACT_APP_FRONTEND || 'http://localhost:3000/',
   },
   outputDir: 'e2e/results',
   reporter: [ [cliReporter], ['html', { open: 'never', outputFolder: 'e2e/results/html' }] ],
