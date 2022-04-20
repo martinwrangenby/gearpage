@@ -8,7 +8,7 @@ test.describe('Login', () => {
     await page.fill('[data-test-id="loginPassword"]', process.env.E2E_TEST_PASSWORD);
     await page.click('[data-test-id="loginSubmit"]');
     await page.waitForLoadState('networkidle');
-    await page.click('#menuButton');
+    await page.click('[data-test-id="toolbarMenuButton"]');
     await expect(page.locator('#menuContent')).toBeVisible();
   });
 

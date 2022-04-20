@@ -30,7 +30,8 @@ const Toolbar = (props) => {
           type='fa fa-bars'
           id='menuButton'
           active={props.showMenu}
-          clicked={() => props.toggleMenu(!props.showMenu)}/>
+          clicked={() => props.toggleMenu(!props.showMenu)}
+          dataTestId='toolbarMenuButton'/>
         <div className='ToolbarMenuContainer'>
           <Transition show={props.showMenu}>
             <ToolbarMenu handleMenuChoice={handleMenuChoice}/>
