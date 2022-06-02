@@ -12,6 +12,11 @@ module.exports = async config => {
         Run ${logFormat.color.fg.green}"npm start"${logFormat.clearFormat} before executing the e2e tests`);
     process.exit(0);
   }
+  if (! process.env.E2E_TEST_PASSWORD) {
+    console.log(`\t${logFormat.color.fg.red}Password for ${process.env.E2E_TEST_USERNAME || 'tester@testmail.com'} not defined${logFormat.clearFormat}
+        Store the password in the env variable ${logFormat.color.fg.green}E2E_TEST_PASSWORD${logFormat.clearFormat} before executing the e2e tests`);
+    process.exit(0);
+  }
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto(baseUrl);
