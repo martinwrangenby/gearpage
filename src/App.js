@@ -10,10 +10,10 @@ import Layout from './hoc/Layout/Layout';
 import Spinner from './components/UI/Spinner/Spinner';
 import Modal from './components/UI/Modal/Modal';
 import ConfirmChoice from './components/Navigation/ConfirmChoice/ConfirmChoice';
-import { app } from './firebase';
+import firebase from './firebase';
 import './App.css';
 
-const auth = getAuth(app);
+const auth = getAuth(firebase);
 
 const App = () => {
   const [rememberMe, setRememberMe] = useState(true);
