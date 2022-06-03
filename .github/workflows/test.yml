@@ -32,6 +32,7 @@ jobs:
     name: E2e tests
     env: 
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
+      E2E_TEST_USERNAME: ${{ secrets.E2E_TEST_USERNAME }}
       E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
       E2E_TEST_UID: ${{ secrets.E2E_TEST_UID }}
       FIREBASE_SC_PRIVATE_KEY: ${{ secrets.FIREBASE_SC_PRIVATE_KEY }}
