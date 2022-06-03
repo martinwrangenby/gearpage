@@ -1,5 +1,8 @@
 name: Test
-on: push
+on: 
+  push:
+    branches-ignore:
+      - master
 env:
   REACT_APP_FIREBASE_APIKEY: ${{ secrets.REACT_APP_FIREBASE_APIKEY }}
   REACT_APP_FIREBASE_AUTHDOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTHDOMAIN }}

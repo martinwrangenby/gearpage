@@ -42,7 +42,12 @@ To setup your own firebase project to use with the app locally:
    - `messagingSenderId` - `REACT_APP_FIREBASE_MSGSENDERID`
    - `appId` - `REACT_APP_FIREBASE_APPID`
 7. Create a user account under project Authentication
-8. Great, now you _should_ be good to go :tada:
+
+To be able to deploy your project (part of the CI pipelines) you also need to setup firebase hosting as well.
+Follow the [Firebase Hosting documenation](https://firebase.google.com/docs/hosting).  
+
+Great, now you _should_ be good to go :tada:
+
 ### Start the app in dev mode
 ```
 npm start
@@ -95,14 +100,17 @@ On test failure, a screenshot will be saved to `e2e/results/`.
 Local git hooks are setup using [husky](https://www.npmjs.com/package/husky). Active hooks:  
 - Pre-commit: lint check
 ### Github actions
-#### push trigger
+
+#### Tests & code analysis
+##### push trigger
 [tests workflow](.github/workflows/tests.yml). The tests workflow runs:  
 - component tests
 - e2e tests (stores test artifacts upon failure)
-#### pull request trigger
+##### pull request trigger
 [scan workflow](.github/workflows/scan.yml).
 The following checks are performed on Pr trigger:
-##### DangerJS
+
+**DangerJS**  
 [DangerJS](https://danger.systems/js/) is a tool that performs static code and git/github metadata checks using the [dangerfile](dangerfile.js).  
 To try this out locally you need to get hold of the github project's dangerbot access token.  
 If you've forked the project, create a bot of your own and then [generate an access token](https://danger.systems/js/guides/getting_started.html#tokens-for-oss-projects) and use that one.  
@@ -111,12 +119,17 @@ Then, to run dangerJS locally:
 DANGER_GITHUB_API_TOKEN=[YOUR_TOKEN_GOES_HERE] npm run danger:local [URL TO EXISTING PR IN PROJECT]
 ```
 
-##### Sonarcloud
+**Sonarcloud**  
 Tool scanning code for bugs, code smells and potential vulnerabilities. Also calculates code duplication and code coverage.  
 If you've forked the project, you can read up on setting up sonarcloud [here](https://sonarcloud.io/github)
 
-##### CodeQL
-Another scanning tool from github. Read more about it [here](https://github.com/github/codeql)
+#### Deploys
+##### Staging
+A staging build is deployed on PR-trigger. The URL to the staging deploy can be found in the 
+PR comment posted by the gitlab bot when deploy is done.
+##### Production
+Push to master (merging a PR) triggers a production deploy
+
 #### Scheduled jobs
 Apart from being run on pr trigger, sonarcloud and CodeQL are also run daily targeting the master branch.
 ## Boilerplate
