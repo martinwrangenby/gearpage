@@ -71,7 +71,7 @@ The framework generates and cleans up test data under the hood by firing request
 
 ##### User account credentials
 To be able to login to the app, the framework will make use of the following env variables:
-- `E2E_TEST_USERNAME` user account email (will by default fallback to `tester@testmail.com`)
+- `E2E_TEST_USERNAME` user account email
 - `E2E_TEST_PASSWORD` - user account password
 - `E2E_TEST_UID` - user account ID
 
