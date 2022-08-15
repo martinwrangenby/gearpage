@@ -2,7 +2,9 @@ const axios = require('axios');
 const logFormat = require('../../assets/logFormat');
 const { chromium } = require('@playwright/test');
 
-const baseUrl = process.env.REACT_APP_FRONTEND || 'http://localhost:3000/';
+const baseUrl = process.env.BROWSERSTACK
+  ? `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`
+  : process.env.REACT_APP_FRONTEND || 'http://localhost:3000/';
 
 const checkEnv = async () => {
   try {
@@ -21,6 +23,14 @@ const checkEnv = async () => {
     console.log(`\t${logFormat.color.fg.red}Password for ${process.env.E2E_TEST_USERNAME} not defined${logFormat.clearFormat}
         Store the password in the env variable ${logFormat.color.fg.green}E2E_TEST_PASSWORD${logFormat.clearFormat} before executing the e2e tests`);
     process.exit(1);
+  }
+  if (process.env.BROWSERSTACK) {
+    if (!process.env.BROWSERSTACK_USERNAME || !process.env.BROWSERSTACK_ACCESS_KEY) {
+      console.log(`\t${logFormat.color.fg.red}Browserstack username and/or access key not defined${logFormat.clearFormat}
+          Store the username/access key in the env variables ${logFormat.color.fg.green}BROWSERSTACK_USERNAME/BROWSERSTACK_ACCESS_KEY${logFormat.clearFormat}
+          before executing the e2e:browserstack tests`);
+      process.exit(1);
+    }
   }
 };
 

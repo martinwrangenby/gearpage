@@ -1,5 +1,5 @@
 
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('../config/fixtures');
 
 test.describe('Login', () => {
   test('User can login', async ({ page }) => {

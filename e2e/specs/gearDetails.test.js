@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('../config/fixtures');
 const { addGearItem, deleteGearItem } = require('../utils/firebaseAPI');
 const { bass, guitar } = require('../assets/testdata');
 test.use({ storageState: 'loggedIn.json' });
