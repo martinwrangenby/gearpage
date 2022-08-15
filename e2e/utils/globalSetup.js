@@ -2,7 +2,9 @@ const axios = require('axios');
 const logFormat = require('../../assets/logFormat');
 const { chromium } = require('@playwright/test');
 
-const baseUrl = process.env.REACT_APP_FRONTEND || 'http://localhost:3000/';
+const baseUrl = process.env.BROWSERSTACK
+  ? `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`
+  : process.env.REACT_APP_FRONTEND || 'http://localhost:3000/';
 
 const checkEnv = async () => {
   try {
