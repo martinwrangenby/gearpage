@@ -9,6 +9,8 @@ test.describe('Logout', () => {
   test('User can log out', async ({ page }) => {
     await page.click('[data-test-id="toolbarMenuButton"]');
     await page.click('[data-test-id="toolbarMenuLogout"]');
+    const confirmElement = await page.locator('[data-test-id="confirm"]').elementHandle();
+    await confirmElement.waitForElementState('stable');
     await page.click('[data-test-id="confirm"]');
     await expect(page.locator('[data-test-id="loginUsername"]')).toBeVisible();
   });
