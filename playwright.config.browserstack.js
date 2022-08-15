@@ -11,27 +11,26 @@ config.projects = [
   // -- BrowserStack Projects --
   // name should be of the format browser@browser_version:os os_version@browserstack|emulation device
   {
-    name: 'chrome@latest:Windows 10@browserstack',
+    name: 'playwright-webkit@latest:OSX Monterey@browserstack', // Add emulation info separated by | here and extract to name in fixture
+    use: {
+      browserName: 'webkit',
+    },
+  },
+  {
+    name: 'chrome@latest-beta:OSX Monterey@browserstack',
     use: {
       browserName: 'chromium',
       channel: 'chrome',
     },
   },
   {
-    name: 'chrome@latest-beta:OSX Big Sur@browserstack',
-    use: {
-      browserName: 'chromium',
-      channel: 'chrome',
-    },
-  },
-  {
-    name: 'edge@latest:Windows 10@browserstack',
+    name: 'edge@latest:Windows 11@browserstack',
     use: {
       browserName: 'chromium',
     },
   },
   {
-    name: 'playwright-firefox@latest:OSX Catalina@browserstack',
+    name: 'playwright-firefox@latest:OSX Big Sur@browserstack',
     use: {
       browserName: 'firefox',
       ignoreHTTPSErrors: true,
