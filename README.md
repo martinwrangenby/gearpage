@@ -74,6 +74,9 @@ To be able to login to the app, the framework will make use of the following env
 - `E2E_TEST_USERNAME` user account email
 - `E2E_TEST_PASSWORD` - user account password
 - `E2E_TEST_UID` - user account ID
+- `BROWSERSTACK_USERNAME` - username for a browserstack account (needed for browserstack execution only)
+- `BROWSERSTACK_ACCESS_KEY` - access key for a browserstack account (needed for browserstack execution only)
+
 
 So if you're running your own firebase project, make sure to create a user for the purpose of running e2e tests and set the env variables listed above.
 #### Execution
@@ -90,7 +93,13 @@ To start the dev server and execute the tests all in one script, run:
 ```
 npm run:ci
 ```
-When the tests are done, the server will shut down.
+When the tests are done, the server will shut down.  
+
+The tests can also be executed on browserstack. For this you need a browserstack account (see credentials instructions above) Currently only basic browserstack is implemented (one browser/os config). Unlike the variants above, browserstack execution will run the tests towards deployed service. To execute, run:
+```
+npm run e2e:browserstack
+```
+
 #### Test results
 On test completion, a html report is generated and stored at `e2e/results/html`.  
 On test failure, a screenshot will be saved to `e2e/results/`.  
