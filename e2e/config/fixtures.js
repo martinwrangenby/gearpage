@@ -22,6 +22,24 @@ const caps = {
   'client.playwrightVersion': clientPlaywrightVersion,
 };
 
+const patchCaps = (name, title) => {
+  const emulate = name.split('|')[1];
+  const combination = name.split(/@browserstack/)[0];
+  const [browerCaps, osCaps] = combination.split(/:/);
+  const [browser, browser_version] = browerCaps.split(/@/);
+  const osCapsSplit = osCaps.split(/ /);
+  const os = osCapsSplit.shift();
+  const os_version = osCapsSplit.join(' ');
+  caps.browser = browser ? browser : 'chrome';
+  caps.browser_version = browser_version ? browser_version : 'latest';
+  caps.os = os ? os : 'osx';
+  caps.os_version = os_version ? os_version : 'catalina';
+  caps.name = title;
+  caps.build = emulate
+    ? `${process.env.TIMESTAMP} - ${emulate} emulation, ${caps.os} ${caps.os_version}`
+    : `${process.env.TIMESTAMP} - ${caps.browser.replace('playwright-', '')} ${caps.browser_version}, ${caps.os} ${caps.os_version}`;
+};
+
 const isHash = (entity) => Boolean(entity && typeof(entity) === 'object' && !Array.isArray(entity));
 const nestedKeyValue = (hash, keys) => keys.reduce((hashInner, key) => (isHash(hashInner) ? hashInner[key] : undefined), hash);
 const isUndefined = val => (val === undefined || val === null || val === '');
@@ -36,7 +54,7 @@ exports.test = base.test.extend({
   page: async ({ page }, use, testInfo ) => {
     if (!process.env.BROWSERSTACK) use(page);
     else {
-      caps.name = `${testInfo._test.parent.title} - ${testInfo.title}`;
+      patchCaps(testInfo.project.name, `${testInfo._test.parent.title} - ${testInfo.title}`);
       const browserstackBrowser = await base.chromium.connect({
         wsEndpoint: `wss://cdp.browserstack.com/playwright?caps=${encodeURIComponent(JSON.stringify(caps))}`,
       });

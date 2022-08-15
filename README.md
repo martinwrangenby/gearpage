@@ -95,7 +95,7 @@ npm run:ci
 ```
 When the tests are done, the server will shut down.  
 
-The tests can also be executed on browserstack. For this you need a browserstack account (see credentials instructions above) Currently only basic browserstack is implemented (one browser/os config). Unlike the variants above, browserstack execution will run the tests towards deployed service. To execute, run:
+The tests can also be executed on browserstack which will run the tests on a number of os/browser combinations (can be viewed/altered in the `playwright.config.broserstack.js` config file). For this you need a browserstack account (see credentials instructions above). Unlike the test execution variants above, browserstack execution will run the tests towards the deployed service (rather that local dev server). To execute, run:
 ```
 npm run e2e:browserstack
 ```
