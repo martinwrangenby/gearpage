@@ -24,6 +24,14 @@ const checkEnv = async () => {
         Store the password in the env variable ${logFormat.color.fg.green}E2E_TEST_PASSWORD${logFormat.clearFormat} before executing the e2e tests`);
     process.exit(1);
   }
+  if (process.env.BROWSERSTACK) {
+    if (!process.env.BROWSERSTACK_USERNAME || !process.env.BROWSERSTACK_ACCESS_KEY) {
+      console.log(`\t${logFormat.color.fg.red}Browserstack username and/or access key not defined${logFormat.clearFormat}
+          Store the username/access key in the env variables ${logFormat.color.fg.green}BROWSERSTACK_USERNAME/BROWSERSTACK_ACCESS_KEY${logFormat.clearFormat}
+          before executing the e2e:browserstack tests`);
+      process.exit(1);
+    }
+  }
 };
 
 const storeSignedInState = async () => {
