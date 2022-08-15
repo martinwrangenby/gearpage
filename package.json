@@ -21,6 +21,7 @@
     "build": "react-scripts build",
     "e2e": "npx playwright test",
     "e2e:headful": "HEADFUL=true npm run e2e",
+    "e2e:browserstack": "BROWSERSTACK=true npm run e2e",
     "e2e:ci": "start-server-and-test 3000 e2e",
     "test": "react-scripts test",
     "cleanup": "rimraf e2e/results",
