@@ -10,13 +10,6 @@ const timestamp = new Date();
 process.env.TIMESTAMP = timestamp.toLocaleString('se-SV');
 
 const checkEnv = async () => {
-  try {
-    await axios.get(baseUrl);
-  } catch (err) {
-    console.log(`\t${logFormat.color.fg.red}Target server ${baseUrl} is not up${logFormat.clearFormat}
-        Run ${logFormat.color.fg.green}"npm start"${logFormat.clearFormat} before executing the e2e tests`);
-    process.exit(1);
-  }
   if (!process.env.E2E_TEST_USERNAME) {
     console.log(`\t${logFormat.color.fg.red}Test account not defined${logFormat.clearFormat}
         Store the account username in the env variable ${logFormat.color.fg.green}E2E_TEST_USERNAME${logFormat.clearFormat} before executing the e2e tests`);
@@ -33,6 +26,14 @@ const checkEnv = async () => {
           Store the username/access key in the env variables ${logFormat.color.fg.green}BROWSERSTACK_USERNAME/BROWSERSTACK_ACCESS_KEY${logFormat.clearFormat}
           before executing the e2e:browserstack tests`);
       process.exit(1);
+    } else {
+      try {
+        await axios.get(baseUrl);
+      } catch (err) {
+        console.log(`\t${logFormat.color.fg.red}Target server ${baseUrl} is not up${logFormat.clearFormat}
+          Run ${logFormat.color.fg.green}"npm start"${logFormat.clearFormat} before executing the e2e tests`);
+        process.exit(1);
+      }
     }
   }
 };
