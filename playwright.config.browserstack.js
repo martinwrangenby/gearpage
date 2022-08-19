@@ -7,6 +7,7 @@ config.use = {
   screenshot: 'only-on-failure',
   baseURL: `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`,
 };
+config.retries = 1;
 config.projects = [
   // -- BrowserStack Projects --
   // name should be of the format browser@browser_version:os os_version@browserstack|emulation device

@@ -14,5 +14,6 @@ const config = {
   },
   outputDir: 'e2e/results/output',
   reporter: [ [cliReporter], ['html', { open: 'never', outputFolder: 'e2e/results/html' }] ],
+  retries: 0,
 };
 module.exports = config;
