@@ -24,7 +24,7 @@ config.projects = [
     },
   },
   {
-    name: 'edge@latest:Windows 11@browserstack',
+    name: 'edge@latest:Windows 10@browserstack',
     use: {
       browserName: 'chromium',
     },

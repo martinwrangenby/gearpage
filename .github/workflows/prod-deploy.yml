@@ -28,3 +28,35 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEAR_PAGE }}'
           channelId: live
           projectId: gear-page
+
+  post_deploy_e2e_tests:
+    name: Browserstack post-deploy e2e tests
+    needs: build_and_deploy
+    env: 
+      REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
+      E2E_TEST_USERNAME: ${{ secrets.E2E_TEST_USERNAME }}
+      E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
+      E2E_TEST_UID: ${{ secrets.E2E_TEST_UID }}
+      FIREBASE_SC_PRIVATE_KEY: ${{ secrets.FIREBASE_SC_PRIVATE_KEY }}
+      FIREBASE_SC_CLIENT_EMAIL: ${{ secrets.FIREBASE_SC_CLIENT_EMAIL }}
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Configure node environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci && sudo npx playwright install-deps
+      - name: Run the e2e tests on browserstack
+        run: npm run e2e:browserstack
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: e2e-test-artifacts
+          path: e2e/results/
+          retention-days: 10
