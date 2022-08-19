@@ -12,7 +12,7 @@ const config = {
     screenshot: 'only-on-failure',
     baseURL: process.env.REACT_APP_FRONTEND || 'http://localhost:3000/',
   },
-  outputDir: 'e2e/results',
+  outputDir: 'e2e/results/output',
   reporter: [ [cliReporter], ['html', { open: 'never', outputFolder: 'e2e/results/html' }] ],
 };
 module.exports = config;
