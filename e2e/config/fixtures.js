@@ -1,5 +1,6 @@
 const base = require('@playwright/test');
 const cp = require('child_process');
+const { retries } = require('../../playwright.config.browserstack');
 const clientPlaywrightVersion = cp
   .execSync('npx playwright --version')
   .toString()
@@ -43,9 +44,10 @@ const patchCaps = (name, title) => {
 const isHash = (entity) => Boolean(entity && typeof(entity) === 'object' && !Array.isArray(entity));
 const nestedKeyValue = (hash, keys) => keys.reduce((hashInner, key) => (isHash(hashInner) ? hashInner[key] : undefined), hash);
 const isUndefined = val => (val === undefined || val === null || val === '');
-const evaluateSessionStatus = (status) => {
+const evaluateSessionStatus = (status, retry) => {
   if (!isUndefined(status)) status = status.toLowerCase();
   if (status === 'passed') return 'passed';
+  if (retry < retries) return ''; // Bit of an ugly solution since this is labeled as an unsupported status at browserstack. But this is the only way to prevent failure status for a test that is about to be retried.
   if (status === 'failed' || status === 'timedout') return 'failed';
   return '';
 };
@@ -66,7 +68,7 @@ exports.test = base.test.extend({
       const testResult = {
         action: 'setSessionStatus',
         arguments: {
-          status: evaluateSessionStatus(testInfo.status),
+          status: evaluateSessionStatus(testInfo.status, testInfo.retry),
           reason: nestedKeyValue(testInfo, ['error', 'message']),
         },
       };
