@@ -41,6 +41,7 @@ jobs:
       FIREBASE_SC_CLIENT_EMAIL: ${{ secrets.FIREBASE_SC_CLIENT_EMAIL }}
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      REACT_APP_FIREBASE_AUTHDOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTHDOMAIN }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
