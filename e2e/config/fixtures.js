@@ -54,7 +54,10 @@ exports.test = base.test.extend({
   page: async ({ page }, use, testInfo ) => {
     if (!process.env.BROWSERSTACK) use(page);
     else {
-      patchCaps(testInfo.project.name, `${testInfo._test.parent.title} - ${testInfo.title}`);
+      const name = testInfo.retry
+        ? `${testInfo._test.parent.title} - ${testInfo.title} - retry # ${testInfo.retry}`
+        : `${testInfo._test.parent.title} - ${testInfo.title}`;
+      patchCaps(testInfo.project.name, name);
       const browserstackBrowser = await base.chromium.connect({
         wsEndpoint: `wss://cdp.browserstack.com/playwright?caps=${encodeURIComponent(JSON.stringify(caps))}`,
       });
