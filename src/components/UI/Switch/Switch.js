@@ -11,7 +11,7 @@ const Switch = ({
   <label
     className={['Switch', orientation].join(' ')}
     style={centered ? { margin: 'auto' } : null}
-    data-test-id={dataTestId}>
+    data-testid={dataTestId}>
     <input type='checkbox' defaultChecked={activated} onClick={clicked}/>
     <span className={['Slider', orientation].join(' ')}></span>
   </label>

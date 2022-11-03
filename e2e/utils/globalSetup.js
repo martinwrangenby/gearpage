@@ -42,9 +42,9 @@ const storeSignedInState = async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto(baseUrl);
-  await page.fill('[data-test-id="loginUsername"]', process.env.E2E_TEST_USERNAME);
-  await page.fill('[data-test-id="loginPassword"]', process.env.E2E_TEST_PASSWORD);
-  await page.click('[data-test-id="loginSubmit"]');
+  await page.fill('[data-testid="loginUsername"]', process.env.E2E_TEST_USERNAME);
+  await page.fill('[data-testid="loginPassword"]', process.env.E2E_TEST_PASSWORD);
+  await page.click('[data-testid="loginSubmit"]');
   await page.waitForLoadState('networkidle');
   await page.context().storageState({ path: 'loggedIn.json' });
   await browser.close();

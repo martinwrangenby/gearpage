@@ -65,8 +65,8 @@ const InstrumentDetails = ({ userId }) => {
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
         <div className={`PageContentBox ${instrument.type}`}>
-          <h1 className='PageContentHeader' data-test-id='gearDetailsName'>{instrument.name}</h1>
-          <div data-test-id='gearDetailsDescription'>
+          <h1 className='PageContentHeader' data-testid='gearDetailsName'>{instrument.name}</h1>
+          <div data-testid='gearDetailsDescription'>
             {instrument.description}
           </div>
         </div>

@@ -7,7 +7,7 @@ import { server } from './mocks/server.js';
 import { configure } from '@testing-library/dom';
 require('dotenv').config(({ path: '.env.local' }));
 
-configure({ testIdAttribute: 'data-test-id' });
+configure({ testIdAttribute: 'data-testid' });
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
 // Reset any request handlers that we may add during the tests,

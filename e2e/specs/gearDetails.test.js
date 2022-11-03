@@ -15,8 +15,8 @@ test.describe('Gear details page', () => {
   });
 
   test('Delete instrument', async ({ page }) => {
-    await page.click('[data-test-id="deleteInstrument"]');
-    await page.click('[data-test-id="confirm"]');
+    await page.click('[data-testid="deleteInstrument"]');
+    await page.click('[data-testid="confirm"]');
     await page.waitForLoadState('networkidle');
 
     const deletedInstrument = await page.locator(`#${id}`).isVisible();
@@ -24,15 +24,15 @@ test.describe('Gear details page', () => {
   });
 
   test('Edit instrument', async ({ page }) => {
-    await page.click('[data-test-id="editInstrument"]');
-    await page.selectOption('[data-test-id="formGearType"]', guitar.type);
-    await page.fill('[data-test-id="formGearName"]', guitar.name);
-    await page.fill('[data-test-id="formGearDescription"]', guitar.description);
-    await page.click('[data-test-id="submitGearFormButton"]');
+    await page.click('[data-testid="editInstrument"]');
+    await page.selectOption('[data-testid="formGearType"]', guitar.type);
+    await page.fill('[data-testid="formGearName"]', guitar.name);
+    await page.fill('[data-testid="formGearDescription"]', guitar.description);
+    await page.click('[data-testid="submitGearFormButton"]');
     await page.waitForSelector(`.${guitar.type}`);
 
-    await expect(page.locator('[data-test-id="gearDetailsName"]')).toHaveText(guitar.name);
-    await expect(page.locator('[data-test-id="gearDetailsDescription"]')).toHaveText(guitar.description);
+    await expect(page.locator('[data-testid="gearDetailsName"]')).toHaveText(guitar.name);
+    await expect(page.locator('[data-testid="gearDetailsDescription"]')).toHaveText(guitar.description);
   });
 
 });
