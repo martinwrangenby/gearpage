@@ -67,6 +67,11 @@ The playwright version used is the determined by [browserstack's playwright vers
 
 #### Setup
 
+First and foremost, you need to install playwright browsers
+```
+npx playwright install
+```
+
 ##### Project authentication
 The framework generates and cleans up test data under the hood by firing requests directly to the db. To setup the authentication for this you need to get the service account JSON file from your Firebase project and store `private_key` in the env variable `FIREBASE_SC_PRIVATE_KEY` and `client_email` in the env variable `FIREBASE_SC_CLIENT_EMAIL`
 
