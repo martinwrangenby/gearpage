@@ -24,15 +24,15 @@ jobs:
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEAR_PAGE }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEAR_PAGE }}"
           channelId: live
           projectId: gear-page
 
   post_deploy_e2e_tests:
     name: Browserstack post-deploy e2e tests
     needs: build_and_deploy
-    env: 
+    env:
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
       E2E_TEST_USERNAME: ${{ secrets.E2E_TEST_USERNAME }}
       E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
@@ -50,8 +50,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: Install dependencies
-        run: npm ci && sudo npx playwright install-deps
+      - name: Clean install dependencies
+        run: npm ci
+      - name: Install Playwright dependencies and browsers
+        run: npx playwright install --with-deps
       - name: Run the e2e tests on browserstack
         run: npm run e2e:browserstack
       - name: Upload test artifacts

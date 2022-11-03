@@ -47,6 +47,8 @@ jobs:
           node-version: 16
       - name: Clean install dependencies
         run: npm ci
+      - name: Install Playwright dependencies and chromium
+        run: npx playwright install --with-deps chromium
       - name: Start the app in dev mode and run the e2e tests
         run: npm run e2e:ci
       - name: Upload test artifacts
