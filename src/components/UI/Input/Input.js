@@ -26,7 +26,7 @@ const Input = ({
       className={classes.join(' ')}
       value={value}
       onChange={changed}
-      data-test-id={dataTestId}>
+      data-testid={dataTestId}>
       {placeholderOption}
       {elementConfig.options.map(option => (
         <option key={option} value={option}>
@@ -40,7 +40,7 @@ const Input = ({
       className={classes.join(' ')}
       value={value}
       onChange={changed}
-      data-test-id={dataTestId}
+      data-testid={dataTestId}
       { ...elementConfig }/>;
   }
   return inputContent;
