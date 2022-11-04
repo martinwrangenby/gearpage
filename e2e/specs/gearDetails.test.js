@@ -31,8 +31,7 @@ test.describe('Gear details page', () => {
     await page.click('[data-testid="submitGearFormButton"]');
     await page.waitForSelector(`.${guitar.type}`);
 
-    await expect(page.getByTestId('gearDetailsName')).toHaveText(guitar.name);
-    await expect(page.getByTestId('gearDetailsDescription')).toHaveText(guitar.description);
+    await expect(page.locator('[data-testid="gearDetailsName"]')).toHaveText(guitar.name);
+    await expect(page.locator('[data-testid="gearDetailsDescription"]')).toHaveText(guitar.description);
   });
-
 });

@@ -17,7 +17,7 @@ test.describe('Login', () => {
     await page.fill('[data-testid="loginUsername"]', process.env.E2E_TEST_USERNAME);
     await page.fill('[data-testid="loginPassword"]', 'lol dummy pw');
     await page.click('[data-testid="loginSubmit"]');
-    const loginFailure = page.getByTestId('loginError');
+    const loginFailure = page.locator('[data-testid="loginError"]');
 
     await expect(loginFailure).toContainText('Wrong email or password');
   });
@@ -27,7 +27,7 @@ test.describe('Login', () => {
     await page.fill('[data-testid="loginUsername"]', 'thisemail@isnotaregistereduser.com');
     await page.fill('[data-testid="loginPassword"]', 'lol dummy pw');
     await page.click('[data-testid="loginSubmit"]');
-    const loginFailure = page.getByTestId('loginError');
+    const loginFailure = page.locator('[data-testid="loginError"]');
 
     await expect(loginFailure).toContainText('Wrong email or password');
   });
