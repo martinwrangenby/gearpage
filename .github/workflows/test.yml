@@ -1,5 +1,5 @@
 name: Test
-on: 
+on:
   push:
     branches-ignore:
       - master
@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Configure node environment
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Clean install dependencies
@@ -30,7 +30,7 @@ jobs:
 
   e2e_tests:
     name: E2e tests
-    env: 
+    env:
       REACT_APP_DB: ${{ secrets.REACT_APP_DB }}
       E2E_TEST_USERNAME: ${{ secrets.E2E_TEST_USERNAME }}
       E2E_TEST_PASSWORD: ${{ secrets.E2E_TEST_PASSWORD }}
@@ -40,9 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Configure node environment
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Clean install dependencies

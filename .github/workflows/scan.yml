@@ -2,7 +2,7 @@ name: Code & Metadata Scan
 on:
   pull_request:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: "0 5 * * *"
 
 jobs:
   dangerJS:
@@ -12,9 +12,9 @@ jobs:
       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Configure node environment
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Clean install dependencies
@@ -34,9 +34,9 @@ jobs:
       REACT_APP_FIREBASE_MSGSENDERID: ${{ secrets.REACT_APP_FIREBASE_MSGSENDERID }}
       REACT_APP_FIREBASE_APPID: ${{ secrets.REACT_APP_FIREBASE_APPID }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Clean install dependencies
         run: npm ci
       - name: Run the component tests (To get coverage report)
@@ -52,5 +52,5 @@ jobs:
             -Dsonar.organization=martinwrangenby
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
