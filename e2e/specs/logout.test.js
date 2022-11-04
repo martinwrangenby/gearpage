@@ -9,10 +9,12 @@ test.describe('Logout', () => {
   test('User can log out', async ({ page }) => {
     await page.click('[data-testid="toolbarMenuButton"]');
     await page.click('[data-testid="toolbarMenuLogout"]');
-    const confirmElement = await page.locator('[data-testid="confirm"]').elementHandle();
+    const confirmElement = await page.getByTestId('confirm').elementHandle();
     await confirmElement.waitForElementState('stable');
     await page.click('[data-testid="confirm"]');
-    await expect(page.locator('[data-testid="loginUsername"]')).toBeVisible();
+
+    await expect(page.getByTestId('loginUsername')).toBeVisible();
+
   });
 
   test('User can cancel log out in popup', async ({ page }) => {
