@@ -6,7 +6,7 @@ const IconButton = props => (
     className={`IconButton${props.active ? ' Active' : ''}`}
     onClick={props.clicked}
     id={props.id}
-    data-test-id={props.dataTestId}>
+    data-testid={props.dataTestId}>
     <i className={props.type}></i>
   </div>
 );

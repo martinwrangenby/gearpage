@@ -5,13 +5,13 @@ const ToolbarMenu = ({ handleMenuChoice }) => (
   <div className='ToolbarMenu' id='menuContent'>
     <p
       style={{ margin: 'auto', cursor: 'pointer' }}
-      data-test-id='toolbarMenuSettings'
+      data-testid='toolbarMenuSettings'
       onClick={() => handleMenuChoice('settings')}>
       Settings
     </p>
     <p
       style={{ margin: 'auto', cursor: 'pointer' }}
-      data-test-id='toolbarMenuLogout'
+      data-testid='toolbarMenuLogout'
       onClick={() => handleMenuChoice('logout')}>
       Sign out
     </p>

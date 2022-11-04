@@ -11,7 +11,7 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
   return(
     <Modal show={true}>
       <h1>Login plx</h1>
-      <p className='LoginError' data-test-id='loginError'>{errorMsg}</p>
+      <p className='LoginError' data-testid='loginError'>{errorMsg}</p>
       <form onSubmit={(event) => event.preventDefault()}>
         <Input
           elementConfig={{ placeholder: 'Username (email)',type: 'email', autoComplete: 'on' }}
