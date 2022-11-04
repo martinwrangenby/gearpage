@@ -22,7 +22,7 @@ test.describe('Gear list', () => {
     await page.click('[data-testid="submitGearFormButton"]');
     await page.waitForLoadState('networkidle');
 
-    const newInstrument = page.locator(`[name="${name}"]`);
+    const newInstrument = page.getByRole('cell', { name });
     await expect(newInstrument).toBeVisible();
     await expect(newInstrument).toContainText(name);
   });

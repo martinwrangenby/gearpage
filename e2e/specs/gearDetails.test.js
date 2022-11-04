@@ -34,5 +34,4 @@ test.describe('Gear details page', () => {
     await expect(page.locator('[data-testid="gearDetailsName"]')).toHaveText(guitar.name);
     await expect(page.locator('[data-testid="gearDetailsDescription"]')).toHaveText(guitar.description);
   });
-
 });
