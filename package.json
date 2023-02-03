@@ -11,8 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^5.0.3",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "^5.0.1"
+    "react-router-dom": "^6.2.2"
   },
   "scripts": {
     "lint": "eslint .",
@@ -58,6 +57,7 @@
     "msw": "^0.39.2",
     "playwright": "1.25.1",
     "rimraf": "^3.0.2",
+    "react-scripts": "^5.0.1",
     "start-server-and-test": "^1.11.7"
   }
 }
