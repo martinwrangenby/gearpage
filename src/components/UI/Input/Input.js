@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Switch from '../Switch/Switch';
 import './Input.css';
 
 const Input = ({
@@ -34,7 +35,17 @@ const Input = ({
         </option>
       ))}
     </select>;
-  } else {
+  } else if(elementType==='checkbox') {
+    inputContent = <p className={classes.join(' ')}>
+      Sold
+      <Switch
+        orientation='horizontal'
+        centered={false}
+        activated={false}
+        dataTestId
+      />
+    </p>;
+  }else {
     const CustomTag = elementType;
     inputContent = <CustomTag
       className={classes.join(' ')}
