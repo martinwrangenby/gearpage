@@ -8,6 +8,7 @@ const Modal = ({
   show = true,
   modalClosed = () => null,
   children,
+  dataTestId = undefined,
 }) => {
   const escFunction = React.useCallback((event) => {
     if(event.keyCode === 27) {
@@ -31,7 +32,8 @@ const Modal = ({
         className="Modal"
         style={{
           transform: show ? 'scale(1)' : 'scale(0)',
-          opacity: show ? '1' : '0' }}>
+          opacity: show ? '1' : '0' }}
+        data-testid={dataTestId}>
         {show ? children : null}
       </div>
     </React.Fragment>
