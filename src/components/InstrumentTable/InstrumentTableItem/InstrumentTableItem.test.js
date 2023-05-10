@@ -8,7 +8,13 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('InstrumentableItem', () => {
-  beforeEach(() => {
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+
+  test('renders with name and type', () => {
     render(
       <table>
         <tbody>
@@ -16,14 +22,6 @@ describe('InstrumentableItem', () => {
         </tbody>
       </table>
     );
-  });
-
-  afterAll(() => {
-    jest.resetAllMocks();
-  });
-
-
-  test('renders with name and type', () => {
     // Row has correct length
     const tableRow = screen.getAllByRole('cell');
     expect(tableRow).toHaveLength(2);
@@ -33,7 +31,29 @@ describe('InstrumentableItem', () => {
     expect(tableCell).toEqual(['Strata', 'guitar']);
   });
 
+  test('renders with default values when name and type props are not provided', () => {
+    render(
+      <table>
+        <tbody>
+          <InstrumentTableItem id={123456} />
+        </tbody>
+      </table>
+    );
+    const tableRow = screen.getByRole('row');
+    const tableCell = screen.getAllByRole('cell');
+    expect(tableRow).toHaveAttribute('name', '');
+    expect(tableCell[0]).toHaveTextContent('');
+    expect(tableCell[1]).toHaveTextContent('');
+  });
+
   test('clicking the row will push path and query for instrument to history', () => {
+    render(
+      <table>
+        <tbody>
+          <InstrumentTableItem name={'Strata'} type={'guitar'} id={123456}/>
+        </tbody>
+      </table>
+    );
     const tableRow = screen.getByRole('row');
     fireEvent.click(tableRow);
     expect(mockedUsedNavigate).toBeCalledWith(
