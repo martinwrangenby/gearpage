@@ -9,7 +9,7 @@ const InstrumentTableItem = props => {
       search: `?id=${props.id}` });
   };
   return (
-    <tr role='row' onClick={isSelected} id={props.id} name={props.name}>
+    <tr role='row' onClick={isSelected} id={props.id} name={props.name || ''}>
       <td role='cell'>
         {props.name}
       </td>
