@@ -7,38 +7,38 @@ config.use = {
   screenshot: 'only-on-failure',
   baseURL: `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`,
 };
-config.retries = 1;
+config.retries = 2;
 config.projects = [
   // -- BrowserStack Projects --
   // name should be of the format browser@browser_version:os os_version@browserstack|emulation device
   {
-    name: 'playwright-webkit@latest:OSX Monterey@browserstack', // Add emulation info separated by | here and extract to name in fixture
+    name: 'playwright-webkit@latest:OSX Ventura@browserstack', // Add emulation info separated by | here and extract to name in fixture
     use: {
       browserName: 'webkit',
     },
   },
   {
-    name: 'chrome@latest-beta:OSX Monterey@browserstack',
+    name: 'chrome@latest-beta:OSX Ventura@browserstack',
     use: {
       browserName: 'chromium',
       channel: 'chrome',
     },
   },
   {
-    name: 'edge@latest:Windows 10@browserstack',
+    name: 'edge@latest:Windows 11@browserstack',
     use: {
       browserName: 'chromium',
     },
   },
   {
-    name: 'playwright-firefox@latest:OSX Big Sur@browserstack',
+    name: 'playwright-firefox@latest:OSX Monterey@browserstack',
     use: {
       browserName: 'firefox',
       ignoreHTTPSErrors: true,
     },
   },
   {
-    name: 'playwright-webkit@latest:OSX Big Sur@browserstack|iPhone 12 Pro Max', // Add emulation info separated by | here and extract to name in fixture
+    name: 'playwright-webkit@latest:OSX Ventura@browserstack|iPhone 14 Pro Max', // Add emulation info separated by | here and extract to name in fixture
     use: {
       browserName: 'webkit',
       ...devices['iPhone 12 Pro Max'],
