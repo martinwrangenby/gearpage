@@ -45,7 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "1.25.1",
+    "@playwright/test": "1.32.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -55,9 +55,8 @@
     "eslint-plugin-playwright": "^0.8.0",
     "husky": "^4.3.7",
     "msw": "^0.39.2",
-    "playwright": "1.25.1",
-    "rimraf": "^3.0.2",
     "react-scripts": "^5.0.1",
+    "rimraf": "^3.0.2",
     "start-server-and-test": "^1.11.7"
   }
 }

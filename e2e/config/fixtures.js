@@ -2,7 +2,7 @@ const base = require('@playwright/test');
 const cp = require('child_process');
 const { retries } = require('../../playwright.config.browserstack');
 const clientPlaywrightVersion = cp
-  .execSync('npx playwright --version')
+  .execSync('npx @playwright/test --version')
   .toString()
   .trim()
   .split(' ')[1];
