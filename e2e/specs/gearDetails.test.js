@@ -1,12 +1,13 @@
 const { test, expect } = require('../config/fixtures');
 const { addGearItem, deleteGearItem } = require('../utils/firebaseAPI');
-const { bass, guitar } = require('../assets/testdata');
 test.use({ storageState: 'loggedIn.json' });
 let id;
+let name;
 
 test.describe('Gear details page', () => {
   test.beforeEach(async ({ page }) => {
-    id = await addGearItem(bass);
+    name = `intrument-${Math.random().toString(16).slice(2)}`;
+    id = await addGearItem({ name, type: 'bass', description: 'testgear' });
     await page.goto(`/gearitem?id=${id}`);
   });
 
@@ -14,24 +15,22 @@ test.describe('Gear details page', () => {
     await deleteGearItem(id);
   });
 
-  test('Delete instrument', async ({ page }) => {
-    await page.click('[data-testid="deleteInstrument"]');
-    await page.click('[data-testid="confirm"]');
-    await page.waitForLoadState('networkidle');
+  test.only('Delete instrument', async ({ page }) => {
+    await page.getByTestId('deleteInstrument').click();
+    await page.getByTestId('confirm').click();
 
-    const deletedInstrument = await page.locator(`#${id}`).isVisible();
-    await expect(deletedInstrument).not.toBeTruthy();
+    await expect(page.getByTestId('spinner')).toBeHidden();
+    await expect(page.getByRole('row', { name })).not.toBeVisible();
   });
 
   test('Edit instrument', async ({ page }) => {
-    await page.click('[data-testid="editInstrument"]');
-    await page.selectOption('[data-testid="formGearType"]', guitar.type);
-    await page.fill('[data-testid="formGearName"]', guitar.name);
-    await page.fill('[data-testid="formGearDescription"]', guitar.description);
-    await page.click('[data-testid="submitGearFormButton"]');
-    await page.waitForSelector(`.${guitar.type}`);
+    await page.getByTestId('editInstrument').click();
+    await page.getByTestId('formGearType').selectOption('guitar');
+    await page.getByTestId('formGearName').fill('updated name');
+    await page.getByTestId('formGearDescription').fill('updated description');
+    await page.getByTestId('submitGearFormButton').click();
 
-    await expect(page.locator('[data-testid="gearDetailsName"]')).toHaveText(guitar.name);
-    await expect(page.locator('[data-testid="gearDetailsDescription"]')).toHaveText(guitar.description);
+    await expect(page.getByTestId('gearDetailsName')).toHaveText('updated name');
+    await expect(page.getByTestId('gearDetailsDescription')).toHaveText('updated description');
   });
 });

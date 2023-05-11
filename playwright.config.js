@@ -10,6 +10,8 @@ const config = {
     headless: process.env.HEADFUL ? false : true,
     browserName: 'chromium',
     screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
     baseURL: process.env.REACT_APP_FRONTEND || 'http://localhost:3000/',
   },
   outputDir: 'e2e/results/output',
