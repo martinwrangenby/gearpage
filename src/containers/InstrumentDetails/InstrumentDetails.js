@@ -64,7 +64,7 @@ const InstrumentDetails = ({ userId }) => {
             submitInstrument={updateInstrument}
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
-        <div className={`PageContentBox ${instrument.type}`}>
+        <div className={`PageContentBox ${instrument.type}`} data-testid='gearDetailsContentBox'>
           <h1 className='PageContentHeader' data-testid='gearDetailsName'>{instrument.name}</h1>
           <div data-testid='gearDetailsDescription'>
             {instrument.description}
