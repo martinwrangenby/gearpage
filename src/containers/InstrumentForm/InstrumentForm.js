@@ -5,19 +5,19 @@ import gearFormRules from '../../assets/gearFormRules';
 
 
 // TODO: Add security on input form
-const InstrumentForm = props => {
+const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
 
   const [formContent, setFormContent] = React.useState(gearFormRules);
   const [formValid, setFormValid] = React.useState(false);
 
   React.useEffect(() => {
-    if (props.instrument) {
+    if (instrument) {
       setFormContent(prevFormContent => {
         const updatedFormContent = { ...prevFormContent };
-        Object.keys(props.instrument).forEach(identifier => {
+        Object.keys(instrument).forEach(identifier => {
           if (identifier !== 'id') {
             const updatedFormElement = { ...updatedFormContent[identifier] };
-            updatedFormElement.value = props.instrument[identifier];
+            updatedFormElement.value = instrument[identifier];
             updatedFormElement.valid = true;
             updatedFormContent[identifier] = updatedFormElement;
           }
@@ -25,7 +25,7 @@ const InstrumentForm = props => {
         return updatedFormContent;
       });
     }
-  }, [props.instrument]);
+  }, [instrument]);
 
   const checkValidity = (value, rules) => {
     let isValid = true;
@@ -53,20 +53,12 @@ const InstrumentForm = props => {
   };
 
   const handleSubmit = () => {
-    let validSubmit = true;
-    const data = {};
-    Object.keys(formContent).forEach(identifier => {
-      if (formContent[identifier].mandatory && formContent[identifier].value === '') {
-        validSubmit = false;
-      } else {
-        data[identifier] = formContent[identifier].value;
-      }
-    });
-    if (validSubmit) {
-      props.submitInstrument(data);
-    } else {
-      alert('you must specify both instrument type and name');
+
+    const formSubmitData = {};
+    for (const key in formContent) {
+      formSubmitData[key] = formContent[key].value;
     }
+    submitInstrument(formSubmitData);
   };
 
   const formElementsArray = [];
@@ -77,7 +69,7 @@ const InstrumentForm = props => {
     });
   }
   return (
-    <React.Fragment>
+    <>
       <form onSubmit={(event) => event.preventDefault()}>
         {formElementsArray.map(formElement => (
           <Input
@@ -97,13 +89,13 @@ const InstrumentForm = props => {
         buttonType='Success'
         clicked={handleSubmit}
         dataTestId='submitGearFormButton'>
-        {props.instrument ? 'Update' : 'Add'}
+        {instrument ? 'Update' : 'Add'}
       </Button>
       <Button
         buttonType='Danger'
-        clicked={props.closeModal}>Cancel
+        clicked={closeModal}>Cancel
       </Button>
-    </React.Fragment>
+    </>
   );
 };
 

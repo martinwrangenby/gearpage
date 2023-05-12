@@ -6,6 +6,7 @@ const config = {
   globalSetup: require.resolve(`${__dirname}/e2e/utils/globalSetup.js`),
   testDir: 'e2e/specs',
   workers: process.env.HEADFUL ? 1 : 4,
+  forbidOnly: !!process.env.CI,
   use: {
     headless: process.env.HEADFUL ? false : true,
     browserName: 'chromium',

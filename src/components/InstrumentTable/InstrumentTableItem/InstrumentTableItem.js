@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const InstrumentTableItem = props => {
+const InstrumentTableItem = ({ id, name, type }) => {
   const navigate = useNavigate();
   const isSelected = () => {
     navigate({
       pathname: '/gearitem',
-      search: `?id=${props.id}` });
+      search: `?id=${id}` });
   };
   return (
-    <tr role='row' onClick={isSelected} id={props.id} name={props.name || ''}>
+    <tr role='row' onClick={isSelected} id={id} name={name || ''}>
       <td role='cell'>
-        {props.name}
+        {name}
       </td>
       <td role='cell'>
-        {props.type}
+        {type}
       </td>
     </tr>
   );

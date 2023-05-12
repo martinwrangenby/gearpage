@@ -1,4 +1,4 @@
-.TableActions {
+.InstrumentListActions {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -14,12 +14,12 @@
   display: flex;
   flex-flow: row;
   margin-top: auto;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   max-height: 80px;
 }
 
 .DropdownContentWrapper {
   display: flex;
   flex-flow: column;
-  padding: 10px; 
+  padding: 10px;
 }

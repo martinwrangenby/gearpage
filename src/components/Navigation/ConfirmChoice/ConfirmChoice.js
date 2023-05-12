@@ -2,14 +2,14 @@ import React from 'react';
 import Button from '../../UI/Button/Button';
 import './ConfirmChoice.css';
 
-const ConfirmChoice = props => (
+const ConfirmChoice = ({ title, confirm, reject }) => (
   <React.Fragment>
-    <h2 className='ConfirmTitle'>{props.title}</h2>
+    <h2 className='ConfirmTitle'>{title}</h2>
     <h4>Are you sure?</h4>
-    <Button buttonType='Danger' dataTestId='confirm' clicked={props.confirm}>
+    <Button buttonType='Danger' dataTestId='confirm' clicked={confirm}>
       Yes
     </Button>
-    <Button dataTestId='reject' clicked={props.reject}>
+    <Button dataTestId='reject' clicked={reject}>
       No
     </Button>
   </React.Fragment>
