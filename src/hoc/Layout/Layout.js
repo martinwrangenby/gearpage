@@ -5,7 +5,7 @@ import './Layout.css';
 const Layout = (props) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   return (
-    <React.Fragment>
+    <>
       <Toolbar
         showMenu={menuOpen}
         toggleMenu={setMenuOpen}
@@ -13,7 +13,7 @@ const Layout = (props) => {
       <main className='Content'>
         {props.children}
       </main>
-    </React.Fragment>
+    </>
   );
 };
 
