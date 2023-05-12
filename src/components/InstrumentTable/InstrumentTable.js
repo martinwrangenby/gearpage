@@ -3,18 +3,18 @@ import './InstrumentTable.css';
 import InstrumentTableItem from './InstrumentTableItem/InstrumentTableItem';
 
 
-const InstrumentTable = props => {
+const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
 
   const getClassNamesFor = (name) => {
-    if (!props.sortOrder) {
+    if (!sortOrder) {
       return;
     }
-    return props.sortOrder.key === name ? props.sortOrder.direction : undefined;
+    return sortOrder.key === name ? sortOrder.direction : undefined;
   };
 
-  const content = props.instruments.map((instrument) => {
+  const content = instruments.map((instrument) => {
     return (
-      props.filter.includes(instrument.type)
+      filter.includes(instrument.type)
         ? <InstrumentTableItem key={instrument.id} {...instrument}/>
         : null
     );
@@ -24,10 +24,10 @@ const InstrumentTable = props => {
     <table id='InstrumentTable'>
       <thead>
         <tr>
-          <th className={getClassNamesFor('name')} style={{ width: '75%' }} onClick={() => props.sort('name')}>
+          <th className={getClassNamesFor('name')} style={{ width: '75%' }} onClick={() => sort('name')}>
             Name
           </th>
-          <th className={getClassNamesFor('type')} style={{ width: '25%' }} onClick={() => props.sort('type')}>
+          <th className={getClassNamesFor('type')} style={{ width: '25%' }} onClick={() => sort('type')}>
             Type
           </th>
         </tr>
