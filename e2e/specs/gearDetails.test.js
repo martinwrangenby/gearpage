@@ -15,7 +15,7 @@ test.describe('Gear details page', () => {
     await deleteGearItem(id);
   });
 
-  test.only('Delete instrument', async ({ page }) => {
+  test('Delete instrument', async ({ page }) => {
     await page.getByTestId('deleteInstrument').click();
     await page.getByTestId('confirm').click();
 
