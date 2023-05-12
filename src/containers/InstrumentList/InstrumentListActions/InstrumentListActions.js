@@ -36,14 +36,15 @@ const InstrumentListActions = ({
   };
 
   return (
-    <React.Fragment>
-      <div className='TableActions'>
+    <>
+      <div className='InstrumentListActions' data-testid='instrumentListActions'>
         <div style={{ display: 'flex' }}>
           <IconButton
             type='fa fa-sliders'
             active={showFilter}
             clicked={() => {setShowFilter(!showFilter);}}
-            id='FilterButton'/>
+            id='FilterButton'
+            dataTestId='filterButton'/>
           <Transition orientation='South' show={activeFilter.length !== gearTypes.length}>
             <div
               style={{ alignSelf: 'center', marginLeft: '5px', cursor: 'pointer' }}
@@ -60,21 +61,23 @@ const InstrumentListActions = ({
       <Transition show={showFilter}>
         <div //TODO: make the dropdown a component of its own
           className='DropdownContent'
-          id='FilterDropdown'>
+          id='FilterDropdown'
+          data-testid='filterDropdown'>
           {gearTypes.map(gearType => {
             return (
               <div key={gearType} className='DropdownContentWrapper'>
                 <Switch
                   centered
                   activated={activeFilter.includes(gearType)}
-                  clicked={() => updateFilter(gearType)} />
+                  clicked={() => updateFilter(gearType)}
+                  dataTestId={`${gearType}-filter`}/>
                 {gearType}
               </div>
             );
           })}
         </div>
       </Transition>
-    </React.Fragment>
+    </>
   );
 };
 
