@@ -17,6 +17,8 @@ jobs:
     name: Component tests
     runs-on: ubuntu-latest
     steps:
+      - name: Simple test
+        run: echo $GITHUB_ACTIONS
       - name: Check out repository
         uses: actions/checkout@v3
       - name: Configure node environment
