@@ -2,11 +2,8 @@ const { devices } = require('@playwright/test');
 const config = require('./playwright.config');
 
 config.workers = 5;
-config.use = {
-  headless: true,
-  screenshot: 'only-on-failure',
-  baseURL: `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`,
-};
+config.use.headless = true;
+config.use.baseURL = `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`;
 config.retries = 2;
 config.projects = [
   // -- BrowserStack Projects --
