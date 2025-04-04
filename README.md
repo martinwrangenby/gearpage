@@ -7,6 +7,8 @@ Icon resources from [Font Awesome 4.7](https://fontawesome.com/v4.7.0/).
 
 env variables for local setup can be defined in `.env.local`
 
+dummy change
+
 ## Setup env and get started
 ### Install dependencies
 ```
