@@ -22,7 +22,7 @@ jobs:
       - name: Configure node environment
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - name: Clean install dependencies
         run: npm ci
       - name: Run the component tests
@@ -44,7 +44,7 @@ jobs:
       - name: Configure node environment
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - name: Clean install dependencies
         run: npm ci
       - name: Install Playwright dependencies and chromium
