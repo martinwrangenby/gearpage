@@ -1,0 +1,34 @@
+projectName: Gear Page 
+buildName: post-prod tests
+
+platforms:
+  - os: Windows
+    osVersion: 11
+    browserName: chrome
+    browserVersion: latest
+    playwrightConfigOptions:
+      name: windows Chrome
+  - os: OS X
+    osVersion: Sequoia
+    browserName: playwright-webkit
+    browserVersion: latest
+    playwrightConfigOptions:
+      name: osX Safari
+  # TODO: investigate Android support
+  # - browserName: chrome
+  #   osVersion: 15.0
+  #   deviceName: Samsung Galaxy S25
+  #   playwrightConfigOptions:
+  #     name: Galaxy S25 + Chrome
+  # - browserName: chrome
+  #   osVersion: 13.0
+  #   deviceName: Samsung Galaxy Tab S9
+  #   playwrightConfigOptions:
+  #     name: Galaxy Tab S9 + Chrome
+
+testObservability: false
+consoleLogs: errors
+parallelsPerPlatform: 2 # Adjust according to number of platforms
+playwrightVersion: 1.47.0
+
+# Track compatible playwright version on https://www.browserstack.com/docs/automate/playwright/browsers-and-os
