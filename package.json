@@ -20,10 +20,10 @@
     "build": "react-scripts build",
     "e2e": "npx playwright test",
     "e2e:headful": "HEADFUL=true npm run e2e",
-    "e2e:browserstack": "BROWSERSTACK=true npm run e2e -- --config=./playwright.config.browserstack.js",
+    "e2e:browserstack": "BROWSERSTACK=true browserstack-node-sdk playwright test --config=./playwright.config.browserstack.js",
     "e2e:ci": "CI=true npm run e2e",
     "test": "react-scripts test",
-    "cleanup": "rimraf e2e/results",
+    "cleanup": "rimraf e2e/results log",
     "danger:ci": "danger ci",
     "danger:local": "danger pr"
   },
