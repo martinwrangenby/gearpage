@@ -19,7 +19,6 @@
     "start": "node scripts/devServerBootstrap.js && react-scripts start",
     "build": "react-scripts build",
     "e2e": "npx playwright test",
-    "e2e:headful": "HEADFUL=true npm run e2e",
     "e2e:browserstack": "BROWSERSTACK=true browserstack-node-sdk playwright test --config=./playwright.config.browserstack.js",
     "e2e:ci": "CI=true npm run e2e",
     "test": "react-scripts test",

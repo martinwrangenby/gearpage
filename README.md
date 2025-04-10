@@ -61,7 +61,7 @@ npm run test
 ```
 
 ### E2E
-The e2e test framework is based on [playwright](https://playwright.dev/). Playwright has support for running Chromium, Firefox and Webkit, but only Chromium is used for the e2e tests at this point. Test will by default run headless with a concurrenct of 4 threads. If run headful, the tests will run in series.  
+The e2e test framework is based on [playwright](https://playwright.dev/). Playwright has support for running Chromium, Firefox and Webkit, but only Chromium is used for the e2e tests at this point. Test will by default run headless with a concurrenct of 4 threads.
 By default, the tests will target `http://localhost:3000/`, to override this, specify the desired base url in env variable `REACT_APP_FRONTEND`  
 The playwright version used is the determined by [browserstack's playwright version support](https://www.browserstack.com/docs/automate/playwright/playwright-browser-compatibility)
 
@@ -93,7 +93,7 @@ npm run e2e
 ```
 To run the tests headful, run:
 ```
-npm run test:headful
+npm run e2e -- --headed --workers=1
 ```
 To start the dev server and execute the tests all in one script, run:
 ```
