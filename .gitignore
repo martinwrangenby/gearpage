@@ -10,6 +10,12 @@
 */results
 loggedIn.json
 
+# Browserstack stuff
+/log
+playwright-browserstack-sdk.config.js
+playwright-browserstack-sdk.config.temp.json
+browserstackSetupConfig.json
+
 # production
 /build
 
