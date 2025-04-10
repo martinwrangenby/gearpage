@@ -5,9 +5,6 @@ const baseUrl = process.env.BROWSERSTACK
   ? `http://${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`
   : process.env.REACT_APP_FRONTEND || 'http://localhost:3000/';
 
-const timestamp = new Date();
-process.env.TIMESTAMP = timestamp.toLocaleString('se-SV');
-
 const checkEnv = async () => {
   if (!process.env.E2E_TEST_USERNAME) {
     console.log(`\t${logFormat.color.fg.red}Test account not defined${logFormat.clearFormat}

@@ -1,15 +1,13 @@
 require('dotenv').config(({ path: '.env.local' }));
 
-const { CI, HEADFUL, REACT_APP_FRONTEND, BROWSERSTACK } = process.env;
+const { CI, REACT_APP_FRONTEND, BROWSERSTACK } = process.env;
 const cliReporter = process.env.CI ? 'github' : 'list';
 
 const config = {
   globalSetup: require.resolve(`${__dirname}/e2e/utils/globalSetup.js`),
   testDir: 'e2e/specs',
-  workers: HEADFUL ? 1 : 4,
   forbidOnly: !!CI,
   use: {
-    headless: HEADFUL ? false : true,
     browserName: 'chromium',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
