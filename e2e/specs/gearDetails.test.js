@@ -33,4 +33,13 @@ test.describe('Gear details page', () => {
     await expect(page.getByTestId('gearDetailsName')).toHaveText('updated name');
     await expect(page.getByTestId('gearDetailsDescription')).toHaveText('updated description');
   });
+
+  test('Price is shown first when added to instrument', async ({ page }) => {
+    await expect(page.getByTestId('price')).toHaveCount(0);
+
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await page.getByTestId('formGearPrice').fill('123456');
+    await page.getByRole('button', { name: 'Update' }).click();
+    await expect(page.getByTestId('price')).toBeVisible();
+  });
 });
