@@ -8,6 +8,11 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: jest.fn(),
 }));
+jest.mock('../../hoc/Context/SettingsContext', () => ({
+  useSettings: () => ({
+    settings: { showPrice: false },
+  }),
+}));
 
 // Mock props for the component
 const mockProps = {

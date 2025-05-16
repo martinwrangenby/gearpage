@@ -2,6 +2,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import InstrumentTableItem from './InstrumentTableItem';
 
 const mockedUsedNavigate = jest.fn();
+jest.mock('../../../hoc/Context/SettingsContext', () => ({
+  useSettings: () => ({
+    settings: { showPrice: false },
+  }),
+}));
+
 jest.mock('react-router-dom', () => ({
   ...(jest.requireActual('react-router-dom')),
   useNavigate: () => mockedUsedNavigate,
