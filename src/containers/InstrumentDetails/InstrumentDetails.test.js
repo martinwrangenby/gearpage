@@ -9,6 +9,7 @@ beforeEach(() => {
     type: 'guitar',
     name: 'Rickenbacker',
     description: 'A nice guitar',
+    price: 4000,
   };
   const snapshot = { val: () => fakeData };
 
@@ -30,7 +31,10 @@ test('Instrument info renders', async () => {
   const header = await screen.findByRole('heading', { level: 1 });
   expect(header).toHaveTextContent('Rickenbacker');
 
-  const description = await screen.findByTestId('gearDetailsDescription');
+  const description = screen.getByTestId('gearDetailsDescription');
   expect(description).toHaveTextContent('A nice guitar');
+
+  const price = screen.getByTestId('price');
+  expect(price).toHaveTextContent(4000);
 });
 
