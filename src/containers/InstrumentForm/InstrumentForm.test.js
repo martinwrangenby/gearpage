@@ -41,6 +41,7 @@ describe('InstrumentForm component', () => {
       name: 'Test gear name',
       type: 'guitar',
       description: 'Test description',
+      price: '',
     });
   });
 

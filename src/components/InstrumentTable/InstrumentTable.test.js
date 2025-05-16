@@ -9,6 +9,11 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+const mockedUseSettings = jest.fn();
+jest.mock('../../hoc/Context/SettingsContext', () => ({
+  useSettings: () => mockedUseSettings(),
+}));
+
 // Mock props for the component
 const mockProps = {
   instruments: [
@@ -28,6 +33,36 @@ describe('InstrumentTable', () => {
   });
 
   test('renders correctly with props', () => {
+    mockedUseSettings.mockReturnValue({ settings: { showPrice: false } });
+    // Mock useNavigate to return a jest.fn()
+    useNavigate.mockReturnValue(jest.fn());
+
+    const { getByRole, queryByRole } = render(
+      <MemoryRouter>
+        <InstrumentTable {...mockProps} />
+      </MemoryRouter>
+    );
+
+    const table = getByRole('table');
+
+    // Assert that the table headers are rendered with correct text and classNames
+    expect(getByRole('columnheader', { name: 'Name' })).toBeVisible();
+    expect(getByRole('columnheader', { name: 'Type' })).toBeVisible();
+    expect(getByRole('columnheader', { name: 'Name' })).toHaveClass('asc');
+    expect(getByRole('columnheader', { name: 'Type' })).not.toHaveClass();
+
+    // Assert that price header isn't rendered
+    expect(queryByRole('columnheader', { name: 'Price' })).not.toBeInTheDocument();
+
+    // Assert that the table rows are rendered with the correct content
+    expect(within(table).getByText(/guitar/i)).toBeInTheDocument();
+    expect(within(table).getByText(/string/i)).toBeInTheDocument();
+    expect(within(table).queryByText(/drums/i)).toBeNull();
+    expect(within(table).queryByText(/piano/i)).toBeNull();
+  });
+
+  test('Renders with price column if showPrice is true', () => {
+    mockedUseSettings.mockReturnValue({ settings: { showPrice: true } });
     // Mock useNavigate to return a jest.fn()
     useNavigate.mockReturnValue(jest.fn());
 
@@ -37,22 +72,11 @@ describe('InstrumentTable', () => {
       </MemoryRouter>
     );
 
-    const table = getByRole('table');
-
-    // Assert that the table headers are rendered with correct text and classNames
-    expect(within(table).getByText('Name')).toBeInTheDocument();
-    expect(within(table).getByText('Type')).toBeInTheDocument();
-    expect(within(table).getByText('Name')).toHaveClass('asc');
-    expect(within(table).getByText('Type')).not.toHaveClass();
-
-    // Assert that the table rows are rendered with the correct content
-    expect(within(table).getByText(/guitar/i)).toBeInTheDocument();
-    expect(within(table).getByText(/string/i)).toBeInTheDocument();
-    expect(within(table).queryByText(/drums/i)).toBeNull();
-    expect(within(table).queryByText(/piano/i)).toBeNull();
+    expect(getByRole('columnheader', { name: 'Price' })).toBeVisible();
   });
 
   test('calls sort function with correct key when header is clicked', () => {
+    mockedUseSettings.mockReturnValue({ settings: { showPrice: false } });
     // Mock useNavigate to return a jest.fn()
     useNavigate.mockReturnValue(jest.fn());
 

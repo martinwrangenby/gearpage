@@ -1,7 +1,7 @@
 import React from 'react';
 import './InstrumentTable.css';
 import InstrumentTableItem from './InstrumentTableItem/InstrumentTableItem';
-
+import { useSettings } from '../../hoc/Context/SettingsContext';
 
 const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
 
@@ -20,6 +20,14 @@ const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
     );
   });
 
+  const { settings } = useSettings();
+  const { showPrice } = settings;
+  const priceColumnHeader = showPrice
+    ? <th className={getClassNamesFor('price')} style={{ width: '25%' }} onClick={() => sort('price')}>
+    Price
+    </th>
+    : null;
+
   return (
     <table id='InstrumentTable'>
       <thead>
@@ -30,6 +38,7 @@ const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
           <th className={getClassNamesFor('type')} style={{ width: '25%' }} onClick={() => sort('type')}>
             Type
           </th>
+          {priceColumnHeader}
         </tr>
       </thead>
       <tbody>
