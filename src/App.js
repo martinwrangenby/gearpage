@@ -10,6 +10,7 @@ import Layout from './hoc/Layout/Layout';
 import Spinner from './components/UI/Spinner/Spinner';
 import Modal from './components/UI/Modal/Modal';
 import ConfirmChoice from './components/Navigation/ConfirmChoice/ConfirmChoice';
+import { SettingsProvider } from './hoc/Context/SettingsContext';
 import firebase from './firebase';
 import './App.css';
 
@@ -74,13 +75,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <Layout
-        logout={() => setLoggingOut(true)}>
-        <Modal show={loggingOut} modalClosed={() => setLoggingOut(false)}>
-          <ConfirmChoice title={'Logging out...'} confirm={logout} reject={() => setLoggingOut(false)}/>
-        </Modal>
-        {appContent}
-      </Layout>
+      <SettingsProvider>
+        <Layout
+          logout={() => setLoggingOut(true)}>
+          <Modal show={loggingOut} modalClosed={() => setLoggingOut(false)}>
+            <ConfirmChoice title={'Logging out...'} confirm={logout} reject={() => setLoggingOut(false)}/>
+          </Modal>
+          {appContent}
+        </Layout>
+      </SettingsProvider>
     </div>
   );
 };
