@@ -31,8 +31,7 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
         </div>
         <Button
           disabled={!formValid}
-          clicked={handleSubmitButtonClick}
-          dataTestId='loginSubmit'>
+          clicked={handleSubmitButtonClick}>
           Sign in
         </Button>
       </form>

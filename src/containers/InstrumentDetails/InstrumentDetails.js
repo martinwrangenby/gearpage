@@ -80,10 +80,10 @@ const InstrumentDetails = ({ userId }) => {
         <Button clicked={() => navigate(-1)}>
         Back
         </Button>
-        <Button clicked={setEditingInstrument} dataTestId='editInstrument'>
+        <Button clicked={setEditingInstrument}>
         Edit
         </Button>
-        <Button buttonType='Danger' clicked={setDeletingInstrument} dataTestId='deleteInstrument'>
+        <Button buttonType='Danger' clicked={setDeletingInstrument}>
         Delete
         </Button>
       </>
