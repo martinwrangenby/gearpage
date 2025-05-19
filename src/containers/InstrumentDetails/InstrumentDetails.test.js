@@ -24,9 +24,6 @@ beforeEach(() => {
     callback(snapshot);
     return jest.fn();
   });
-});
-
-test('Instrument info renders', async () => {
   render(
     <MemoryRouter
       initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
@@ -34,7 +31,9 @@ test('Instrument info renders', async () => {
       <InstrumentDetails/>
     </MemoryRouter>
   );
+});
 
+test('Instrument info renders', async () => {
   const header = await screen.findByRole('heading', { level: 1 });
   expect(header).toHaveTextContent('Rickenbacker');
 
@@ -43,37 +42,16 @@ test('Instrument info renders', async () => {
 });
 
 test('Clicking edit button activates instrument edit', async () => {
-  render(
-    <MemoryRouter
-      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
-      initialIndex={1}>
-      <InstrumentDetails/>
-    </MemoryRouter>
-  );
   userEvent.click(screen.getByRole('button', { name: 'Delete' }));
   expect(await screen.findByRole('heading', { name: 'Delete Rickenbacker' })).toBeVisible();
 });
 
 test('Clicking delete button activates instrument delete', async () => {
-  render(
-    <MemoryRouter
-      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
-      initialIndex={1}>
-      <InstrumentDetails/>
-    </MemoryRouter>
-  );
   userEvent.click(screen.getByRole('button', { name: 'Edit' }));
   expect(await screen.findByRole('heading', { name: 'Edit Instrument' })).toBeVisible();
 });
 
 test('Clicking back button navigates user back', async () => {
-  render(
-    <MemoryRouter
-      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
-      initialIndex={1}>
-      <InstrumentDetails/>
-    </MemoryRouter>
-  );
   userEvent.click(screen.getByRole('button', { name: 'Back' }));
   expect(mockedUsedNavigate).toHaveBeenCalledWith(-1);
 });
