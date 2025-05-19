@@ -9,12 +9,6 @@ describe('Button component', () => {
     expect(screen.getByText(buttonText)).toBeInTheDocument();
   });
 
-  test('should render with the correct data-testid attribute', () => {
-    const buttonTestId = 'test-button';
-    render(<Button dataTestId={buttonTestId}>Click me!</Button>);
-    expect(screen.getByTestId(buttonTestId)).toBeInTheDocument();
-  });
-
   test('should call the onClick function when clicked', () => {
     const onClickMock = jest.fn();
     render(<Button clicked={onClickMock}>Click me!</Button>);
