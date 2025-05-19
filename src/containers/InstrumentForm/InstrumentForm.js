@@ -70,6 +70,9 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
   }
   return (
     <>
+      <h1>{instrument ? 'Edit' : 'Add'} Instrument
+
+      </h1>
       <form onSubmit={(event) => event.preventDefault()}>
         {formElementsArray.map(formElement => (
           <Input
@@ -87,8 +90,7 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
       <Button
         disabled={!formValid}
         buttonType='Success'
-        clicked={handleSubmit}
-        dataTestId='submitGearFormButton'>
+        clicked={handleSubmit}>
         {instrument ? 'Update' : 'Add'}
       </Button>
       <Button
