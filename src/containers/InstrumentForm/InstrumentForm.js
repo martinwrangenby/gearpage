@@ -73,6 +73,7 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
       <form onSubmit={(event) => event.preventDefault()}>
         {formElementsArray.map(formElement => (
           <Input
+            label={formElement.config?.label}
             key={formElement.id}
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
@@ -80,7 +81,6 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
             inValid={!formElement.config.valid}
             touched={formElement.config.touched}
             changed={(event) => handleInputChange(event, formElement.id)}
-            dataTestId={formElement.config.dataTestId}
           />
         ))}
       </form>

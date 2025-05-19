@@ -14,13 +14,13 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
       <p className='LoginError' data-testid='loginError'>{errorMsg}</p>
       <form onSubmit={(event) => event.preventDefault()}>
         <Input
+          label='Username'
           elementConfig={{ placeholder: 'Username (email)',type: 'email', autoComplete: 'on' }}
-          changed={(e) => setEmail(e.target.value)}
-          dataTestId='loginUsername'/>
+          changed={(e) => setEmail(e.target.value)}/>
         <Input
+          label='Password'
           elementConfig={{ placeholder: 'Password',type: 'password', autoComplete: 'on' }}
-          changed={(e) => setPassword(e.target.value)}
-          dataTestId='loginPassword'/>
+          changed={(e) => setPassword(e.target.value)}/>
         <div className='Remember'>
           Remember me
           <Switch
