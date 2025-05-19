@@ -16,8 +16,8 @@ test.describe('Gear details page', () => {
   });
 
   test('Delete instrument', async ({ page }) => {
-    await page.getByTestId('deleteInstrument').click();
-    await page.getByTestId('confirm').click();
+    await page.getByRole('button', { name: 'Delete' }).click();
+    await page.getByRole('button', { name: 'Yes' }).click();
 
     await expect(page.getByTestId('spinner')).toBeHidden();
     await expect(page.getByRole('row', { name })).not.toBeVisible();
