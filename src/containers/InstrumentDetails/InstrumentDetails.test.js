@@ -1,8 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import InstrumentDetails from './InstrumentDetails';
 import { onValue } from 'firebase/database';
 jest.mock('firebase/database');
+
+const mockedUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom')),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 beforeEach(() => {
   const fakeData = {
@@ -35,3 +42,38 @@ test('Instrument info renders', async () => {
   expect(screen.getByText('Price: 4000 kr')).toBeVisible();
 });
 
+test('Clicking edit button activates instrument edit', async () => {
+  render(
+    <MemoryRouter
+      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
+      initialIndex={1}>
+      <InstrumentDetails/>
+    </MemoryRouter>
+  );
+  userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+  expect(await screen.findByRole('heading', { name: 'Delete Rickenbacker' })).toBeVisible();
+});
+
+test('Clicking delete button activates instrument delete', async () => {
+  render(
+    <MemoryRouter
+      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
+      initialIndex={1}>
+      <InstrumentDetails/>
+    </MemoryRouter>
+  );
+  userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+  expect(await screen.findByRole('heading', { name: 'Edit Instrument' })).toBeVisible();
+});
+
+test('Clicking back button navigates user back', async () => {
+  render(
+    <MemoryRouter
+      initialEntries={[{ pathname: '/gearitem', search: '?id=testId' }]}
+      initialIndex={1}>
+      <InstrumentDetails/>
+    </MemoryRouter>
+  );
+  userEvent.click(screen.getByRole('button', { name: 'Back' }));
+  expect(mockedUsedNavigate).toHaveBeenCalledWith(-1);
+});
