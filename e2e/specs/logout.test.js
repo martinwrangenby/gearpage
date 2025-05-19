@@ -7,7 +7,7 @@ test.describe('Logout', () => {
   });
 
   test('User can log out', async ({ page }) => {
-    await page.getByTestId('toolbarMenuButton').click();
+    await page.getByRole('button', { name: 'Toolbar menu' }).click();
     await page.getByTestId('toolbarMenuLogout').click();
 
     const confirmElement = await page.getByRole('button', { name: 'Yes' }).elementHandle();
@@ -19,10 +19,10 @@ test.describe('Logout', () => {
   });
 
   test('User can cancel log out in popup', async ({ page }) => {
-    await page.getByTestId('toolbarMenuButton').click();
+    await page.getByRole('button', { name: 'Toolbar menu' }).click();
     await page.getByTestId('toolbarMenuLogout').click();
     await page.getByRole('button', { name: 'No' }).click();
-    await page.getByTestId('toolbarMenuButton').click();
+    await page.getByRole('button', { name: 'Toolbar menu' }).click();
 
     await expect(page.getByTestId('toolbarMenuLogout')).toBeVisible();
 

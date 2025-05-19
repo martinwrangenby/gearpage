@@ -44,7 +44,7 @@ const InstrumentListActions = ({
             active={showFilter}
             clicked={() => {setShowFilter(!showFilter);}}
             id='FilterButton'
-            dataTestId='filterButton'/>
+            label='Filter'/>
           <Transition orientation='South' show={activeFilter.length !== gearTypes.length}>
             <div
               style={{ alignSelf: 'center', marginLeft: '5px', cursor: 'pointer' }}
@@ -56,7 +56,7 @@ const InstrumentListActions = ({
         <IconButton
           type='fa fa-plus'
           clicked={addInstrument}
-          dataTestId='addNewInstrumentButton'/>
+          label='Add new instrument'/>
       </div>
       <Transition show={showFilter}>
         <div //TODO: make the dropdown a component of its own

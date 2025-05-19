@@ -31,7 +31,7 @@ const Toolbar = ({ showMenu, toggleMenu, logout }) => {
           id='menuButton'
           active={showMenu}
           clicked={() => toggleMenu(!showMenu)}
-          dataTestId='toolbarMenuButton'/>
+          label='Toolbar menu'/>
         <div className='ToolbarMenuContainer'>
           <Transition show={showMenu}>
             <ToolbarMenu handleMenuChoice={handleMenuChoice}/>

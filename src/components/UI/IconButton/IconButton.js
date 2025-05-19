@@ -2,13 +2,14 @@ import React from 'react';
 import './IconButton.css';
 
 const IconButton = props => (
-  <div
+  <button
+    type='button'
     className={`IconButton${props.active ? ' Active' : ''}`}
     onClick={props.clicked}
     id={props.id}
-    data-testid={props.dataTestId}>
+    aria-label={props.label}>
     <i className={props.type}></i>
-  </div>
+  </button>
 );
 
 export default IconButton;
