@@ -15,7 +15,7 @@ test.describe('Logout', () => {
 
     await page.getByTestId('confirm').click();
 
-    await expect(page.getByTestId('loginUsername')).toBeVisible();
+    await expect(page.getByRole('textbox', { name: 'Username' })).toBeVisible();
   });
 
   test('User can cancel log out in popup', async ({ page }) => {
