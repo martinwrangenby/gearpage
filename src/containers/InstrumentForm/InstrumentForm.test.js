@@ -13,29 +13,29 @@ describe('InstrumentForm component', () => {
   test('renders form elements', () => {
     render(<InstrumentForm submitInstrument={submitInstrumentMock} closeModal={closeModalMock} />);
 
-    expect(screen.getByTestId('formGearName')).toBeInTheDocument();
-    expect(screen.getByTestId('formGearType')).toBeInTheDocument();
-    expect(screen.getByTestId('formGearDescription')).toBeInTheDocument();
-    expect(screen.getByTestId('submitGearFormButton')).toBeDisabled();
+    expect(screen.getByRole('textbox', { name: 'Name' })).toBeVisible();
+    expect(screen.getByLabelText('Type')).toBeVisible();
+    expect(screen.getByRole('textbox', { name: 'Description' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Add' })).toBeDisabled();
   });
 
   test('populates form when rendered with instrument data', () => {
     const existingData = { type: 'guitar', name: 'My Guitar', description: 'cool one' };
     render(<InstrumentForm submitInstrument={submitInstrumentMock} closeModal={closeModalMock} instrument={existingData}/>);
 
-    expect(screen.getByTestId('formGearType')).toHaveValue('guitar');
-    expect(screen.getByTestId('formGearName')).toHaveValue('My Guitar');
-    expect(screen.getByTestId('formGearDescription')).toHaveValue('cool one');
+    expect(screen.getByLabelText('Type')).toHaveValue('guitar');
+    expect(screen.getByRole('textbox', { name: 'Name' })).toHaveValue('My Guitar');
+    expect(screen.getByRole('textbox', { name: 'Description' })).toHaveValue('cool one');
   });
 
   test('calls submitInstrument when form is submitted with valid inputs', () => {
     render(<InstrumentForm submitInstrument={submitInstrumentMock} closeModal={closeModalMock} />);
 
-    fireEvent.change(screen.getByTestId('formGearName'), { target: { value: 'Test gear name' } });
-    fireEvent.change(screen.getByTestId('formGearType'), { target: { value: 'guitar' } });
-    fireEvent.change(screen.getByTestId('formGearDescription'), { target: { value: 'Test description' } });
+    fireEvent.change(screen.getByRole('textbox', { name: 'Name' }), { target: { value: 'Test gear name' } });
+    fireEvent.change(screen.getByLabelText('Type'), { target: { value: 'guitar' } });
+    fireEvent.change(screen.getByRole('textbox', { name: 'Description' }), { target: { value: 'Test description' } });
 
-    fireEvent.click(screen.getByTestId('submitGearFormButton'));
+    fireEvent.click(screen.getByRole('button', { name: 'Add' }));
 
     expect(submitInstrumentMock).toHaveBeenCalledWith({
       name: 'Test gear name',

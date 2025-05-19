@@ -11,22 +11,22 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
   return(
     <Modal show={true}>
       <h1>Login plx</h1>
-      <p className='LoginError' data-testid='loginError'>{errorMsg}</p>
+      <p className='LoginError'>{errorMsg}</p>
       <form onSubmit={(event) => event.preventDefault()}>
         <Input
+          label='Username'
           elementConfig={{ placeholder: 'Username (email)',type: 'email', autoComplete: 'on' }}
-          changed={(e) => setEmail(e.target.value)}
-          dataTestId='loginUsername'/>
+          changed={(e) => setEmail(e.target.value)}/>
         <Input
+          label='Password'
           elementConfig={{ placeholder: 'Password',type: 'password', autoComplete: 'on' }}
-          changed={(e) => setPassword(e.target.value)}
-          dataTestId='loginPassword'/>
+          changed={(e) => setPassword(e.target.value)}/>
         <div className='Remember'>
           Remember me
           <Switch
             orientation='horizontal'
             clicked={handleSwitchClick}
-            dataTestId='rememberMe'
+            label='Remember me'
             activated={true}/>
         </div>
         <Button

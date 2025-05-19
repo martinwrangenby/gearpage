@@ -3,6 +3,7 @@ import gearTypes from './gearTypes';
 
 const gearFormRules = {
   name: {
+    label: 'Name',
     elementType: 'input',
     elementConfig: {
       placeholder: 'Name',
@@ -14,9 +15,9 @@ const gearFormRules = {
     },
     valid: false,
     touched: false,
-    dataTestId: 'formGearName',
   },
   type: {
+    label: 'Type',
     elementType: 'select',
     elementConfig: {
       options: gearTypes,
@@ -28,9 +29,9 @@ const gearFormRules = {
     },
     valid: false,
     touched: false,
-    dataTestId: 'formGearType',
   },
   description: {
+    label: 'Description',
     elementType: 'textarea',
     elementConfig: {
       placeholder: 'Description',
@@ -41,9 +42,9 @@ const gearFormRules = {
       mandatory: false,
     },
     valid: true,
-    dataTestId: 'formGearDescription',
   },
   price: {
+    label: 'Price',
     elementType: 'input',
     elementConfig: {
       placeholder: 'Price',
@@ -54,7 +55,6 @@ const gearFormRules = {
       mandatory: false,
     },
     valid: true,
-    dataTestId: 'formGearPrice',
   },
 };
 

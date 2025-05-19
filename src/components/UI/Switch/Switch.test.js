@@ -10,18 +10,17 @@ describe('Switch', () => {
         orientation=''
         centered={false}
         activated={false}
-        dataTestId='testSwitch'
+        label='testSwitch'
         clicked={() => {}}
       />
     );
 
     // Assert that the Switch component renders with the correct elements and attributes
-    const switchLabel = screen.getByTestId('testSwitch');
     const switchInput = screen.getByRole('checkbox');
-    const switchSlider = screen.getByTestId('testSwitch'); // Update this line
+    const switchSlider = screen.getByLabelText('testSwitch');
 
-    expect(switchLabel).toBeInTheDocument();
     expect(switchInput).toBeInTheDocument();
+    expect(switchInput.closest('label')).toBeInTheDocument();
     expect(switchSlider).toBeInTheDocument();
     expect(switchInput).not.toBeChecked();
   });
@@ -36,7 +35,7 @@ describe('Switch', () => {
         orientation=''
         centered={false}
         activated={true}
-        dataTestId='testSwitch'
+        label='testSwitch'
         clicked={onClickMock}
       />
     );
@@ -56,13 +55,13 @@ describe('Switch', () => {
         orientation='horizontal'
         centered={true}
         activated={false}
-        dataTestId='testSwitch'
+        label='testSwitch'
         clicked={() => {}}
       />
     );
 
     // Assert that the Switch component renders with the correct classes and styles
-    const switchLabel = screen.getByTestId('testSwitch');
+    const switchLabel = screen.getByLabelText('testSwitch').closest('label');
     expect(switchLabel).toHaveClass('Switch horizontal');
     expect(switchLabel).toHaveStyle({ margin: 'auto' });
   });

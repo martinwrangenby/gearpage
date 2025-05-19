@@ -15,10 +15,10 @@ test.describe('Gear list', () => {
 
   test('Add new instrument', async ({ page }) => {
     await page.getByTestId('addNewInstrumentButton').click();
-    await page.getByTestId('formGearType').selectOption('bass');
-    await page.getByTestId('formGearName').fill(name);
-    await page.getByTestId('formGearDescription').fill('Gear description');
-    await page.getByTestId('submitGearFormButton').click();
+    await page.getByLabel('Type').selectOption('bass');
+    await page.getByRole('textbox', { name: 'Name' }).fill(name);
+    await page.getByRole('textbox', { name: 'Description' }).fill('Gear description');
+    await page.getByRole('button', { name: 'Add' }).click();
 
     await expect(page.getByRole('row', { name })).toBeVisible();
   });

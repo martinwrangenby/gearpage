@@ -70,9 +70,13 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
   }
   return (
     <>
+      <h1>{instrument ? 'Edit' : 'Add'} Instrument
+
+      </h1>
       <form onSubmit={(event) => event.preventDefault()}>
         {formElementsArray.map(formElement => (
           <Input
+            label={formElement.config?.label}
             key={formElement.id}
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
@@ -80,15 +84,13 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
             inValid={!formElement.config.valid}
             touched={formElement.config.touched}
             changed={(event) => handleInputChange(event, formElement.id)}
-            dataTestId={formElement.config.dataTestId}
           />
         ))}
       </form>
       <Button
         disabled={!formValid}
         buttonType='Success'
-        clicked={handleSubmit}
-        dataTestId='submitGearFormButton'>
+        clicked={handleSubmit}>
         {instrument ? 'Update' : 'Add'}
       </Button>
       <Button

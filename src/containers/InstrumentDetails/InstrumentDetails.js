@@ -64,14 +64,14 @@ const InstrumentDetails = ({ userId }) => {
             submitInstrument={updateInstrument}
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
-        <div className={`PageContentBox ${instrument.type}`} data-testid='gearDetailsContentBox'>
-          <h1 className='PageContentHeader' data-testid='gearDetailsName'>{instrument.name}</h1>
-          <p data-testid='gearDetailsDescription'>
+        <div className={`PageContentBox ${instrument.type}`}>
+          <h1 className='PageContentHeader'>{instrument.name}</h1>
+          <p>
             {instrument.description}
           </p>
           { instrument.price
-            ? <p data-testid='price'>
-                Price: {instrument.price}
+            ? <p>
+                Price: {instrument.price} kr
             </p> : null }
         </div>
         <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>

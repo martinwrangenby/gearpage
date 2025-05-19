@@ -24,22 +24,22 @@ test.describe('Gear details page', () => {
   });
 
   test('Edit instrument', async ({ page }) => {
-    await page.getByTestId('editInstrument').click();
-    await page.getByTestId('formGearType').selectOption('guitar');
-    await page.getByTestId('formGearName').fill('updated name');
-    await page.getByTestId('formGearDescription').fill('updated description');
-    await page.getByTestId('submitGearFormButton').click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await page.getByLabel('Type').selectOption('guitar');
+    await page.getByRole('textbox', { name: 'Name' }).fill('updated name');
+    await page.getByRole('textbox', { name: 'Description' }).fill('updated description');
+    await page.getByRole('button', { name: 'Update' }).click();
 
-    await expect(page.getByTestId('gearDetailsName')).toHaveText('updated name');
-    await expect(page.getByTestId('gearDetailsDescription')).toHaveText('updated description');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('updated name');
+    await expect(page.getByText('updated description')).toBeVisible();
   });
 
   test('Price is shown first when added to instrument', async ({ page }) => {
     await expect(page.getByTestId('price')).toHaveCount(0);
 
     await page.getByRole('button', { name: 'Edit' }).click();
-    await page.getByTestId('formGearPrice').fill('123456');
+    await page.getByLabel('Price').fill('123456');
     await page.getByRole('button', { name: 'Update' }).click();
-    await expect(page.getByTestId('price')).toBeVisible();
+    await expect(page.getByText('Price: 123456 kr')).toBeVisible();
   });
 });

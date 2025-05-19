@@ -40,7 +40,7 @@ describe('InstrumentListActions component', () => {
 
   test('clicking a filter switch calls updateFilter function', () => {
     fireEvent.click(screen.getByTestId('filterButton'));
-    fireEvent.click(screen.getByTestId('guitar-filter'));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'guitar-filter' }));
     expect(updateFilter).toHaveBeenCalledTimes(1);
     expect(updateFilter).toHaveBeenCalledWith('guitar');
   });
