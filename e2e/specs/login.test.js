@@ -12,7 +12,7 @@ test.describe('Login', () => {
     await page.getByRole('textbox', { name: 'Username' }).fill(E2E_TEST_USERNAME);
     await page.getByLabel('Password').fill(E2E_TEST_PASSWORD);
     await page.getByRole('button', { name: 'Sign in' }).click();
-    await page.getByTestId('toolbarMenuButton').click();
+    await page.getByRole('button', { name: 'Toolbar menu' }).click();
 
     await expect(page.getByTestId('toolbarMenuLogout')).toBeVisible();
   });

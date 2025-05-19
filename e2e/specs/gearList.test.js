@@ -14,11 +14,11 @@ test.describe('Gear list', () => {
   });
 
   test('Add new instrument', async ({ page }) => {
-    await page.getByTestId('addNewInstrumentButton').click();
+    await page.getByRole('button', { name: 'Add new instrument' }).click();
     await page.getByLabel('Type').selectOption('bass');
     await page.getByRole('textbox', { name: 'Name' }).fill(name);
     await page.getByRole('textbox', { name: 'Description' }).fill('Gear description');
-    await page.getByRole('button', { name: 'Add' }).click();
+    await page.getByRole('button', { name: 'Add', exact: true }).click();
 
     await expect(page.getByRole('row', { name })).toBeVisible();
   });
