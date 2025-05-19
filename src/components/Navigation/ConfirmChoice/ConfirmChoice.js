@@ -6,10 +6,10 @@ const ConfirmChoice = ({ title, confirm, reject }) => (
   <React.Fragment>
     <h2 className='ConfirmTitle'>{title}</h2>
     <h4>Are you sure?</h4>
-    <Button buttonType='Danger' dataTestId='confirm' clicked={confirm}>
+    <Button buttonType='Danger' clicked={confirm}>
       Yes
     </Button>
-    <Button dataTestId='reject' clicked={reject}>
+    <Button clicked={reject}>
       No
     </Button>
   </React.Fragment>

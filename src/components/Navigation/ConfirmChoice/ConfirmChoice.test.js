@@ -12,14 +12,14 @@ describe('ConfirmChoice', () => {
   it('should call the confirm function when "Yes" is clicked', () => {
     const confirmMock = jest.fn();
     render(<ConfirmChoice confirm={confirmMock} />);
-    fireEvent.click(screen.getByTestId('confirm'));
+    fireEvent.click(screen.getByRole('button', { name: 'Yes' }));
     expect(confirmMock).toHaveBeenCalled();
   });
 
   it('should call the reject function when "No" is clicked', () => {
     const rejectMock = jest.fn();
     render(<ConfirmChoice reject={rejectMock} />);
-    fireEvent.click(screen.getByTestId('reject'));
+    fireEvent.click(screen.getByRole('button', { name: 'No' }));
     expect(rejectMock).toHaveBeenCalled();
   });
 });

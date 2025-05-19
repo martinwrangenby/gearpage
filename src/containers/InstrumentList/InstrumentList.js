@@ -77,7 +77,7 @@ const InstrumentList = ({ userId }) => {
     instrumentTable = (
       <>
         <h3>No Gear? get started adding already!</h3>
-        <Button clicked={() => setAddingInstrument(true)} dataTestId='addNewInstrumentButton'>
+        <Button clicked={() => setAddingInstrument(true)}>
           Add an instrument
         </Button>
       </>
