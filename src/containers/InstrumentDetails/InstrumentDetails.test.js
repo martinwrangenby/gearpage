@@ -31,10 +31,7 @@ test('Instrument info renders', async () => {
   const header = await screen.findByRole('heading', { level: 1 });
   expect(header).toHaveTextContent('Rickenbacker');
 
-  const description = screen.getByTestId('gearDetailsDescription');
-  expect(description).toHaveTextContent('A nice guitar');
-
-  const price = screen.getByTestId('price');
-  expect(price).toHaveTextContent(4000);
+  expect(screen.getByText('A nice guitar')).toBeVisible();
+  expect(screen.getByText('Price: 4000 kr')).toBeVisible();
 });
 

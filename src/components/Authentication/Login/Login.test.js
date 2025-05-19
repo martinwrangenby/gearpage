@@ -17,18 +17,11 @@ describe('Login', () => {
     );
 
     // Assert that the Login component renders with the correct elements and attributes
-    const loginHeading = screen.getByRole('heading', { name: 'Login plx' });
-    const usernameInput = screen.getByTestId('loginUsername');
-    const passwordInput = screen.getByTestId('loginPassword');
-    const rememberMeSwitch = screen.getByTestId('rememberMe');
-    const submitButton = screen.getByTestId('loginSubmit');
-
-    expect(loginHeading).toBeInTheDocument();
-    expect(usernameInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
-    expect(rememberMeSwitch).toBeInTheDocument();
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toBeDisabled();
+    expect(screen.getByRole('heading', { name: 'Login plx' })).toBeVisible();
+    expect(screen.getByRole('textbox', { name: 'Username' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Remember me' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Sign in' })).toBeDisabled();
   });
 
   test('calls the appropriate functions with correct values on form submission', () => {
@@ -51,14 +44,11 @@ describe('Login', () => {
     );
 
     // Enter values in the username and password input fields
-    const usernameInput = screen.getByTestId('loginUsername');
-    const passwordInput = screen.getByTestId('loginPassword');
-    fireEvent.change(usernameInput, { target: { value: 'test@test.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.change(screen.getByRole('textbox', { name: 'Username' }), { target: { value: 'test@test.com' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
 
     // Click the submit button
-    const submitButton = screen.getByTestId('loginSubmit');
-    fireEvent.click(submitButton);
+    fireEvent.click(screen.getByRole('button', { name: 'Sign in' }));
 
     // Assert that the appropriate functions are called with correct values
     expect(setEmailMock).toHaveBeenCalledWith('test@test.com');
@@ -82,8 +72,6 @@ describe('Login', () => {
     );
 
     // Assert that the error message is displayed
-    const errorElement = screen.getByTestId('loginError');
-    expect(errorElement).toBeInTheDocument();
-    expect(errorElement.textContent).toBe(errorMsg);
+    expect(screen.getByText(errorMsg)).toBeVisible();
   });
 });
