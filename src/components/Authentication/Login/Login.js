@@ -26,7 +26,7 @@ const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonCli
           <Switch
             orientation='horizontal'
             clicked={handleSwitchClick}
-            dataTestId='rememberMe'
+            label='Remember me'
             activated={true}/>
         </div>
         <Button

@@ -70,7 +70,7 @@ const InstrumentListActions = ({
                   centered
                   activated={activeFilter.includes(gearType)}
                   clicked={() => updateFilter(gearType)}
-                  dataTestId={`${gearType}-filter`}/>
+                  label={`${gearType}-filter`}/>
                 {gearType}
               </div>
             );
