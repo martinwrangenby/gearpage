@@ -7,8 +7,7 @@ const Button = ( { disabled, type, buttonType, clicked, dataTestId, children }) 
     disabled={disabled}
     type={type}
     className={['Button', buttonType].join(' ')}
-    onClick={clicked}
-    data-testid={dataTestId}>
+    onClick={clicked}>
     {children}
   </button>
 );
