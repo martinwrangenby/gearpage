@@ -24,7 +24,7 @@ describe('InstrumentListActions component', () => {
   });
 
   test('clicking filter button shows filter dropdown', () => {
-    fireEvent.click(screen.getByTestId('filterButton'));
+    fireEvent.click(screen.getByRole('button', { name: 'Filter' }));
     expect(screen.getByTestId('filterDropdown')).toBeInTheDocument();
   });
 
@@ -34,12 +34,12 @@ describe('InstrumentListActions component', () => {
   });
 
   test('clicking add instrument button calls addInstrument function', () => {
-    fireEvent.click(screen.getByTestId('addNewInstrumentButton'));
+    fireEvent.click(screen.getByRole('button', { name: 'Add new instrument' }));
     expect(addInstrument).toHaveBeenCalledTimes(1);
   });
 
   test('clicking a filter switch calls updateFilter function', () => {
-    fireEvent.click(screen.getByTestId('filterButton'));
+    fireEvent.click(screen.getByRole('button', { name: 'Filter' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'guitar-filter' }));
     expect(updateFilter).toHaveBeenCalledTimes(1);
     expect(updateFilter).toHaveBeenCalledWith('guitar');

@@ -27,7 +27,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    expect(screen.getByTestId('toolbarMenuButton')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Toolbar menu' })).toBeInTheDocument();
   });
 
   test('should toggle menu on button click', () => {
@@ -40,7 +40,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByTestId('toolbarMenuButton'));
+    fireEvent.click(screen.getByRole('button', { name: 'Toolbar menu' }));
     expect(toggleMenuSpy).toHaveBeenCalledTimes(1);
   });
 
