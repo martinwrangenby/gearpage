@@ -70,9 +70,6 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
   }
   return (
     <>
-      <h1>{instrument ? 'Edit' : 'Add'} Instrument
-
-      </h1>
       <form onSubmit={(event) => event.preventDefault()}>
         {formElementsArray.map(formElement => (
           <Input
