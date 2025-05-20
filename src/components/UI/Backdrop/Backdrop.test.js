@@ -1,24 +1,24 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import Backdrop from './Backdrop';
 
 describe('Backdrop', () => {
   test('renders correctly with show prop as true', () => {
     // Render the Backdrop component with show prop as true
-    render(<Backdrop show={true} clicked={() => {}} />);
+    const { container } = render(<Backdrop show={true} clicked={() => {}} />);
 
     // Assert that the Backdrop component renders with the correct element and class
-    const backdropElement = screen.getByTestId('backdrop');
+    const backdropElement = container.querySelector('.Backdrop');
     expect(backdropElement).toBeInTheDocument();
     expect(backdropElement).toHaveClass('Backdrop');
   });
 
   test('renders correctly with show prop as false', () => {
     // Render the Backdrop component with show prop as false
-    render(<Backdrop show={false} clicked={() => {}} />);
+    const { container } = render(<Backdrop show={false} clicked={() => {}} />);
 
     // Assert that the Backdrop component does not render any element
-    const backdropElement = screen.queryByTestId('backdrop');
+    const backdropElement = container.querySelector('.Backdrop');
     expect(backdropElement).toBeNull();
   });
 
@@ -27,10 +27,10 @@ describe('Backdrop', () => {
     const onClickMock = jest.fn();
 
     // Render the Backdrop component with mock callback
-    render(<Backdrop show={true} clicked={onClickMock} />);
+    const { container } = render(<Backdrop show={true} clicked={onClickMock} />);
 
     // Click the backdrop element
-    const backdropElement = screen.getByTestId('backdrop');
+    const backdropElement = container.querySelector('.Backdrop');
     fireEvent.click(backdropElement);
 
     // Assert that the onClick callback function is called

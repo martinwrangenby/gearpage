@@ -78,8 +78,11 @@ const App = () => {
       <SettingsProvider>
         <Layout
           logout={() => setLoggingOut(true)}>
-          <Modal show={loggingOut} modalClosed={() => setLoggingOut(false)}>
-            <ConfirmChoice title={'Logging out...'} confirm={logout} reject={() => setLoggingOut(false)}/>
+          <Modal
+            show={loggingOut}
+            modalClosed={() => setLoggingOut(false)}
+            title='Logging out...'>
+            <ConfirmChoice confirm={logout} reject={() => setLoggingOut(false)}/>
           </Modal>
           {appContent}
         </Layout>

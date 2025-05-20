@@ -30,7 +30,7 @@ test.describe('Gear details page', () => {
     await page.getByRole('textbox', { name: 'Description' }).fill('updated description');
     await page.getByRole('button', { name: 'Update' }).click();
 
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('updated name');
+    await expect(page.getByRole('heading', { name: 'updated name', exact: true })).toBeVisible();
     await expect(page.getByText('updated description')).toBeVisible();
   });
 
