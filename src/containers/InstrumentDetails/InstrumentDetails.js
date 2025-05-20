@@ -43,7 +43,7 @@ const InstrumentDetails = ({ userId }) => {
   if (error) {
     content = (
       <>
-        <Modal>
+        <Modal title='Error'>
           <h3>
             {error.message}
           </h3>
@@ -58,7 +58,10 @@ const InstrumentDetails = ({ userId }) => {
     // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
       <>
-        <Modal show={editingInstrument} modalClosed={() => setEditingInstrument(false)}>
+        <Modal
+          show={editingInstrument}
+          modalClosed={() => setEditingInstrument(false)}
+          title={`Edit ${instrument.name}`}>
           <InstrumentForm
             instrument={instrument}
             submitInstrument={updateInstrument}
@@ -74,8 +77,11 @@ const InstrumentDetails = ({ userId }) => {
                 Price: {instrument.price} kr
             </p> : null }
         </div>
-        <Modal show={deletingInstrument} modalClosed={() => setDeletingInstrument(false)}>
-          <ConfirmChoice title={`Delete ${instrument.name}`} confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
+        <Modal
+          show={deletingInstrument}
+          modalClosed={() => setDeletingInstrument(false)}
+          title={`Delete ${instrument.name}`}>
+          <ConfirmChoice confirm={deleteInstrument} reject={() => setDeletingInstrument(false)}/>
         </Modal>
         <Button clicked={() => navigate(-1)}>
         Back

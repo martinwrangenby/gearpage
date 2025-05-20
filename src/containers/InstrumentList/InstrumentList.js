@@ -85,7 +85,10 @@ const InstrumentList = ({ userId }) => {
   }
 
   const addInstrumentModal = (
-    <Modal show={addingInstrument} modalClosed={() => setAddingInstrument(false)}>
+    <Modal
+      show={addingInstrument}
+      modalClosed={() => setAddingInstrument(false)}
+      title='Add instrument'>
       <InstrumentForm
         submitInstrument={addInstrument}
         closeModal={() => setAddingInstrument(false)}/>

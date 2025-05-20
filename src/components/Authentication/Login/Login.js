@@ -9,8 +9,7 @@ import './Login.css';
 const Login = ({ setPassword, setEmail, handleSwitchClick, handleSubmitButtonClick, errorMsg, formValid }) => {
 
   return(
-    <Modal show={true}>
-      <h1>Login plx</h1>
+    <Modal show={true} title='Login plx'>
       <p className='LoginError'>{errorMsg}</p>
       <form onSubmit={(event) => event.preventDefault()}>
         <Input
