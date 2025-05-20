@@ -34,21 +34,19 @@ beforeEach(() => {
 });
 
 test('Instrument info renders', async () => {
-  const header = await screen.findByRole('heading', { level: 1 });
-  expect(header).toHaveTextContent('Rickenbacker');
-
+  expect(await screen.findByRole('heading', { name: 'Rickenbacker' })).toBeVisible();
   expect(screen.getByText('A nice guitar')).toBeVisible();
   expect(screen.getByText('Price: 4000 kr')).toBeVisible();
 });
 
-test('Clicking edit button activates instrument edit', async () => {
+test('Clicking delete button activates instrument delete', async () => {
   userEvent.click(screen.getByRole('button', { name: 'Delete' }));
   expect(await screen.findByRole('heading', { name: 'Delete Rickenbacker' })).toBeVisible();
 });
 
-test('Clicking delete button activates instrument delete', async () => {
+test('Clicking edit button activates instrument edit', async () => {
   userEvent.click(screen.getByRole('button', { name: 'Edit' }));
-  expect(await screen.findByRole('heading', { name: 'Edit Instrument' })).toBeVisible();
+  expect(await screen.findByRole('heading', { name: 'Edit Rickenbacker' })).toBeVisible();
 });
 
 test('Clicking back button navigates user back', async () => {

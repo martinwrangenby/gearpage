@@ -3,9 +3,8 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import ConfirmChoice from './ConfirmChoice';
 
 describe('ConfirmChoice', () => {
-  it('should render the title and confirmation message', () => {
-    render(<ConfirmChoice title="Test Confirmation" />);
-    expect(screen.getByText('Test Confirmation')).toBeInTheDocument();
+  it('should render the confirmation message', () => {
+    render(<ConfirmChoice/>);
     expect(screen.getByText('Are you sure?')).toBeInTheDocument();
   });
 
