@@ -1,77 +1,66 @@
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { AuthContext } from '../../../hoc/Context/AuthContext';
 import Login from './Login';
 
+const renderWithAuth = (mockValues = {}) => {
+  const defaults = {
+    login: jest.fn(),
+    loginError: '',
+  };
+  return render(
+    <AuthContext.Provider value={{ ...defaults, ...mockValues }}>
+      <Login />
+    </AuthContext.Provider>
+  );
+};
+
 describe('Login', () => {
-  test('renders correctly with initial props', () => {
-    // Render the Login component
-    render(
-      <Login
-        setPassword={() => {}}
-        setEmail={() => {}}
-        handleSwitchClick={() => {}}
-        handleSubmitButtonClick={() => {}}
-        errorMsg=""
-        formValid={false}
-      />
-    );
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+  test('renders login form with inputs, switch and button', () => {
+    renderWithAuth();
 
-    // Assert that the Login component renders with the correct elements and attributes
-    expect(screen.getByRole('heading', { name: 'Login plx' })).toBeVisible();
-    expect(screen.getByRole('textbox', { name: 'Username' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Username')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: 'Remember me' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Sign in' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+    expect(screen.getByText(/remember me/i)).toBeInTheDocument();
   });
 
-  test('calls the appropriate functions with correct values on form submission', () => {
-    // Mock callback functions
-    const setPasswordMock = jest.fn();
-    const setEmailMock = jest.fn();
-    const handleSwitchClickMock = jest.fn();
-    const handleSubmitButtonClickMock = jest.fn();
+  test('disables Sign in button if email or password is empty', () => {
+    renderWithAuth();
 
-    // Render the Login component with mock callbacks
-    render(
-      <Login
-        setPassword={setPasswordMock}
-        setEmail={setEmailMock}
-        handleSwitchClick={handleSwitchClickMock}
-        handleSubmitButtonClick={handleSubmitButtonClickMock}
-        errorMsg=""
-        formValid={true}
-      />
-    );
+    expect(screen.getByRole('button', { name: /sign in/i })).toBeDisabled();
 
-    // Enter values in the username and password input fields
-    fireEvent.change(screen.getByRole('textbox', { name: 'Username' }), { target: { value: 'test@test.com' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
+    expect(screen.getByRole('button')).toBeDisabled();
 
-    // Click the submit button
-    fireEvent.click(screen.getByRole('button', { name: 'Sign in' }));
-
-    // Assert that the appropriate functions are called with correct values
-    expect(setEmailMock).toHaveBeenCalledWith('test@test.com');
-    expect(setPasswordMock).toHaveBeenCalledWith('password123');
-    expect(handleSwitchClickMock).not.toHaveBeenCalled();
-    expect(handleSubmitButtonClickMock).toHaveBeenCalled();
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
+    expect(screen.getByRole('button')).not.toBeDisabled();
   });
 
-  test('displays error message when errorMsg prop is provided', () => {
-    // Render the Login component with errorMsg prop
-    const errorMsg = 'Invalid credentials';
-    render(
-      <Login
-        setPassword={() => {}}
-        setEmail={() => {}}
-        handleSwitchClick={() => {}}
-        handleSubmitButtonClick={() => {}}
-        errorMsg={errorMsg}
-        formValid={false}
-      />
-    );
+  test('calls login with correct email, password, and rememberMe', () => {
+    const loginMock = jest.fn();
+    renderWithAuth({ login: loginMock });
 
-    // Assert that the error message is displayed
-    expect(screen.getByText(errorMsg)).toBeVisible();
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
+    fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+
+    expect(loginMock).toHaveBeenCalledWith('test@test.com', 'pass123', true);
+  });
+
+  test('toggles rememberMe when switch is clicked', () => {
+    const loginMock = jest.fn();
+    renderWithAuth({ login: loginMock });
+
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
+
+    fireEvent.click(screen.getByLabelText(/remember me/i));
+    fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+
+    expect(loginMock).toHaveBeenCalledWith('test@test.com', 'pass123', false);
   });
 });
+
