@@ -24,7 +24,7 @@ const InstrumentDetails = ({ userId }) => {
       if (data) setInstrument({ id, ...data });
       else setError(new Error('Gear item couldn\'t be found in database'));
     },
-    (err) => navigate('/login') // TODO: when adding id specific db path, investigate if this should be tweaked if loggedin user tries to get other user's stuff...
+    (err) => setError(err)
     );
     return () => off(databaseRef);
   },[location.search, db, navigate, userId]);
