@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   // Listen for auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
+    return onAuthStateChanged(
       auth,
       (firebaseUser) => {
         setUser(firebaseUser);
@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     );
-    return unsubscribe;
   }, [auth]);
 
   // login helper
