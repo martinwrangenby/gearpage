@@ -1,14 +1,14 @@
 import React from 'react';
 import './IconButton.css';
 
-const IconButton = props => (
+const IconButton = ({ active, clicked, id, label, type }) => (
   <button
     type='button'
-    className={`IconButton${props.active ? ' Active' : ''}`}
-    onClick={props.clicked}
-    id={props.id}
-    aria-label={props.label}>
-    <i className={props.type}></i>
+    className={`IconButton${active ? ' Active' : ''}`}
+    onClick={clicked}
+    id={id}
+    aria-label={label}>
+    <i className={type}></i>
   </button>
 );
 
