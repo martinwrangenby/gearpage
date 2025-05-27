@@ -1,27 +1,25 @@
 import React from 'react';
 import './Transition.css';
 
-const Transition = props => {
-  const [show, setShow] = React.useState(props.show);
+const Transition = ({ show, orientation = 'North', children }) => {
+  const [isShowed, setIsShowed] = React.useState(show);
   const [classNameExt, setClassNameExt] = React.useState('');
 
   React.useEffect(() => {
-    if (show && !props.show) {
+    if (isShowed && !show) {
       setClassNameExt('Close');
-      setTimeout(() => setShow(props.show), 180);
-    } else if (!show && props.show) {
+      setTimeout(() => setIsShowed(show), 180);
+    } else if (!isShowed && show) {
       setClassNameExt('Open');
-      setShow(props.show);
+      setIsShowed(show);
     }
-  }, [show, props.show]);
+  }, [isShowed, show]);
 
-  const { orientation = 'North' } = props;
-
-  return show
+  return isShowed
     ? (
       <div className={`TransitionContainer ${classNameExt}`}>
         <div className ={`Transition${orientation} ${classNameExt}`}>
-          {props.children}
+          {children}
         </div>
       </div>
     )
