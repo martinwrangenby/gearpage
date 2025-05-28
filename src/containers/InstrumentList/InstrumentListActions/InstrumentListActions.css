@@ -23,3 +23,17 @@
   flex-flow: column;
   padding: 10px;
 }
+.ResetButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  display: block;
+  text-align: center;
+  width: 100%;
+  color: inherit;
+  font: inherit;
+
+  padding: 0.2em 0.4em;
+  line-height: normal;
+}

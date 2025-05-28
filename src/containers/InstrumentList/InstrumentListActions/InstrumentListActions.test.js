@@ -20,16 +20,18 @@ describe('InstrumentListActions component', () => {
   });
 
   test('renders the component', () => {
-    expect(screen.getByTestId('instrumentListActions')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Toggle filter menu' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add new instrument' })).toBeInTheDocument();
   });
 
   test('clicking filter button shows filter dropdown', () => {
-    fireEvent.click(screen.getByRole('button', { name: 'Filter' }));
-    expect(screen.getByTestId('filterDropdown')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
+    expect(screen.getByRole('checkbox', { name: 'guitar filter' })).toBeInTheDocument();
   });
 
   test('clicking reset filters button calls resetFilter function', () => {
-    fireEvent.click(screen.getByText('Reset Filters'));
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reset Filters' }));
     expect(resetFilter).toHaveBeenCalledTimes(1);
   });
 
@@ -39,8 +41,9 @@ describe('InstrumentListActions component', () => {
   });
 
   test('clicking a filter switch calls updateFilter function', () => {
-    fireEvent.click(screen.getByRole('button', { name: 'Filter' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'guitar-filter' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'guitar filter' }));
+
     expect(updateFilter).toHaveBeenCalledTimes(1);
     expect(updateFilter).toHaveBeenCalledWith('guitar');
   });
