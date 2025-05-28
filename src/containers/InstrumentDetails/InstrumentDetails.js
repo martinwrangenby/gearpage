@@ -6,8 +6,11 @@ import Modal from '../../components/UI/Modal/Modal';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { useAuth } from '../../hoc/Context/AuthContext';
 
-const InstrumentDetails = ({ userId }) => {
+const InstrumentDetails = () => {
+  const { user } = useAuth();
+  const { uid } = user;
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
@@ -18,7 +21,7 @@ const InstrumentDetails = ({ userId }) => {
 
   React.useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
-    const databaseRef = ref(db, `/users/${userId}/gear/${id}`);
+    const databaseRef = ref(db, `/users/${uid}/gear/${id}`);
     onValue(databaseRef, snapshot => {
       const data = snapshot.val();
       if (data) setInstrument({ id, ...data });
@@ -27,15 +30,15 @@ const InstrumentDetails = ({ userId }) => {
     (err) => setError(err)
     );
     return () => off(databaseRef);
-  },[location.search, db, navigate, userId]);
+  },[location.search, db, navigate, uid]);
 
   const deleteInstrument = () => {
-    remove(ref(db, `/users/${userId}/gear/${instrument.id}`),);
+    remove(ref(db, `/users/${uid}/gear/${instrument.id}`),);
     navigate('/', { replace: true });
   };
 
   const updateInstrument = (data) => {
-    set(ref(db, `/users/${userId}/gear/${instrument.id}`), data);
+    set(ref(db, `/users/${uid}/gear/${instrument.id}`), data);
     setEditingInstrument(false);
   };
 
