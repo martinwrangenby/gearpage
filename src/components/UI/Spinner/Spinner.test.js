@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 describe('Spinner component', () => {
   test('should render without errors', () => {
     render(<Spinner />);
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByRole('status')).toBeInTheDocument();
   });
 });
 

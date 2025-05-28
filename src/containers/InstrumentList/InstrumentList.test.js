@@ -34,7 +34,7 @@ test('shows spinner while loading data', async () => {
   onValue.mockImplementation(() => {});
 
   renderWithProviders(<InstrumentList />);
-  expect(screen.getByTestId('spinner')).toBeInTheDocument();
+  expect(screen.getByRole('status')).toBeInTheDocument();
 });
 
 test('displays instruments in table when data is loaded', async () => {
