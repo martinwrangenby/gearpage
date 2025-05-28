@@ -34,7 +34,7 @@ test('shows spinner while loading data', async () => {
   onValue.mockImplementation(() => {});
 
   renderWithProviders(<InstrumentList />);
-  expect(screen.getByTestId('spinner')).toBeInTheDocument();
+  expect(screen.getByRole('status')).toBeInTheDocument();
 });
 
 test('displays instruments in table when data is loaded', async () => {
@@ -94,13 +94,8 @@ test('toggles gear filter and stores it in localStorage', async () => {
 
   renderWithProviders(<InstrumentList />);
 
-  // Open the filter panel
-  const filterToggle = await screen.findByRole('button', { name: /filter/i });
-  userEvent.click(filterToggle);
-
-  // Find the specific gear type switch
-  const guitarCheckbox = await screen.findByRole('checkbox', { name: /guitar-filter/i });
-  userEvent.click(guitarCheckbox);
+  userEvent.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
+  userEvent.click(await screen.findByRole('checkbox', { name: 'guitar filter' }));
 
   // Check that 'guitar' was removed from localStorage filter
   const updatedFilter = JSON.parse(localStorage.getItem('gearTypesFilter'));

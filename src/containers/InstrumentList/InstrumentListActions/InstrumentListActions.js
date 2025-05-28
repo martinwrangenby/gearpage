@@ -10,22 +10,38 @@ const InstrumentListActions = ({
   resetFilter,
   addInstrument,
   updateFilter,
-
 }) => {
   const [showFilter, setShowFilter] = React.useState(false);
   React.useEffect(() => {
     if (showFilter) {
       document.addEventListener('mousedown', handleClick);
+      document.addEventListener('keydown', handleKeyDown);
       return () => {
         document.removeEventListener('mousedown', handleClick);
+        document.removeEventListener('keydown', handleKeyDown);
       };
     }
-  },[showFilter]);
+  }, [showFilter]);
 
-  const handleClick = event => {
-    if (!document.getElementById('FilterDropdown').contains(event.target) &&
-      !document.getElementById('FilterButton').contains(event.target) &&
-      !document.getElementById('InstrumentTable').contains(event.target)) {
+  const handleClick = (event) => {
+    const filterDropdown = document.getElementById('FilterDropdown');
+    const filterButton = document.getElementById('FilterButton');
+    const instrumentTable = document.getElementById('InstrumentTable');
+
+    if (
+      filterDropdown &&
+      filterButton &&
+      instrumentTable &&
+      !filterDropdown.contains(event.target) &&
+      !filterButton.contains(event.target) &&
+      !instrumentTable.contains(event.target)
+    ) {
+      setShowFilter(false);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
       setShowFilter(false);
     }
   };
@@ -37,44 +53,52 @@ const InstrumentListActions = ({
 
   return (
     <>
-      <div className='InstrumentListActions' data-testid='instrumentListActions'>
+      <div className="InstrumentListActions" role="region" aria-label="Instrument actions">
         <div style={{ display: 'flex' }}>
           <IconButton
-            type='fa fa-sliders'
+            type="fa fa-sliders"
             active={showFilter}
-            clicked={() => {setShowFilter(!showFilter);}}
-            id='FilterButton'
-            label='Filter'/>
-          <Transition orientation='South' show={activeFilter.length !== gearTypes.length}>
-            <div
+            clicked={() => setShowFilter(!showFilter)}
+            id="FilterButton"
+            aria-haspopup="menu"
+            aria-expanded={showFilter}
+            aria-controls="FilterDropdown"
+            label="Toggle filter menu"
+          />
+          <Transition orientation="South" show={activeFilter.length !== gearTypes.length}>
+            <button
+              type="button"
+              className='ResetButton'
               style={{ alignSelf: 'center', marginLeft: '5px', cursor: 'pointer' }}
-              onClick={() => resetFilters()}>
+              onClick={resetFilters}
+            >
               Reset Filters
-            </div>
+            </button>
           </Transition>
         </div>
-        <IconButton
-          type='fa fa-plus'
-          clicked={addInstrument}
-          label='Add new instrument'/>
+        <IconButton type="fa fa-plus" clicked={addInstrument} label="Add new instrument" />
       </div>
       <Transition show={showFilter}>
-        <div //TODO: make the dropdown a component of its own
-          className='DropdownContent'
-          id='FilterDropdown'
-          data-testid='filterDropdown'>
-          {gearTypes.map(gearType => {
-            return (
-              <div key={gearType} className='DropdownContentWrapper'>
-                <Switch
-                  centered
-                  activated={activeFilter.includes(gearType)}
-                  clicked={() => updateFilter(gearType)}
-                  label={`${gearType}-filter`}/>
-                {gearType}
-              </div>
-            );
-          })}
+        <div
+          className="DropdownContent"
+          id="FilterDropdown"
+          role="menu"
+          aria-label="Gear type filter options"
+          tabIndex={-1}
+        >
+          {gearTypes.map((gearType) => (
+            <div key={gearType} className="DropdownContentWrapper" role="none">
+              <Switch
+                centered
+                activated={activeFilter.includes(gearType)}
+                clicked={() => updateFilter(gearType)}
+                label={`${gearType} filter`}
+                role="menuitemcheckbox"
+                aria-checked={activeFilter.includes(gearType)}
+              />
+              <span>{gearType}</span>
+            </div>
+          ))}
         </div>
       </Transition>
     </>

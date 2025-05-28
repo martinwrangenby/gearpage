@@ -12,9 +12,9 @@ test.describe('Login', () => {
     await page.getByRole('textbox', { name: 'Username' }).fill(E2E_TEST_USERNAME);
     await page.getByLabel('Password').fill(E2E_TEST_PASSWORD);
     await page.getByRole('button', { name: 'Sign in' }).click();
-    await page.getByRole('button', { name: 'Toolbar menu' }).click();
+    await page.getByRole('button', { name: 'Toggle menu' }).click();
 
-    await expect(page.getByTestId('toolbarMenuLogout')).toBeVisible();
+    await expect(page.getByRole('menuitem', { name: 'Sign out' })).toBeVisible();
   });
 
   test('Login with incorrect password (with valid, existing email)', async ({ page }) => {

@@ -31,7 +31,11 @@ const Toolbar = ({ showMenu, toggleMenu, logout }) => {
           id='menuButton'
           active={showMenu}
           clicked={() => toggleMenu(!showMenu)}
-          label='Toolbar menu'/>
+          label='Toggle menu'
+          aria-expanded={showMenu}
+          aria-controls='menuContent'
+          aria-haspopup='menu'
+        />
         <div className='ToolbarMenuContainer'>
           <Transition show={showMenu}>
             <ToolbarMenu handleMenuChoice={handleMenuChoice}/>

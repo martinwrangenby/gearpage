@@ -19,7 +19,7 @@ test.describe('Gear details page', () => {
     await page.getByRole('button', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Yes' }).click();
 
-    await expect(page.getByTestId('spinner')).toBeHidden();
+    await expect(page.getByRole('status')).toBeHidden();
     await expect(page.getByRole('row', { name })).not.toBeVisible();
   });
 

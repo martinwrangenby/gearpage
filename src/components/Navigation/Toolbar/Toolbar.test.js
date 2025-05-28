@@ -27,7 +27,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    expect(screen.getByRole('button', { name: 'Toolbar menu' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Toggle menu' })).toBeInTheDocument();
   });
 
   test('should toggle menu on button click', () => {
@@ -40,7 +40,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByRole('button', { name: 'Toolbar menu' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
     expect(toggleMenuSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -68,7 +68,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByTestId('toolbarMenuSettings'));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Settings' }));
     expect(mockedUsedNavigate).toHaveBeenCalledWith('/settings');
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });
@@ -83,7 +83,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByTestId('toolbarMenuLogout'));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
     expect(logoutSpy).toHaveBeenCalledTimes(1);
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });

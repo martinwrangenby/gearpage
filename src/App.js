@@ -8,7 +8,6 @@ import Layout from './hoc/Layout/Layout';
 import Spinner from './components/UI/Spinner/Spinner';
 import Modal from './components/UI/Modal/Modal';
 import ConfirmChoice from './components/Navigation/ConfirmChoice/ConfirmChoice';
-import { SettingsProvider } from './hoc/Context/SettingsContext';
 import { useAuth } from './hoc/Context/AuthContext';
 import ProtectedRoute from './hoc/ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -57,18 +56,16 @@ const App = () => {
 
   return (
     <div className='App'>
-      <SettingsProvider>
-        <Layout logout={() => setLoggingOut(true)}>
-          <Modal
-            show={loggingOut}
-            modalClosed={() => setLoggingOut(false)}
-            title='Logging out...'
-          >
-            <ConfirmChoice confirm={async () => { await logout(); setLoggingOut(false); }} reject={() => setLoggingOut(false)} />
-          </Modal>
-          <AppContent />
-        </Layout>
-      </SettingsProvider>
+      <Layout logout={() => setLoggingOut(true)}>
+        <Modal
+          show={loggingOut}
+          modalClosed={() => setLoggingOut(false)}
+          title='Logging out...'
+        >
+          <ConfirmChoice confirm={async () => { await logout(); setLoggingOut(false); }} reject={() => setLoggingOut(false)} />
+        </Modal>
+        <AppContent />
+      </Layout>
     </div>
   );
 };
