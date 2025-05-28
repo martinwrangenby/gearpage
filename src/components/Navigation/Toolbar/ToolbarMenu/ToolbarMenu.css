@@ -3,3 +3,19 @@
   background: #201d26;
   padding: 10px 20px;
 }
+
+.ToolbarMenuItem {
+  all: unset; /* resets all default button styles */
+  cursor: pointer;
+  margin: auto;
+  display: block;
+  text-align: center;
+  width: 100%;
+  color: inherit;
+  font: inherit;
+}
+
+.ToolbarMenuItem:focus {
+  outline: 2px solid #007bff; /* visible focus style */
+  outline-offset: 2px;
+}

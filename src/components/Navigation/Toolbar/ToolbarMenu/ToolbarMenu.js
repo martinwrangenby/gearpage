@@ -2,20 +2,29 @@ import React from 'react';
 import './ToolbarMenu.css';
 
 const ToolbarMenu = ({ handleMenuChoice }) => (
-  <div className='ToolbarMenu' id='menuContent'>
-    <p
-      style={{ margin: 'auto', cursor: 'pointer' }}
-      data-testid='toolbarMenuSettings'
-      onClick={() => handleMenuChoice('settings')}>
+  <nav
+    className='ToolbarMenu'
+    id='menuContent'
+    aria-label='Toolbar menu'
+    role='menu'
+  >
+    <button
+      type='button'
+      role='menuitem'
+      onClick={() => handleMenuChoice('settings')}
+      className='ToolbarMenuItem'
+    >
       Settings
-    </p>
-    <p
-      style={{ margin: 'auto', cursor: 'pointer' }}
-      data-testid='toolbarMenuLogout'
-      onClick={() => handleMenuChoice('logout')}>
+    </button>
+    <button
+      type='button'
+      role='menuitem'
+      onClick={() => handleMenuChoice('logout')}
+      className='ToolbarMenuItem'
+    >
       Sign out
-    </p>
-  </div>
+    </button>
+  </nav>
 );
 
 export default ToolbarMenu;
