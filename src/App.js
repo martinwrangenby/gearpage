@@ -14,7 +14,7 @@ import ProtectedRoute from './hoc/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 const AppContent = () => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
 
   if (loading) return <Spinner />;
 
@@ -25,7 +25,7 @@ const AppContent = () => {
         path='/'
         element={
           <ProtectedRoute>
-            <InstrumentList userId={user?.uid} />
+            <InstrumentList/>
           </ProtectedRoute>
         }
       />
@@ -33,7 +33,7 @@ const AppContent = () => {
         path='/gearitem'
         element={
           <ProtectedRoute>
-            <InstrumentDetails userId={user?.uid} />
+            <InstrumentDetails/>
           </ProtectedRoute>
         }
       />
