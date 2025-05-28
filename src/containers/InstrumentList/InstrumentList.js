@@ -8,10 +8,13 @@ import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 import gearTypes from '../../assets/gearTypes';
+import { useAuth } from '../../hoc/Context/AuthContext';
 
 import './InstrumentList.css';
 
-const InstrumentList = ({ userId }) => {
+const InstrumentList = () => {
+  const { user } = useAuth();
+  const { uid } = user;
   const [instruments, setInstruments] = React.useState([]);
   const [gearFilter, setGearFilter] = React.useState(JSON.parse(localStorage.getItem('gearTypesFilter')) || gearTypes);
   const [addingInstrument, setAddingInstrument] = React.useState(false);
@@ -21,7 +24,7 @@ const InstrumentList = ({ userId }) => {
 
   React.useEffect(() => {
     localStorage.setItem('gearTypesFilter', JSON.stringify(gearFilter));
-    const databaseRef = ref(db, `/users/${userId}/gear`);
+    const databaseRef = ref(db, `/users/${uid}/gear`);
     onValue(databaseRef, (snapshot) => {
       const data = snapshot.val();
       const fetchedGear = [];
@@ -39,7 +42,7 @@ const InstrumentList = ({ userId }) => {
     }
     );
     return () => off(databaseRef);
-  },[db, gearFilter, userId]);
+  },[db, gearFilter, uid]);
   const updateGearFilter = (instrumentType) => {
     gearFilter.includes(instrumentType)
       ? setGearFilter(gearFilter.filter(item => item !== instrumentType))
@@ -49,7 +52,7 @@ const InstrumentList = ({ userId }) => {
   const resetGearFilter = () => setGearFilter(gearTypes);
 
   const addInstrument = (instrument) => {
-    push(ref(db, `/users/${userId}/gear`), instrument);
+    push(ref(db, `/users/${uid}/gear`), instrument);
     setAddingInstrument(false);
   };
 

@@ -3,7 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import InstrumentDetails from './InstrumentDetails';
 import { onValue } from 'firebase/database';
+
 jest.mock('firebase/database');
+
+jest.mock('../../hoc/Context/AuthContext', () => ({
+  useAuth: () => ({
+    user: { uid: 'mocked-uid' },
+  }),
+}));
 
 const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
