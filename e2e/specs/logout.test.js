@@ -7,8 +7,8 @@ test.describe('Logout', () => {
   });
 
   test('User can log out', async ({ page }) => {
-    await page.getByRole('button', { name: 'Toolbar menu' }).click();
-    await page.getByTestId('toolbarMenuLogout').click();
+    await page.getByRole('button', { name: 'Toggle menu' }).click();
+    await page.getByRole('menuitem', { name: 'Sign out' }).click();
 
     const confirmElement = await page.getByRole('button', { name: 'Yes' }).elementHandle();
     await confirmElement.waitForElementState('stable');
@@ -19,12 +19,12 @@ test.describe('Logout', () => {
   });
 
   test('User can cancel log out in popup', async ({ page }) => {
-    await page.getByRole('button', { name: 'Toolbar menu' }).click();
-    await page.getByTestId('toolbarMenuLogout').click();
+    await page.getByRole('button', { name: 'Toggle menu' }).click();
+    await page.getByRole('menuitem', { name: 'Sign out' }).click();
     await page.getByRole('button', { name: 'No' }).click();
-    await page.getByRole('button', { name: 'Toolbar menu' }).click();
+    await page.getByRole('button', { name: 'Toggle menu' }).click();
 
-    await expect(page.getByTestId('toolbarMenuLogout')).toBeVisible();
+    await expect(page.getByRole('menuitem', { name: 'Sign out' })).toBeVisible();
 
   });
 });
