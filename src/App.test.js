@@ -78,12 +78,9 @@ test('shows logout modal and allows cancel', async () => {
 
   renderApp('/');
 
-  const menuButton = screen.getByRole('button', { name: /toolbar menu/i });
-  await userEvent.click(menuButton);
+  userEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
 
-  // Click "Sign out"
-  const signOutItem = screen.getByText(/sign out/i);
-  await userEvent.click(signOutItem);
+  userEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
 
   // Assert modal title is shown
   expect(screen.getByRole('heading', { name: /logging out/i })).toBeInTheDocument();

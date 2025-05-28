@@ -6,7 +6,7 @@ describe('ToolbarMenu', () => {
   test('should call handleMenuChoice with "settings" when settings option is clicked', () => {
     const handleMenuChoice = jest.fn();
     render(<ToolbarMenu handleMenuChoice={handleMenuChoice} />);
-    const settingsOption = screen.getByTestId('toolbarMenuSettings');
+    const settingsOption = screen.getByRole('menuitem', { name: 'Settings' });
 
     fireEvent.click(settingsOption);
 
@@ -16,7 +16,7 @@ describe('ToolbarMenu', () => {
   test('should call handleMenuChoice with "logout" when sign out option is clicked', () => {
     const handleMenuChoice = jest.fn();
     render(<ToolbarMenu handleMenuChoice={handleMenuChoice} />);
-    const logoutOption = screen.getByTestId('toolbarMenuLogout');
+    const logoutOption = screen.getByRole('menuitem', { name: 'Sign out' });
 
     fireEvent.click(logoutOption);
 
