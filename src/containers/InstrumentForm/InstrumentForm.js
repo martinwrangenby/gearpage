@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import gearFormRules from '../../assets/gearFormRules';
+import { checkFieldValidity } from '../../assets/validation';
 
 
 // TODO: Add security on input form
@@ -27,13 +28,7 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
     }
   }, [instrument]);
 
-  const checkValidity = (value, rules) => {
-    let isValid = true;
-    if (rules.mandatory) {
-      isValid = value.trim() !== '' && isValid;
-    }
-    return isValid;
-  };
+  const checkValidity = (value, rules) => checkFieldValidity(value, rules);
 
   const handleInputChange = (event, identifier) => {
     if (event.target.value !== formContent[identifier].value) {

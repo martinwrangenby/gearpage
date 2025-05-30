@@ -1,12 +1,14 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, onValue, off, set, remove } from 'firebase/database';
+import { getDatabase, ref, onValue, off, update, remove } from 'firebase/database';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 import InstrumentForm from '../InstrumentForm/InstrumentForm';
 import ConfirmChoice from '../../components/Navigation/ConfirmChoice/ConfirmChoice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { useAuth } from '../../hoc/Context/AuthContext';
+import { validateInstrumentData } from '../../assets/validation';
+import gearFormRules from '../../assets/gearFormRules';
 
 const InstrumentDetails = () => {
   const { user } = useAuth();
@@ -14,7 +16,7 @@ const InstrumentDetails = () => {
   const [ instrument, setInstrument ] = React.useState(null);
   const [ editingInstrument, setEditingInstrument ] = React.useState(false);
   const [ deletingInstrument, setDeletingInstrument ] = React.useState(false);
-  const [ error, setError ] = React.useState(false);
+  const [ error, setError ] = React.useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   const db = getDatabase();
@@ -38,27 +40,34 @@ const InstrumentDetails = () => {
   };
 
   const updateInstrument = (data) => {
-    set(ref(db, `/users/${uid}/gear/${instrument.id}`), data);
+    const { isValid, errors } = validateInstrumentData(data, gearFormRules);
+    if (!isValid) {
+      setError(errors);
+      return;
+    }
     setEditingInstrument(false);
+    update(ref(db, `/users/${uid}/gear/${instrument.id}`), data)
+      .catch(err => setError(err));
   };
 
   let content = <Spinner />;
   if (error) {
+    const errorMessages = typeof error === 'object' && !('message' in error)
+      ? Object.values(error)
+      : [error.message || String(error)];
+
     content = (
-      <>
-        <Modal title='Error'>
-          <h3>
-            {error.message}
-          </h3>
-          <Button clicked={() => navigate('/')}>
-              Back
-          </Button>
-        </Modal>
-      </>
+      <Modal title='Error'>
+        {errorMessages.map((msg, index) => (
+          <h4 key={index}>{msg}</h4>
+        ))}
+        <Button clicked={() => setError(null)}>
+          Back
+        </Button>
+      </Modal>
     );
   }
   if (instrument) {
-    // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
       <>
         <Modal
@@ -70,7 +79,7 @@ const InstrumentDetails = () => {
             submitInstrument={updateInstrument}
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
-        <div className={`PageContentBox ${instrument.type}`}>
+        <div className={'PageContentBox'}>
           <h1 className='PageContentHeader'>{instrument.name}</h1>
           <p>
             {instrument.description}
