@@ -58,7 +58,6 @@ const InstrumentDetails = () => {
     );
   }
   if (instrument) {
-    // adding the type to the class name is primarily to help the e2e tests. When further developing, this should be indintifyable in some other way...
     content = (
       <>
         <Modal
@@ -70,7 +69,7 @@ const InstrumentDetails = () => {
             submitInstrument={updateInstrument}
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
-        <div className={`PageContentBox ${instrument.type}`}>
+        <div className={'PageContentBox'}>
           <h1 className='PageContentHeader'>{instrument.name}</h1>
           <p>
             {instrument.description}
