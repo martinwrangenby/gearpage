@@ -27,6 +27,7 @@ jest.mock('../../hoc/Context/AuthContext', () => ({
 beforeEach(() => {
   localStorage.clear();
   push.mockClear();
+  push.mockImplementation(() => Promise.resolve());
 });
 
 test('shows spinner while loading data', async () => {
