@@ -9,6 +9,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 import gearTypes from '../../assets/gearTypes';
 import { useAuth } from '../../hoc/Context/AuthContext';
+import { validateInstrumentData } from '../../assets/validation';
+import gearFormRules from '../../assets/gearFormRules';
 
 import './InstrumentList.css';
 
@@ -19,7 +21,7 @@ const InstrumentList = () => {
   const [gearFilter, setGearFilter] = React.useState(JSON.parse(localStorage.getItem('gearTypesFilter')) || gearTypes);
   const [addingInstrument, setAddingInstrument] = React.useState(false);
   const [loading, setLoading ] = React.useState(true);
-  const [ error, setError ] = React.useState(false);
+  const [ error, setError ] = React.useState(null);
   const db = getDatabase();
 
   React.useEffect(() => {
@@ -52,7 +54,13 @@ const InstrumentList = () => {
   const resetGearFilter = () => setGearFilter(gearTypes);
 
   const addInstrument = (instrument) => {
-    push(ref(db, `/users/${uid}/gear`), instrument);
+    const { isValid, errors } = validateInstrumentData(instrument, gearFormRules);
+    if (!isValid) {
+      setError(errors);
+      return;
+    }
+    push(ref(db, `/users/${uid}/gear`), instrument)
+      .catch(err => setError(err));
     setAddingInstrument(false);
   };
 
@@ -75,7 +83,17 @@ const InstrumentList = () => {
       </>
     );
   } else if (error) {
-    instrumentTable = <h4>{error.message}</h4>;
+    const errorMessages = typeof error === 'object' && !('message' in error)
+      ? Object.values(error)
+      : [error.message || String(error)];
+    instrumentTable = (
+      <>
+        {errorMessages.map((msg, index) => (
+          <h4 key={index}>{msg}</h4>
+        ))}
+      </>
+    );
+
   } else if (!loading) {
     instrumentTable = (
       <>
