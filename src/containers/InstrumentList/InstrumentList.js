@@ -66,45 +66,6 @@ const InstrumentList = () => {
   };
 
   const { sortedItems, requestSort, sortConfig } = useSortedData(instruments);
-  let instrumentTable = <Spinner />;
-  //TODO: not very pretty... perhaps find a more elegant solution...
-  if (instruments.length > 0) {
-    instrumentTable = (
-      <>
-        <InstrumentListActions
-          activeFilter={gearFilter}
-          resetFilter={resetGearFilter}
-          addInstrument={setAddingInstrument}
-          updateFilter={updateGearFilter}/>
-        <InstrumentTable
-          filter={gearFilter}
-          instruments={sortedItems}
-          sort={requestSort}
-          sortOrder={sortConfig}/>
-      </>
-    );
-  } else if (error) {
-    const errorMessages = typeof error === 'object' && !('message' in error)
-      ? Object.values(error)
-      : [error.message || String(error)];
-    instrumentTable = (
-      <>
-        {errorMessages.map((msg, index) => (
-          <h4 key={index}>{msg}</h4>
-        ))}
-      </>
-    );
-
-  } else if (!loading) {
-    instrumentTable = (
-      <>
-        <h3>No Gear? get started adding already!</h3>
-        <Button clicked={() => setAddingInstrument(true)}>
-          Add an instrument
-        </Button>
-      </>
-    );
-  }
 
   const addInstrumentModal = (
     <Modal
@@ -117,10 +78,45 @@ const InstrumentList = () => {
     </Modal>
   );
 
+  if (loading) return <Spinner />;
+
+  if (error) {
+    const errorMessages = typeof error === 'object' && !('message' in error)
+      ? Object.values(error)
+      : [error.message || String(error)];
+
+    return (
+      <div className='InstrumentList'>
+        {errorMessages.map((msg, index) => <h4 key={index}>{msg}</h4>)}
+      </div>
+    );
+  };
+
+  if (instruments.length === 0) {
+    return (
+      <div className='InstrumentList'>
+        {addInstrumentModal}
+        <h3>No Gear? get started adding already!</h3>
+        <Button clicked={() => setAddingInstrument(true)}>
+          Add an instrument
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className='InstrumentList'>
-      {!loading ? addInstrumentModal : ''}
-      {instrumentTable}
+      {addInstrumentModal}
+      <InstrumentListActions
+        activeFilter={gearFilter}
+        resetFilter={resetGearFilter}
+        addInstrument={setAddingInstrument}
+        updateFilter={updateGearFilter}/>
+      <InstrumentTable
+        filter={gearFilter}
+        instruments={sortedItems}
+        sort={requestSort}
+        sortOrder={sortConfig}/>
     </div>
   );
 };
