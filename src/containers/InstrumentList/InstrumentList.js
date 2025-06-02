@@ -41,6 +41,7 @@ const InstrumentList = () => {
     },
     (err) => {
       setError(err);
+      setLoading(false);
     }
     );
     return () => off(databaseRef);
