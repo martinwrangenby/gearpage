@@ -4,8 +4,6 @@ import Input from '../../components/UI/Input/Input';
 import gearFormRules from '../../assets/gearFormRules';
 import { checkFieldValidity } from '../../assets/validation';
 
-
-// TODO: Add security on input form
 const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
 
   const [formContent, setFormContent] = React.useState(gearFormRules);
