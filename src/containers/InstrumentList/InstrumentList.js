@@ -90,7 +90,7 @@ const InstrumentList = () => {
         {errorMessages.map((msg, index) => <h4 key={index}>{msg}</h4>)}
       </div>
     );
-  };
+  }
 
   if (instruments.length === 0) {
     return (
