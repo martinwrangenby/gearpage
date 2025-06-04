@@ -47,6 +47,7 @@ jobs:
           args: >
             -Dsonar.sources=src,e2e
             -Dsonar.coverage.exclusions=e2e/**,**/*.test.js,src/assets/**
+            -Dsonar.cpd.exclusions=e2e/**,**/*.test.js
             -Dsonar.qualitygate.wait=true
             -Dsonar.projectKey=martinwrangenby_gearpage
             -Dsonar.organization=martinwrangenby
