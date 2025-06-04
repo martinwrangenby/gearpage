@@ -23,7 +23,8 @@ describe('Backdrop', () => {
     expect(backdropElement).toBeNull();
   });
 
-  test('calls the onClick callback function when clicked', () => {
+  test('calls the onClick callback function when clicked', async () => {
+    const user = userEvent.setup();
     // Mock callback function
     const onClickMock = jest.fn();
 
@@ -32,7 +33,7 @@ describe('Backdrop', () => {
 
     // Click the backdrop element
     const backdropElement = container.querySelector('.Backdrop');
-    userEvent.click(backdropElement);
+    await user.click(backdropElement);
 
     // Assert that the onClick callback function is called
     expect(onClickMock).toHaveBeenCalled();

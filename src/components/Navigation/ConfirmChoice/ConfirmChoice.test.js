@@ -9,17 +9,19 @@ describe('ConfirmChoice', () => {
     expect(screen.getByText('Are you sure?')).toBeInTheDocument();
   });
 
-  it('should call the confirm function when "Yes" is clicked', () => {
+  it('should call the confirm function when "Yes" is clicked', async () => {
+    const user = userEvent.setup();
     const confirmMock = jest.fn();
     render(<ConfirmChoice confirm={confirmMock} />);
-    userEvent.click(screen.getByRole('button', { name: 'Yes' }));
+    await user.click(screen.getByRole('button', { name: 'Yes' }));
     expect(confirmMock).toHaveBeenCalled();
   });
 
-  it('should call the reject function when "No" is clicked', () => {
+  it('should call the reject function when "No" is clicked', async () => {
+    const user = userEvent.setup();
     const rejectMock = jest.fn();
     render(<ConfirmChoice reject={rejectMock} />);
-    userEvent.click(screen.getByRole('button', { name: 'No' }));
+    await user.click(screen.getByRole('button', { name: 'No' }));
     expect(rejectMock).toHaveBeenCalled();
   });
 });

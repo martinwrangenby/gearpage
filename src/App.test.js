@@ -73,14 +73,15 @@ test('renders settings page if authenticated', () => {
 });
 
 test('shows logout modal and allows cancel', async () => {
+  const user = userEvent.setup();
   const logout = jest.fn();
   mockUseAuth({ loading: false, user: { uid: 'abc' }, logout });
 
   renderApp('/');
 
-  userEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
+  await user.click(screen.getByRole('button', { name: 'Toggle menu' }));
 
-  userEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Sign out' }));
 
   // Assert modal title is shown
   expect(screen.getByRole('heading', { name: /logging out/i })).toBeInTheDocument();

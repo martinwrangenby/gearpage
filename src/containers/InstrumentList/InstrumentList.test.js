@@ -68,17 +68,18 @@ test('shows error message on database read failure', async () => {
 });
 
 test('can open modal and add instrument', async () => {
+  const user = userEvent.setup();
   const emptySnapshot = { val: () => null };
   onValue.mockImplementation((_, cb) => cb(emptySnapshot));
 
   renderWithProviders(<InstrumentList />);
 
-  userEvent.click(await screen.findByRole('button', { name: /add/i }));
+  await user.click(await screen.findByRole('button', { name: /add/i }));
 
-  userEvent.type(await screen.findByLabelText('Name'), 'bosse');
-  userEvent.selectOptions(screen.getByRole('combobox', { name: /type/i }), 'guitar');
+  await user.type(await screen.findByLabelText('Name'), 'bosse');
+  await user.selectOptions(screen.getByRole('combobox', { name: /type/i }), 'guitar');
 
-  userEvent.click(screen.getByRole('button', { name: 'Add' }));
+  await user.click(screen.getByRole('button', { name: 'Add' }));
 
   await waitFor(() => {
     expect(push).toHaveBeenCalled();
@@ -86,6 +87,7 @@ test('can open modal and add instrument', async () => {
 });
 
 test('toggles gear filter and stores it in localStorage', async () => {
+  const user = userEvent.setup();
   const fakeSnapshot = {
     val: () => ({
       id1: { name: 'Fender', type: 'guitar' },
@@ -95,8 +97,8 @@ test('toggles gear filter and stores it in localStorage', async () => {
 
   renderWithProviders(<InstrumentList />);
 
-  userEvent.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
-  userEvent.click(await screen.findByRole('checkbox', { name: 'guitar filter' }));
+  await user.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
+  await user.click(await screen.findByRole('checkbox', { name: 'guitar filter' }));
 
   // Check that 'guitar' was removed from localStorage filter
   const updatedFilter = JSON.parse(localStorage.getItem('gearTypesFilter'));

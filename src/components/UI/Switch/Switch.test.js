@@ -26,7 +26,8 @@ describe('Switch', () => {
     expect(switchInput).not.toBeChecked();
   });
 
-  test('calls the onClick callback function when clicked', () => {
+  test('calls the onClick callback function when clicked', async () => {
+    const user = userEvent.setup();
     // Mock callback function
     const onClickMock = jest.fn();
 
@@ -43,7 +44,7 @@ describe('Switch', () => {
 
     // Click the switch input
     const switchInput = screen.getByRole('checkbox');
-    userEvent.click(switchInput);
+    await user.click(switchInput);
 
     // Assert that the onClick callback function is called
     expect(onClickMock).toHaveBeenCalled();
