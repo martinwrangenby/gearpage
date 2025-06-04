@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 
 describe('Modal Component', () => {
@@ -39,7 +40,7 @@ describe('Modal Component', () => {
     );
 
     const backdrop = container.querySelector('.Backdrop');
-    fireEvent.click(backdrop);
+    userEvent.click(backdrop);
 
     expect(modalClosedMock).toHaveBeenCalledTimes(1);
   });
@@ -51,8 +52,7 @@ describe('Modal Component', () => {
       </Modal>
     );
 
-    const modal = screen.getByRole('dialog');
-    fireEvent.keyDown(modal, { keyCode: 27 });
+    userEvent.keyboard('{Escape}');
 
     expect(modalClosedMock).toHaveBeenCalledTimes(1);
   });

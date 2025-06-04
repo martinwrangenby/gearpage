@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import InstrumentTableItem from './InstrumentTableItem';
 
 const mockedUsedNavigate = jest.fn();
@@ -82,7 +83,7 @@ describe('InstrumentableItem', () => {
       </table>
     );
     const tableRow = screen.getByRole('row');
-    fireEvent.click(tableRow);
+    userEvent.click(tableRow);
     expect(mockedUsedNavigate).toBeCalledWith(
       {
         pathname: '/gearitem',

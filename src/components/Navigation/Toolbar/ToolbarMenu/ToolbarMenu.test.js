@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ToolbarMenu from './ToolbarMenu';
 
 describe('ToolbarMenu', () => {
@@ -8,7 +9,7 @@ describe('ToolbarMenu', () => {
     render(<ToolbarMenu handleMenuChoice={handleMenuChoice} />);
     const settingsOption = screen.getByRole('menuitem', { name: 'Settings' });
 
-    fireEvent.click(settingsOption);
+    userEvent.click(settingsOption);
 
     expect(handleMenuChoice).toHaveBeenCalledWith('settings');
   });
@@ -18,7 +19,7 @@ describe('ToolbarMenu', () => {
     render(<ToolbarMenu handleMenuChoice={handleMenuChoice} />);
     const logoutOption = screen.getByRole('menuitem', { name: 'Sign out' });
 
-    fireEvent.click(logoutOption);
+    userEvent.click(logoutOption);
 
     expect(handleMenuChoice).toHaveBeenCalledWith('logout');
   });

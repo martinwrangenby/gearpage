@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Switch from './Switch';
 
 describe('Switch', () => {
@@ -42,7 +43,7 @@ describe('Switch', () => {
 
     // Click the switch input
     const switchInput = screen.getByRole('checkbox');
-    fireEvent.click(switchInput);
+    userEvent.click(switchInput);
 
     // Assert that the onClick callback function is called
     expect(onClickMock).toHaveBeenCalled();

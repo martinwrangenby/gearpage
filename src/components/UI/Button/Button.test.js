@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Button from './Button';
 
 describe('Button component', () => {
@@ -12,7 +13,7 @@ describe('Button component', () => {
   test('should call the onClick function when clicked', () => {
     const onClickMock = jest.fn();
     render(<Button clicked={onClickMock}>Click me!</Button>);
-    fireEvent.click(screen.getByText('Click me!'));
+    userEvent.click(screen.getByText('Click me!'));
     expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 

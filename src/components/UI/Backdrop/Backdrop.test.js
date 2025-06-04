@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Backdrop from './Backdrop';
 
 describe('Backdrop', () => {
@@ -31,7 +32,7 @@ describe('Backdrop', () => {
 
     // Click the backdrop element
     const backdropElement = container.querySelector('.Backdrop');
-    fireEvent.click(backdropElement);
+    userEvent.click(backdropElement);
 
     // Assert that the onClick callback function is called
     expect(onClickMock).toHaveBeenCalled();

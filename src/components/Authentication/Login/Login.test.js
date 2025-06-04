@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { AuthContext } from '../../../hoc/Context/AuthContext';
 import Login from './Login';
 
@@ -32,10 +33,10 @@ describe('Login', () => {
 
     expect(screen.getByRole('button', { name: /sign in/i })).toBeDisabled();
 
-    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
+    userEvent.type(screen.getByLabelText('Username'), 'test@test.com' );
     expect(screen.getByRole('button')).toBeDisabled();
 
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
+    userEvent.type(screen.getByLabelText('Password'), 'pass123' );
     expect(screen.getByRole('button')).not.toBeDisabled();
   });
 
@@ -43,9 +44,9 @@ describe('Login', () => {
     const loginMock = jest.fn();
     renderWithAuth({ login: loginMock });
 
-    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
-    fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+    userEvent.type(screen.getByLabelText('Username'), 'test@test.com' );
+    userEvent.type(screen.getByLabelText('Password'), 'pass123' );
+    userEvent.click(screen.getByRole('button', { name: /sign in/i }));
 
     expect(loginMock).toHaveBeenCalledWith('test@test.com', 'pass123', true);
   });
@@ -54,11 +55,11 @@ describe('Login', () => {
     const loginMock = jest.fn();
     renderWithAuth({ login: loginMock });
 
-    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'test@test.com' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass123' } });
+    userEvent.type(screen.getByLabelText('Username'), 'test@test.com');
+    userEvent.type(screen.getByLabelText('Password'), 'pass123' );
 
-    fireEvent.click(screen.getByLabelText(/remember me/i));
-    fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+    userEvent.click(screen.getByLabelText(/remember me/i));
+    userEvent.click(screen.getByRole('button', { name: /sign in/i }));
 
     expect(loginMock).toHaveBeenCalledWith('test@test.com', 'pass123', false);
   });

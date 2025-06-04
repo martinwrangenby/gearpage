@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, within } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import InstrumentTable from './InstrumentTable';
 
@@ -91,12 +92,12 @@ describe('InstrumentTable', () => {
     const typeHeader = within(table).getByText('Type');
 
     // Simulate click on the name header
-    fireEvent.click(nameHeader);
+    userEvent.click(nameHeader);
 
     expect(mockProps.sort).toHaveBeenCalledWith('name');
 
     // Simulate click on the type header
-    fireEvent.click(typeHeader);
+    userEvent.click(typeHeader);
 
     expect(mockProps.sort).toHaveBeenCalledWith('type');
   });

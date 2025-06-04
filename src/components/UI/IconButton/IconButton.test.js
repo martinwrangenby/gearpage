@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import IconButton from './IconButton';
 
 describe('IconButton Component', () => {
@@ -33,7 +34,7 @@ describe('IconButton Component', () => {
     );
 
     const iconButton = screen.getByRole('button', { name: 'icon-button' });
-    fireEvent.click(iconButton);
+    userEvent.click(iconButton);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });
