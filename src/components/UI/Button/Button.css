@@ -34,8 +34,8 @@
 }
 
 .Danger {
-  border:0.2em solid#5e2a0e;
-  color: #944317;
+  border: 0.2em solid #5e2a0e;
+  color: #ffffff;
 }
 .Danger:hover,
 .Danger:active {

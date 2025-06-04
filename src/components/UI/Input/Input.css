@@ -1,7 +1,7 @@
 .InputElement {
   font-family: inherit;
   font-size: 1em;
-  background-color: #2d2d3a;
+  background-color: #201d26;
   color: #d2d2d2;
   width: 43%;
   padding: 8px;
@@ -12,6 +12,10 @@
   box-sizing: border-box;
   -webkit-appearance: none;
   resize: none;
+}
+
+.InputElement::placeholder {
+  color: #c7c5c5
 }
 
 .InputElement.Invalid {
