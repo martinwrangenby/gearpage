@@ -82,7 +82,6 @@ const InstrumentListActions = ({
         <div
           className="DropdownContent"
           id="FilterDropdown"
-          role="menu"
           aria-label="Gear type filter options"
           tabIndex={-1}
         >
