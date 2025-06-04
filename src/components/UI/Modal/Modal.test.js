@@ -52,7 +52,6 @@ describe('Modal Component', () => {
       </Modal>
     );
 
-    const modal = screen.getByRole('dialog');
     userEvent.keyboard('{Escape}');
 
     expect(modalClosedMock).toHaveBeenCalledTimes(1);

@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ToolbarMenu from './ToolbarMenu';
-import { use } from 'react';
 
 describe('ToolbarMenu', () => {
   test('should call handleMenuChoice with "settings" when settings option is clicked', () => {
