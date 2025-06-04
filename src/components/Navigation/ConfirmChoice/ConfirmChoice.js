@@ -4,7 +4,7 @@ import './ConfirmChoice.css';
 
 const ConfirmChoice = ({ confirm, reject }) => (
   <>
-    <h4>Are you sure?</h4>
+    <h3>Are you sure?</h3>
     <Button buttonType='Danger' clicked={confirm}>
       Yes
     </Button>
