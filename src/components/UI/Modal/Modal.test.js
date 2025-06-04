@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 
@@ -32,7 +32,8 @@ describe('Modal Component', () => {
     expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();
   });
 
-  it('calls modalClosed function when backdrop is clicked', () => {
+  it('calls modalClosed function when backdrop is clicked', async () => {
+    const user = userEvent.setup();
     const { container } = render(
       <Modal show={true} modalClosed={modalClosedMock}>
         <div>Modal Content</div>
@@ -40,7 +41,7 @@ describe('Modal Component', () => {
     );
 
     const backdrop = container.querySelector('.Backdrop');
-    userEvent.click(backdrop);
+    await user.click(backdrop);
 
     expect(modalClosedMock).toHaveBeenCalledTimes(1);
   });
@@ -52,7 +53,8 @@ describe('Modal Component', () => {
       </Modal>
     );
 
-    userEvent.keyboard('{Escape}');
+    const modal = screen.getByRole('dialog');
+    fireEvent.keyDown(modal, { keyCode: 27 });
 
     expect(modalClosedMock).toHaveBeenCalledTimes(1);
   });

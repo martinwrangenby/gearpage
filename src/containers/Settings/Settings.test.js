@@ -57,7 +57,8 @@ describe('<Settings />', () => {
     expect(priceSwitch).not.toBeChecked();
   });
 
-  test('clicking "Display price in list" calls updateSettings with toggled value', () => {
+  test('clicking "Display price in list" calls updateSettings with toggled value', async () => {
+    const user = userEvent.setup();
     useSettings.mockReturnValue({
       settings: { showPrice: true },
       updateSettings: mockUpdateSettings,
@@ -65,7 +66,7 @@ describe('<Settings />', () => {
 
     render(<Settings />);
     const priceSwitch = screen.getByLabelText(/display price in list/i);
-    userEvent.click(priceSwitch);
+    await user.click(priceSwitch);
     expect(mockUpdateSettings).toHaveBeenCalledWith({ showPrice: false });
   });
 });

@@ -76,7 +76,8 @@ describe('InstrumentTable', () => {
     expect(getByRole('columnheader', { name: 'Price' })).toBeVisible();
   });
 
-  test('calls sort function with correct key when header is clicked', () => {
+  test('calls sort function with correct key when header is clicked', async () => {
+    const user = userEvent.setup();
     mockedUseSettings.mockReturnValue({ settings: { showPrice: false } });
     // Mock useNavigate to return a jest.fn()
     useNavigate.mockReturnValue(jest.fn());
@@ -92,12 +93,12 @@ describe('InstrumentTable', () => {
     const typeHeader = within(table).getByText('Type');
 
     // Simulate click on the name header
-    userEvent.click(nameHeader);
+    await user.click(nameHeader);
 
     expect(mockProps.sort).toHaveBeenCalledWith('name');
 
     // Simulate click on the type header
-    userEvent.click(typeHeader);
+    await user.click(typeHeader);
 
     expect(mockProps.sort).toHaveBeenCalledWith('type');
   });

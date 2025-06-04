@@ -47,16 +47,19 @@ test('Instrument info renders', async () => {
 });
 
 test('Clicking delete button activates instrument delete', async () => {
-  userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: 'Delete' }));
   expect(await screen.findByRole('heading', { name: 'Delete Rickenbacker' })).toBeVisible();
 });
 
 test('Clicking edit button activates instrument edit', async () => {
-  userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: 'Edit' }));
   expect(await screen.findByRole('heading', { name: 'Edit Rickenbacker' })).toBeVisible();
 });
 
 test('Clicking back button navigates user back', async () => {
-  userEvent.click(screen.getByRole('button', { name: 'Back' }));
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: 'Back' }));
   expect(mockedUsedNavigate).toHaveBeenCalledWith(-1);
 });

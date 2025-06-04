@@ -10,10 +10,11 @@ describe('Button component', () => {
     expect(screen.getByText(buttonText)).toBeInTheDocument();
   });
 
-  test('should call the onClick function when clicked', () => {
+  test('should call the onClick function when clicked', async () => {
+    const user = userEvent.setup();
     const onClickMock = jest.fn();
     render(<Button clicked={onClickMock}>Click me!</Button>);
-    userEvent.click(screen.getByText('Click me!'));
+    await user.click(screen.getByText('Click me!'));
     expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 

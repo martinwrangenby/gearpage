@@ -31,7 +31,8 @@ describe('Toolbar', () => {
     expect(screen.getByRole('button', { name: 'Toggle menu' })).toBeInTheDocument();
   });
 
-  test('should toggle menu on button click', () => {
+  test('should toggle menu on button click', async () => {
+    const user = userEvent.setup();
     render(
       <BrowserRouter>
         <Toolbar
@@ -41,11 +42,12 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    userEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
+    await user.click(screen.getByRole('button', { name: 'Toggle menu' }));
     expect(toggleMenuSpy).toHaveBeenCalledTimes(1);
   });
 
-  test('should close menu on click outside of menu container', () => {
+  test('should close menu on click outside of menu container', async () => {
+    const user = userEvent.setup();
     render(
       <BrowserRouter>
         <Toolbar
@@ -55,11 +57,12 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    userEvent.click(screen.getByRole('banner'));
+    await user.click(screen.getByRole('banner'));
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });
 
-  test('should navigate to settings page on settings menu click', () => {
+  test('should navigate to settings page on settings menu click', async () => {
+    const user = userEvent.setup();
     render(
       <BrowserRouter>
         <Toolbar
@@ -69,12 +72,13 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    userEvent.click(screen.getByRole('menuitem', { name: 'Settings' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Settings' }));
     expect(mockedUsedNavigate).toHaveBeenCalledWith('/settings');
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });
 
-  test('should call logout on sign out menu click', () => {
+  test('should call logout on sign out menu click', async () => {
+    const user = userEvent.setup();
     render(
       <BrowserRouter>
         <Toolbar
@@ -84,7 +88,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    userEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Sign out' }));
     expect(logoutSpy).toHaveBeenCalledTimes(1);
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });

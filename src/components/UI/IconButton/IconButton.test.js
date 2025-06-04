@@ -24,7 +24,8 @@ describe('IconButton Component', () => {
     expect(iconButton.querySelector('.fa.fa-heart')).toBeInTheDocument();
   });
 
-  test('calls the clicked function when clicked', () => {
+  test('calls the clicked function when clicked', async () => {
+    const user = userEvent.setup();
     render(
       <IconButton
         type="fa fa-heart"
@@ -34,7 +35,7 @@ describe('IconButton Component', () => {
     );
 
     const iconButton = screen.getByRole('button', { name: 'icon-button' });
-    userEvent.click(iconButton);
+    await user.click(iconButton);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });

@@ -33,10 +33,11 @@ describe('UI Component: Input', () => {
     expect(inputElement).toHaveClass('InputElement Invalid');
   });
 
-  test('component logs an error when changed if no onChange handler was passed', () => {
+  test('component logs an error when changed if no onChange handler was passed', async () => {
+    const user = userEvent.setup();
     render(<Input elementType='input'/>);
     const inputElement = screen.getByRole('textbox', { type: 'input' });
-    userEvent.type(inputElement, 'H');
+    await user.type(inputElement, 'H');
     expect(consoleSpy).toHaveBeenCalledWith('no onChange handler function provided to input component');
   });
 

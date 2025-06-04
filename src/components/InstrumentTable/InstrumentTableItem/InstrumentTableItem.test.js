@@ -73,7 +73,8 @@ describe('InstrumentableItem', () => {
     expect(tableCell[1]).toHaveTextContent('');
   });
 
-  test('clicking the row will push path and query for instrument to history', () => {
+  test('clicking the row will push path and query for instrument to history', async () => {
+    const user = userEvent.setup();
     mockedUseSettings.mockReturnValue({ settings: { showPrice: false } });
     render(
       <table>
@@ -83,7 +84,8 @@ describe('InstrumentableItem', () => {
       </table>
     );
     const tableRow = screen.getByRole('row');
-    userEvent.click(tableRow);
+
+    await user.click(tableRow);
     expect(mockedUsedNavigate).toBeCalledWith(
       {
         pathname: '/gearitem',
