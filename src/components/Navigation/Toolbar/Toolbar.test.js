@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Toolbar from './Toolbar';
+import userEvent from '@testing-library/user-event';
 
 const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -40,7 +41,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
+    userEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
     expect(toggleMenuSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -54,7 +55,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.mouseDown(screen.getByRole('banner'));
+    userEvent.click(screen.getByRole('banner'));
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });
 
@@ -68,7 +69,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Settings' }));
+    userEvent.click(screen.getByRole('menuitem', { name: 'Settings' }));
     expect(mockedUsedNavigate).toHaveBeenCalledWith('/settings');
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });
@@ -83,7 +84,7 @@ describe('Toolbar', () => {
         />
       </BrowserRouter>
     );
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
+    userEvent.click(screen.getByRole('menuitem', { name: 'Sign out' }));
     expect(logoutSpy).toHaveBeenCalledTimes(1);
     expect(toggleMenuSpy).toHaveBeenCalledWith(false);
   });

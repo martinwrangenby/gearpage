@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Settings from './Settings';
 import { useSettings } from '../../hoc/Context/SettingsContext';
 
@@ -64,7 +65,7 @@ describe('<Settings />', () => {
 
     render(<Settings />);
     const priceSwitch = screen.getByLabelText(/display price in list/i);
-    fireEvent.click(priceSwitch);
+    userEvent.click(priceSwitch);
     expect(mockUpdateSettings).toHaveBeenCalledWith({ showPrice: false });
   });
 });
