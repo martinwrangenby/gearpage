@@ -4,7 +4,7 @@ const LOCAL_STORAGE_KEY = 'user-settings';
 
 const loadSettings = () => {
   const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-  return stored ? JSON.parse(stored) : { showPrice: true };
+  return stored ? JSON.parse(stored) : { showPrice: true, showSoldItems: true };
 };
 
 const SettingsContext = createContext();
