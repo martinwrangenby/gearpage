@@ -8,7 +8,7 @@ import './InstrumentForm.css';
 
 const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
 
-  const [formContent, setFormContent] = React.useState(gearFormRules);
+  const [formContent, setFormContent] = React.useState(() => JSON.parse(JSON.stringify(gearFormRules)));
   const [formValid, setFormValid] = React.useState(false);
 
   React.useEffect(() => {
@@ -41,8 +41,10 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
 
       // If sold is toggled, dynamically update soldPrice rules
       if (identifier === 'sold') {
-        updatedForm['soldPrice'].rules.mandatory = newValue;
-        updatedForm['soldPrice'].valid = checkValidity(updatedForm['soldPrice'].value, updatedForm['soldPrice'].rules);
+        const soldPriceEl = { ...updatedForm.soldPrice };
+        soldPriceEl.rules = { ...soldPriceEl.rules, mandatory: newValue };
+        soldPriceEl.valid = checkValidity(soldPriceEl.value, soldPriceEl.rules);
+        updatedForm.soldPrice = soldPriceEl;
       }
 
       updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.rules);
@@ -85,10 +87,9 @@ const InstrumentForm = ({ instrument, submitInstrument, closeModal }) => {
           if (formElement.id === 'sold') {
             return (
 
-              <div className="SoldContent">
+              <div className="SoldContent" key={formElement.id}>
                 <span>{formElement.config.label}</span>
                 <Switch
-                  key={formElement.id}
                   label={formElement.config.label}
                   activated={formElement.config.value}
                   orientation='horizontal'
