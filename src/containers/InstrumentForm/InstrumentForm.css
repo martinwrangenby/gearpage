@@ -1,11 +1,3 @@
-
-
-/* .SoldContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
-
 .Sold input[type='checkbox'] {
   cursor: pointer;
   margin-left: auto;
