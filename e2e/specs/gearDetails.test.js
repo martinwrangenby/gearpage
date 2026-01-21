@@ -28,9 +28,11 @@ test.describe('Gear details page', () => {
     await page.getByLabel('Type').selectOption('guitar');
     await page.getByRole('textbox', { name: 'Name' }).fill('updated name');
     await page.getByRole('textbox', { name: 'Description' }).fill('updated description');
+    await page.locator('label span').click();
+    await page.getByPlaceholder('Sold Price').fill('5000');
     await page.getByRole('button', { name: 'Update' }).click();
 
-    await expect(page.getByRole('heading', { name: 'updated name', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'updated name (Sold)', exact: true })).toBeVisible();
     await expect(page.getByText('updated description')).toBeVisible();
   });
 
