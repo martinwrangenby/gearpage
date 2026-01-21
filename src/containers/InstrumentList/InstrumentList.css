@@ -2,17 +2,20 @@
   width: 100%;
   margin: auto;
   text-align: center;
+  font-size: 0.8em;
 }
 
 @media (min-width: 500px) {
   .InstrumentList {
     width: 450px;
+    font-size: 1em;
   }
 }
 
 @media (min-width: 1000px) {
   .InstrumentList {
     width: 700px;
+    font-size: 1em;
   }
 }
 /* TODO: these media limits should be general for all content within the app, not just this class
