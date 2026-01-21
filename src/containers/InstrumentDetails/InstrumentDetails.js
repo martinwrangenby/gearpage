@@ -80,7 +80,7 @@ const InstrumentDetails = () => {
             closeModal={() => setEditingInstrument(false)}/>
         </Modal>
         <div className={'PageContentBox'}>
-          <h1 className='PageContentHeader'>{instrument.name}</h1>
+          <h1 className='PageContentHeader'>{instrument.name} {instrument.sold ? '(Sold)' : ''}</h1>
           <p>
             {instrument.description}
           </p>
