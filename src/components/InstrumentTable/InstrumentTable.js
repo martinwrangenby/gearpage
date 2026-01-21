@@ -4,6 +4,8 @@ import InstrumentTableItem from './InstrumentTableItem/InstrumentTableItem';
 import { useSettings } from '../../hoc/Context/SettingsContext';
 
 const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
+  const { settings } = useSettings();
+  const { showPrice, showSoldItems } = settings;
 
   const getClassNamesFor = (name) => {
     if (!sortOrder) {
@@ -13,15 +15,12 @@ const InstrumentTable = ({ sortOrder, instruments, filter, sort }) => {
   };
 
   const content = instruments.map((instrument) => {
-    return (
-      filter.includes(instrument.type)
-        ? <InstrumentTableItem key={instrument.id} {...instrument}/>
-        : null
-    );
+    const shouldHideItem = !showSoldItems && instrument.sold;
+    return filter.includes(instrument.type) && !shouldHideItem
+      ? <InstrumentTableItem key={instrument.id} {...instrument}/>
+      : null;
   });
 
-  const { settings } = useSettings();
-  const { showPrice } = settings;
   const priceColumnHeader = showPrice
     ? <th className={getClassNamesFor('price')} style={{ width: '25%' }} onClick={() => sort('price')}>
     Price

@@ -5,7 +5,7 @@ const Switch = ({
   orientation = '',
   centered = false,
   activated = false,
-  label='',
+  label = '',
   clicked = () => {console.error('no onClick handler function provided to the Switch component');},
 }) => (
   <label
@@ -14,8 +14,8 @@ const Switch = ({
     <input
       type='checkbox'
       aria-label={label}
-      defaultChecked={activated}
-      onClick={clicked}/>
+      checked={activated}
+      onChange={clicked}/>
     <span className={['Slider', orientation].join(' ')}></span>
   </label>
 );

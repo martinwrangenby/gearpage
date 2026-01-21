@@ -1,0 +1,44 @@
+.Sold input[type='checkbox'] {
+  cursor: pointer;
+  margin-left: auto;
+}
+
+
+
+.SoldContent {
+  display: inline-flex;             /* inline-flex to match other inputs */
+  align-items: center;             /* vertically align label + checkbox + input */
+  justify-content: flex-start;     /* LEFT-align children */
+  gap: 12px;                       /* spacing between label, switch, and input */
+  background-color: #201d26;
+  color: #d2d2d2;
+  width: 43%;                      /* same as other input widths */
+  padding: 8px 12px;
+  margin: 10px 2%;
+  border: 1px solid #5c5c5c;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+.SoldPriceInput {
+  font-family: inherit;
+  font-size: 0.9em;
+  background-color: #201d26;
+  color: #d2d2d2;
+  border: 0px solid #5c5c5c;
+  border-radius: 0px;
+  
+  margin-left: 16px;
+  width: 48%;
+}
+.SoldPriceInput::placeholder {
+  color: #c7c5c5
+}
+
+@media (max-width: 600px) {
+  .SoldContent {
+    width: 90%;
+  }
+}

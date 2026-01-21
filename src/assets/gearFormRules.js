@@ -56,6 +56,33 @@ const gearFormRules = {
     },
     valid: true,
   },
+  sold: {
+    label: 'Sold',
+    elementType: 'input',
+    elementConfig: {
+      type: 'checkbox',
+    },
+    value: false,
+    rules: {
+      mandatory: false,
+    },
+    valid: true,
+    touched: false,
+  },
+  soldPrice: {
+    label: 'Sold Price',
+    elementType: 'input',
+    elementConfig: {
+      type: 'number',
+      placeholder: 'Sold price',
+    },
+    value: '',
+    rules: {
+      mandatory: false, // This is set dynamically in form logic
+    },
+    valid: true,
+    touched: false,
+  },
 };
 
 export default gearFormRules;

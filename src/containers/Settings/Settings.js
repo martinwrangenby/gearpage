@@ -6,7 +6,7 @@ import './Settings.css';
 
 const Settings = () => {
   const { settings ,updateSettings } = useSettings();
-  const { showPrice } = settings;
+  const { showPrice, showSoldItems } = settings;
   return (
     <div className='PageContentBox'>
       <h1 className='PageContentHeader'>
@@ -16,7 +16,9 @@ const Settings = () => {
         Show sold gear:
         <Switch
           label='show sold gear'
-          orientation='horizontal'/>
+          orientation='horizontal'
+          activated={showSoldItems}
+          clicked={() => updateSettings({ showSoldItems: !showSoldItems })}/>
       </p>
       <p className='SettingsItem'>
         Display price in list:
