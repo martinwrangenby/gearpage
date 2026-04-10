@@ -1,8 +1,16 @@
 name: Test
+
 on:
   push:
     branches-ignore:
       - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: read
+
 env:
   REACT_APP_FIREBASE_APIKEY: ${{ secrets.REACT_APP_FIREBASE_APIKEY }}
   REACT_APP_FIREBASE_AUTHDOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTHDOMAIN }}
@@ -12,6 +20,10 @@ env:
   REACT_APP_FIREBASE_MSGSENDERID: ${{ secrets.REACT_APP_FIREBASE_MSGSENDERID }}
   REACT_APP_FIREBASE_APPID: ${{ secrets.REACT_APP_FIREBASE_APPID }}
 
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
 jobs:
   component_tests:
     name: Component tests
@@ -19,12 +31,15 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Configure node environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Clean install dependencies
         run: npm ci
+
       - name: Run the component tests
         run: npm test
 
@@ -41,16 +56,21 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Configure node environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Clean install dependencies
         run: npm ci
+
       - name: Install Playwright dependencies and chromium
         run: npx playwright install --with-deps chromium
+
       - name: Start the app in dev mode and run the e2e tests
         run: npm run e2e:ci
+
       - name: Upload test artifacts
         uses: actions/upload-artifact@v4
         if: failure()
@@ -58,3 +78,40 @@ jobs:
           name: e2e-test-artifacts
           path: e2e/results/
           retention-days: 10
+
+  publish_failed_e2e_report:
+    name: Publish failed E2E report to GitHub Pages
+    needs: e2e_tests
+    if: ${{ always() && needs.e2e_tests.result == 'failure' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Download failed test artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-test-artifacts
+          path: ./pages-site
+
+      - name: Ensure report entry file exists
+        run: |
+          if [ ! -f ./pages-site/index.html ]; then
+            echo "Expected ./pages-site/index.html but it was not found."
+            echo "Contents of downloaded artifact:"
+            find ./pages-site -maxdepth 3 -type f | sort
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./pages-site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
