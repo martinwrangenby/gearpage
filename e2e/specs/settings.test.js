@@ -1,6 +1,6 @@
 
 const { test, expect } = require('../config/fixtures');
-const { addGearItem, deleteGearItem } = require('../utils/firebaseAPI');
+const { addGearItem, deleteGearItem, resetUserSettings } = require('../utils/firebaseAPI');
 test.use({ storageState: 'loggedIn.json' });
 let id;
 let name;
@@ -9,11 +9,13 @@ test.describe('Settings', () => {
   test.beforeEach(async ({ page }) => {
     name = new Date().toLocaleString();
     id = await addGearItem({ name, type: 'bass', description: 'testgear', sold: true });
+    await resetUserSettings();
     await page.goto('/');
   });
 
   test.afterEach(async ({ page }) => {
     await deleteGearItem(id);
+    await resetUserSettings();
   });
 
   test('Show sold gear toggle works as expected', async ({ page }) => {

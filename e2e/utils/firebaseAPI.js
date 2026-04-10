@@ -56,4 +56,30 @@ const addGearItem = async (gearItem) => {
   return data.name;
 };
 
-module.exports = { deleteGearItem, addGearItem };
+const resetUserSettings = async () => {
+  const { access_token } = await _getGoogleApiToken();
+
+  await fetch(`${baseUrl}/users/${userId}/settings.json`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+const setUserSettings = async (updates = {}) => {
+  if (!updates || typeof updates !== 'object') {
+    throw new Error('setUserSettings expects an object');
+  }
+  const { access_token } = await _getGoogleApiToken();
+  await fetch(`${baseUrl}/users/${userId}/settings.json`, {
+    method: 'PATCH', // allows partial updates
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updates),
+  });
+};
+
+module.exports = { deleteGearItem, addGearItem, resetUserSettings, setUserSettings };
