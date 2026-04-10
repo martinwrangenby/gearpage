@@ -76,7 +76,7 @@ jobs:
         if: failure()
         with:
           name: e2e-test-artifacts
-          path: e2e/results/
+          path: e2e/results/html
           retention-days: 10
 
   publish_failed_e2e_report:
