@@ -25,7 +25,6 @@ const InstrumentList = () => {
   const db = getDatabase();
 
   React.useEffect(() => {
-    localStorage.setItem('gearTypesFilter', JSON.stringify(gearFilter));
     const databaseRef = ref(db, `/users/${uid}/gear`);
     onValue(databaseRef, (snapshot) => {
       const data = snapshot.val();
@@ -45,7 +44,12 @@ const InstrumentList = () => {
     }
     );
     return () => off(databaseRef);
-  },[db, gearFilter, uid]);
+  },[db, uid]);
+
+  React.useEffect(() => {
+    localStorage.setItem('gearTypesFilter', JSON.stringify(gearFilter));
+  }, [gearFilter]);
+
   const updateGearFilter = (instrumentType) => {
     gearFilter.includes(instrumentType)
       ? setGearFilter(gearFilter.filter(item => item !== instrumentType))
