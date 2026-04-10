@@ -8,9 +8,9 @@ test.describe('Login', () => {
     await page.goto('/');
   });
 
-  test('User can login', async ({ page }) => {
+  test('User can login', async ({ page, fillSecret }) => {
     await page.getByRole('textbox', { name: 'Username' }).fill(E2E_TEST_USERNAME);
-    await page.getByLabel('Password').fill(E2E_TEST_PASSWORD);
+    await fillSecret(page.getByLabel('Password'), E2E_TEST_PASSWORD);
     await page.getByRole('button', { name: 'Sign in' }).click();
     await page.getByRole('button', { name: 'Toggle menu' }).click();
 
