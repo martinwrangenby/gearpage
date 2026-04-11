@@ -3,26 +3,36 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import InstrumentList from './InstrumentList';
 import { onValue, push } from 'firebase/database';
-import { SettingsProvider } from '../../hoc/Context/SettingsContext';
+
+jest.mock('firebase/database');
+
+jest.mock('../../hoc/Context/AuthContext', () => ({
+  useAuth: () => ({
+    user: { uid: 'mocked-uid' },
+    loading: false,
+  }),
+}));
+
+jest.mock('../../hoc/Context/SettingsContext', () => ({
+  useSettings: () => ({
+    settings: {
+      showPrice: true,
+      showSoldItems: true,
+    },
+    updateSettings: jest.fn(),
+    loading: false,
+  }),
+}));
 
 const renderWithProviders = (ui, { route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route);
 
   return render(
     <MemoryRouter initialEntries={[route]}>
-      <SettingsProvider>
-        {ui}
-      </SettingsProvider>
+      {ui}
     </MemoryRouter>
   );
 };
-
-jest.mock('firebase/database');
-jest.mock('../../hoc/Context/AuthContext', () => ({
-  useAuth: () => ({
-    user: { uid: 'mocked-uid' },
-  }),
-}));
 
 beforeEach(() => {
   localStorage.clear();
@@ -86,21 +96,41 @@ test('can open modal and add instrument', async () => {
   });
 });
 
-test('toggles gear filter and stores it in localStorage', async () => {
+test('toggles gear filter and updates visible instruments', async () => {
   const user = userEvent.setup();
+
   const fakeSnapshot = {
     val: () => ({
-      id1: { name: 'Fender', type: 'guitar' },
+      id1: { name: 'Fender Jazzbass', type: 'bass' },
+      id2: { name: 'Strat', type: 'guitar' },
     }),
   };
+
   onValue.mockImplementation((_, cb) => cb(fakeSnapshot));
 
   renderWithProviders(<InstrumentList />);
 
+  expect(await screen.findByText('Fender Jazzbass')).toBeInTheDocument();
+  expect(screen.getByText('Strat')).toBeInTheDocument();
+
   await user.click(screen.getByRole('button', { name: 'Toggle filter menu' }));
   await user.click(await screen.findByRole('checkbox', { name: 'guitar filter' }));
 
-  // Check that 'guitar' was removed from localStorage filter
-  const updatedFilter = JSON.parse(localStorage.getItem('gearTypesFilter'));
-  expect(updatedFilter).not.toContain('guitar');
+  expect(screen.queryByText('Strat')).not.toBeInTheDocument();
+  expect(screen.getByText('Fender Jazzbass')).toBeInTheDocument();
+});
+
+test('shows validation error and does not add invalid instrument', async () => {
+  const user = userEvent.setup();
+  const emptySnapshot = { val: () => null };
+  onValue.mockImplementation((_, cb) => cb(emptySnapshot));
+
+  renderWithProviders(<InstrumentList />);
+
+  await user.click(await screen.findByRole('button', { name: /add/i }));
+  await user.click(screen.getByRole('button', { name: 'Add' }));
+
+  await waitFor(() => {
+    expect(push).not.toHaveBeenCalled();
+  });
 });
