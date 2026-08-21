@@ -1,15 +1,11 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  rest.get('/gear/testId.json', (req, res, ctx) => {
-    return res(
-      ctx.json(
-        {
-          type: 'guitar',
-          name: 'Rickenbacker',
-          description: 'A nice guitar',
-        },
-      )
-    );
+  http.get('/gear/testId.json', () => {
+    return HttpResponse.json({
+      type: 'guitar',
+      name: 'Rickenbacker',
+      description: 'A nice guitar',
+    });
   }),
 ];
